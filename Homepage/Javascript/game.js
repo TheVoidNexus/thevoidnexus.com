@@ -298,20 +298,18 @@ function closePopup() {
 }
 
 function redirect() {
-  window.location.href = "https://thevoidnexus.com/database/";
+  window.location.href = "/database.html";
 }
 
 function redirect2() {
-  window.location.href = "https://thevoidnexus.com/calc/";
+  window.location.href = "/calculator.html";
 }
 
 function redirect3() {
-  window.location.href = "https://thevoidnexus.com/privacy";
+  window.location.href = "/privacy.html";
 }
 
-function redirect4() {
-  window.location.href = "https://github.com/TheVoidNexus/thevoidnexus.com/";
-}
+// redirect 4 permanently removed
 
 function redirect5() {
   window.location.href = "https://github.com/TheVoidNexus";

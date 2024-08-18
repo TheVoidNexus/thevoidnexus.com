@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator by TheVoidNexus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/2891/2891382.png">
+    <link rel="icon" href="https://i.ibb.co/zXp3ds3/image-1.png" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="Calculator/CSS/style.css" media="(min-width: 750px)">
+    <link rel="stylesheet" href="Calculator/CSS/mstyle.css" media="(max-width: 749px)">
+
+</head>
+
+<body>
+    <div class="dynamic-background"></div>
+    <div class="container">
+        <a href="https://thevoidnexus.github.io" id="main" class="main">thevoidnexus.github.io</a>
+        <p id="playtime" class="playtime">Calculator</p>
+        <div class="container2">
+            <button onclick="redirect()" class="database" id="voidclicker">VoidClicker</button>
+            <button onclick="redirect2()" class="calculator" id="database">Database</button>
+            <button class="google-log-in" id="login" onclick="login()">Log in</button>
+                <div class="buttons-container">
+                <img id="pfp" class="pfp" alt="">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <select class="language-select" id="language-select" onchange="updateLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="de">German</option>
+        <option value="sv">Swedish</option>
+      </select>
+    <div id="toast" class="toast"></div>
+    <div class="content">
+    <input type="text" id="input" placeholder="Enter expression">
+    <div>
+        <button onclick="addToInput('+')" class="add">+</button>
+        <button onclick="addToInput('-')" class="add">-</button>
+        <button onclick="addToInput('*')" class="add">*</button>
+        <button onclick="addToInput('/')" class="add">/</button>
+        <button onclick="addToInput('^')" class="add">^</button>
+        <button onclick="addToInput('√')" class="add">√</button>
+    </div>
+    <button class="calculate" onclick="calculate()" id="calculate">New Calculation</button>
+    <br>
+    <p id="result" class="result">Enter an expression.</p>
+</div>
+    <script src="Calculator/Javascript/translations.js"></script>
+    <script src="Calculator/Javascript/script.js"></script>
+    <script src="Calculator/Javascript/background.js"></script>
+</body>
+</html>

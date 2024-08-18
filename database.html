@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+<link rel="stylesheet" href="Database/style.css" media="screen and (min-width: 599px)">
+<link rel="stylesheet" href="Database/mstyle.css" media="screen and (max-width: 600px)">
+<title>Database by TheVoidNexus</title>
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/1602/1602309.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="https://i.ibb.co/zSjcMyb/image.png" media="(prefers-color-scheme: dark)">
+</head>
+<body>
+    <div id="loading" class="loading"></div>
+    <div id="popup" class="popup">
+        <p id="username" class="username"></p>
+        <button id="signout" class="signout">Sign Out</button>
+        <br>
+        <button id="export" class="export">Save Data</button>
+        <button id="import" class="import">Fetch Data</button>
+    </div>
+    <div id="toast" class="toast"></div>
+    <div class="overlay" id="overlay"></div>
+    <div id="dynamic-background" class="dynamic-background"></div>
+    <div class="header">
+        <a href="https://thevoidnexus.github.io" class="main">thevoidnexus.github.io</a>
+        <p class="title">Database</p>
+        <div class="header2">
+            <button onclick="redirect()" class="redirect">VoidClicker</button>
+            <button onclick="redirect2()" class="redirect2">Calculator</button>
+            <button class="google-log-in" id="login">Log in</button>
+            <div class="buttons-container">
+            <img id="pfp" class="pfp" alt="">
+        </div>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <button onclick="clearStorage()" class="clear" id="clear">Clear</button>
+    <button onclick="addValue()" class="add">Add</button>
+    <button onclick="removeValue()" class="remove">Remove</button>
+    <button onclick="getValue()" class="get">Get</button>
+    <button onclick="modifyValue()" class="modify">Modify</button>
+    <button onclick="copyValue()" class="copy">Copy</button>
+    <button onclick="showList()" class="list">List</button>
+
+<script src="Database/script.js"></script>
+<script src="Database/background.js"></script>
+<script src="Database/firebase.js" type="module"></script>
+</body>
+</html>

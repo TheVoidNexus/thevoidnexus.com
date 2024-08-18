@@ -1,0 +1,282 @@
+body {
+  background-color: transparent;
+  color: white;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add {
+  display: inline-block;
+  justify-content: center;
+  margin: auto;
+}
+
+input,
+.calculate,
+.result {
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  align-items: center;
+  margin: auto;
+}
+
+
+.result {
+  margin-top: 2%;
+  font-size: 22px;
+  border: 0.5px solid gray;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+
+.add {
+  margin-top: 2.5%;
+  font-size: 25px;
+  border-color: white;
+  border-style: solid;
+  padding: 11.5px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+}
+
+.add:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+input {
+  margin-top: 8%;
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  border-style: solid;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+input::placeholder {
+  color: lightgray;
+  font-size: 15px;
+}
+
+input:hover {
+  background-color: rgb(23, 23, 23);
+}
+
+.calculate {
+  margin-top: 2%;
+  font-size: 20px;
+  border-color: white;
+  border-style: solid;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: transparent;
+  background: linear-gradient(to right, lime, yellow, lime);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientShiftLeft 5s infinite linear;
+}
+
+.calculate:hover {
+  border-color: rgb(190, 190, 190);
+}
+
+@keyframes gradientShiftLeft {
+  0% {
+    background-position: 200% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.database, .calculator, .main, .playtime, .google-log-in, .pfp {
+  user-select: none;
+}
+
+.database,
+.calculator {
+  width: 25%;
+  height: 40px;
+  border: solid lightgray;
+  border-radius: 20px;
+  border-width: 2px;
+  color: whitesmoke;
+  background: transparent;
+  display: inline-table;
+}
+
+.database:hover,
+.calculator:hover {
+  opacity: 0.9;
+  border-color: lightblue;
+  color: lightblue;
+}
+
+.database, .calculator {
+  width: 25%;
+  height: 40px;
+  border: solid lightgray;
+  border-radius: 20px;
+  border-width: 2px;
+  color: whitesmoke;
+  background: transparent;
+  display:inline-table;
+}
+
+.database:hover, .calculator:hover {
+  opacity: 0.9;
+  border-color: lightblue;
+  color: lightblue;
+}
+
+.main {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0;
+  font-size: 25px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+  flex-grow: 1;
+}
+.main:hover {
+  color: lightblue;
+}
+
+.playtime {
+  display: flex;
+  font-size: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 0 auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: whitesmoke;
+  margin-left: 15px;
+}
+
+.playtime:hover {
+  color: lightblue;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  z-index: 1;
+}
+
+.container2 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 1;
+  background-color: black;
+  z-index: 1;
+}
+
+.google-log-in {
+  border-radius: 15px;
+  background-color: transparent;
+  border-color: rgb(165, 165, 165);
+  color: rgb(235, 235, 235);
+  padding: 10px;
+  margin-left: 50px;
+  border-style: solid;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pfp {
+  display: inline-block;
+  border-radius: 50%;
+  border: 3px black solid;
+  width: 35%;
+  height: 35%;
+  margin-left: auto;
+}
+
+.pfp:hover {
+  border: 3px solid rgb(90, 90, 90);
+}
+
+.toast {
+  user-select: none;
+  -webkit-user-select: none;
+  position: fixed;
+  top: 113px;
+  right: 10px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out, display 0.5s ease-in-out;
+}
+
+.language-select {
+  position: absolute;
+  right: 0;
+  margin-top: 2px;
+  margin-right: 20px;
+
+  border-color: white;
+  color: white;
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 8px;
+  padding-right: 5px;
+  white-space: nowrap;
+}
+
+option:nth-child(1), option:nth-child(2), option:nth-child(3) {
+  background-color: black;
+}
+
+.dynamic-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: -1;
+}
+
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: move 10s linear infinite;
+}
+
+@keyframes move {
+  0% {
+      left: -10%;
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(50px);
+  }
+  100% {
+      left: 110%;
+      transform: translateY(calc(50px + calc(100px * calc(1 - var(--rand)))));
+  }
+}
