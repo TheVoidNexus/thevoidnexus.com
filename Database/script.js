@@ -1,11 +1,11 @@
 // Created by TheVoidNexus on 22.04.2024
 
 function redirect() {
-    location.href = "https://thevoidnexus.github.io";
+    location.href = "https://thevoidnexus.com";
 }
 
 function redirect2() {
-    location.href = "https://thevoidnexus.github.io/calculator";
+    location.href = "/calculator.html";
 }
 
 window.onbeforeunload = function() {

@@ -55,11 +55,11 @@ const database = document.getElementById('database');
 const voidclicker = document.getElementById('voidclicker');
 
 database.addEventListener("click", function () {
-    window.location.href = "https://thevoidnexus.github.io/database/";
+    window.location.href = "/database.html";
 });
 
 voidclicker.addEventListener("click", function () {
-    window.location.href = "https://thevoidnexus.github.io/";
+    window.location.href = "https://thevoidnexus.com";
 });
 
 let usersave = JSON.parse(localStorage.getItem("User"));
