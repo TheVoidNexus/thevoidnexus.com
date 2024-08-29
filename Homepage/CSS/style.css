@@ -98,7 +98,7 @@ body, html {
     color: white;
     margin: 5px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    overflow-y: auto;
+    overflow-y: none;
     scrollbar-width: 5px;
 }
 
@@ -164,10 +164,10 @@ body, html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
     background-color: #141414e3;
     border-radius: 20px;
-    max-width: 88%;
+    max-width: 70%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -176,14 +176,14 @@ body, html {
   color: white;
   padding: 12px;
   text-align: center;
-  font-size: 80%;
+  font-size: 16px;
   border-radius: 50%;
   background-color: #252525;
   transition: transform 0.2s ease-in-out;
   transition: border 0.2s ease-in-out;
   margin: auto;
-  max-width: 100px; 
-  max-height: 100px;
+  max-width: 130px; 
+  max-height: 130px;
   width: 100%;
   aspect-ratio: 1 / 1; 
   display: flex;
@@ -197,8 +197,8 @@ body, html {
 }
 
 .Button1 {
-    max-width: 120px; 
-    max-height: 120px;
+    max-width: 160px; 
+    max-height: 160px;
     background-color: #00385e;
     border: 3px solid #001e31;
     box-shadow: 0 0 15px #001e31;
@@ -676,7 +676,7 @@ body, html {
     padding-top: 50px;
 }
 
-.sidebar::-webkit-scrollbar {
+.sidebar::-webkit-scrollbar, body::-webkit-scrollbar{
     width: 8px;
 }
 
@@ -684,7 +684,7 @@ body, html {
     background: rgba(128, 128, 128, 0.2);
 }
 
-.sidebar::-webkit-scrollbar-thumb {
+.sidebar::-webkit-scrollbar-thumb{
     background: rgba(111, 111, 111, 0.5);
     border-radius: 4px;
 }

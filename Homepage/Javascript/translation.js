@@ -186,7 +186,6 @@ function setLanguage(lang) {
     const menu_other = document.getElementById("menu-other");
     const menu_developer = document.getElementById("menu-developer");
     const menu_appearance = document.getElementById("menu-appearance");
-    const menu_contribute = document.getElementById("menu-contribute");
 
     reset.innerHTML = translations[language].reset;
     database.innerHTML = translations[language].database

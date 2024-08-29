@@ -5,15 +5,14 @@ body {
     user-select: none;
 }
 
-h1 {
-    font-size: 50px;
-    background: linear-gradient(to right, cyan, green, lime, yellow, orange, red, magenta, purple, blue, cyan);
-    background-size: 200% 200%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradientShiftLeft 8s infinite linear;
+@keyframes glow {
+  from {
+    text-shadow: 0 0 2px white
   }
+  to {
+    text-shadow: 0 0 3px white
+  }
+}
 
 h2 {
     font-size: 22px;
@@ -23,6 +22,17 @@ h2 {
     -webkit-background-clip: text;
     color: transparent;
     animation: gradientShiftLeft 10s infinite linear;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9;
 }
 
 p {
@@ -95,10 +105,15 @@ h1, h2, .removed, .returnp {
 
 .container {
   display: flex;
+  position: sticky;
+  top: 0;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
   z-index: 1;
+  background-color: rgba(24, 24, 24, 0.836);
+  border-radius: 15px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 .container2 {
@@ -106,7 +121,6 @@ h1, h2, .removed, .returnp {
   justify-content: flex-end;
   align-items: center;
   flex-grow: 1;
-  background-color: black;
   z-index: 1;
 }
 
@@ -148,12 +162,98 @@ h1, h2, .removed, .returnp {
     }
   }
 
-.language-select {
-  position: absolute;
-  right: 0;
-  margin-top: 2px;
-  margin-right: 20px;
+option:nth-child(1), option:nth-child(2), option:nth-child(3) {
+  background-color: black;
+}
 
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 50px;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(128, 128, 128, 0.2);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(111, 111, 111, 0.5);
+  border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(70, 70, 70, 0.7);
+  transition: background 0.3s ease;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.closebtn {
+  cursor: pointer;
+  transition: scale 0.5s ease;
+}
+
+.closebtn:hover {
+  scale: 1.05;
+}
+
+.menu-section {
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 10px;
+}
+
+.pfp {
+  display: none;
+  border-radius: 50%;
+  border: 3px rgba(24, 24, 24, 0.836) solid;
+  width: 47px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.pfp:hover {
+  border: 3px solid rgb(61, 61, 61);
+}
+
+.language-select {
   border-color: white;
   color: white;
   border-radius: 10px;
@@ -165,4 +265,148 @@ h1, h2, .removed, .returnp {
 
 option:nth-child(1), option:nth-child(2), option:nth-child(3) {
   background-color: black;
+}
+
+.menu-icon {
+  z-index: 5;
+  font-size: 30px;
+  cursor: pointer;
+  position: flex;
+  margin-left: 10px;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon:hover {
+  transform: scale(1.15);
+}
+
+.menu-title, .menu-language, .menu-appearance, .menu-privacy, .menu-developer {
+  font-size: 20px;
+  color: white;
+  white-space: nowrap;
+}
+
+.developer-container {
+display: inline-flex;
+align-items: center;
+}
+
+.developer {
+font-size: 16px;
+font-weight: bold;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+white-space: nowrap;
+background: linear-gradient(to right, orange, red, orange, yellow, orange);
+background-size: 200% 200%;
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+animation: gradientShiftLeft 5s infinite linear;
+}
+
+.menu-verified {
+width: 20px;
+height: 20px;
+margin-left: 5px;
+background-image: url('https://cdn-icons-png.flaticon.com/128/7641/7641727.png');
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+position: relative;
+}  
+
+.menu-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.menu-verified .menu-tooltip {
+  font-family: normal;
+  font-weight: normal;
+  visibility: hidden;
+  width: 135px;
+  background-color: #444444;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 4px;
+  position: absolute;
+  z-index: 1002;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -72px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.menu-verified:hover .menu-tooltip {
+visibility: visible;
+opacity: 1;
+}
+
+.title {
+  text-align: center;
+  color: whitesmoke;
+  animation: glow 2s ease-in-out infinite alternate;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.google-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background-color: #3b3b3b;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  color: #333333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.google-btn img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.login-text {
+  color: white;
+}
+
+.database, .calculator, .privacy {
+  margin-bottom: 5px;
+  width: 80%;
+  height: 40px;
+  border: solid lightgray;
+  border-radius: 20px;
+  border-width: 2px;
+  color: whitesmoke;
+  background: transparent;
+  transition: scale 0.5s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.database:hover, .calculator:hover, .privacy:hover {
+  scale: 1.05;
+  
+}
+
+.code404 {
+  background: linear-gradient(to right, yellow, orange, lime, aqua, lime, orange, yellow);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientShiftLeft 15s infinite linear;
 }

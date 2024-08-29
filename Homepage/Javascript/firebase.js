@@ -88,6 +88,8 @@ function successfulLogout() {
     pfp.style.display = "none";
     checkmark.style.display = "none";
 
+    localStorage.removeItem("User");
+
     showToast(translations[language].logged_out, 3000, "info");
 }
 
