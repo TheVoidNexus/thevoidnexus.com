@@ -9,27 +9,19 @@
 
 @keyframes red-green {
     0% {
-        border: darkred 2px inset;
-        box-shadow: 0 0 10px darkred inset;
-        background-color: rgba(139, 0, 0, 0.25);
+        border: rgb(92, 0, 0) 2px solid;
     }
     100% {
-        border: darkgreen 2px outset;
-        box-shadow: 0 0 10px darkgreen;
-        background-color: rgba(0, 100, 0, 0.25);
+        border: darkgreen 2px solid;
     }
 }
 
 @keyframes green-red {
     0% {
-        border: darkgreen 2px outset;
-        box-shadow: 0 0 10px darkgreen;
-        background-color: rgba(0, 100, 0, 0.25);
+        border: darkgreen 2px solid;
     }
     100% {
-        border: darkred 2px inset;
-        box-shadow: 0 0 10px darkred;
-        background-color: rgba(139, 0, 0, 0.25);
+        border: rgb(92, 0, 0) 2px solid;
     }
 }
 
@@ -142,22 +134,22 @@ body, html {
     padding: 5px;
     background-color: #141414e3;
     border-radius: 20px;
-    max-width: 300px;
-    margin-top: 65px;
-    margin-bottom: 50px;
+    max-width: 350px;
+    margin-top: 1%;
+    margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .balance, .mpc, .mps, .playtime {
     color: white;
-    padding: 15px;
+    padding: 8px;
     text-align: center;
-    font-size: 150%;
+    font-size: 130%;
     border-radius: 15px;
     background-color: #2c2c2c;
     margin: 10px 0;
-    width: 80%;
+    width: 90%;
     max-width: 400px;
     transition: transform 0.2s ease-in-out;
 }
@@ -172,32 +164,32 @@ body, html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     background-color: #141414e3;
     border-radius: 20px;
-    max-width: 710px;
+    max-width: 88%;
     margin-left: auto;
     margin-right: auto;
 }
 
 .Button1, .Button2, .Button3 {
-    color: white;
-    padding: 12px;
-    text-align: center;
-    font-size: 120%;
-    border-radius: 50%;
-    background-color: #44444460;
-    transition: transform 0.2s ease-in-out;
-    transition: border 0.2s ease-in-out;
-    margin: 0 50px;
-    min-width: 150px;
-    min-height: 150px;
-    width: 150px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-size: 80%;
+  border-radius: 50%;
+  background-color: #252525;
+  transition: transform 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
+  margin: auto;
+  max-width: 100px; 
+  max-height: 100px;
+  width: 100%;
+  aspect-ratio: 1 / 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .Button1:hover, .Button2:hover, .Button3:hover {
@@ -205,15 +197,14 @@ body, html {
 }
 
 .Button1 {
-    min-width: 170px;
-    min-height: 170px;
-    width: 170px;
-    height: 170px;
+    max-width: 120px; 
+    max-height: 120px;
     background-color: #00385e;
     border: 3px solid #001e31;
     box-shadow: 0 0 15px #001e31;
     transition: transform 0.1s ease-in-out;
-}
+    margin: auto;
+  }
 
 .Button1:active, .Button2:active, .Button3:active {
     transform: skew(0.5deg);
@@ -224,11 +215,13 @@ body, html {
     font-size: 16px;
     font-weight: bold;
     color: rgba(255, 255, 255, 0.91);
-    width: 40%;
+    width: 60%;
+    max-width: 250px;
     height: 100%;
     padding: 1%;
-    display: block;
+    display: flex;
     margin: 0 auto;
+    justify-content: center;
     border-color: rgba(255, 17, 0, 0.788);
     background: transparent;
     border-style: dashed;
@@ -681,6 +674,24 @@ body, html {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 50px;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(128, 128, 128, 0.2);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(111, 111, 111, 0.5);
+    border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(70, 70, 70, 0.7);
+    transition: background 0.3s ease;
 }
 
 .sidebar a {
