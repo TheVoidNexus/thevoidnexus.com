@@ -18,11 +18,13 @@ function addValue() {
         showToast("Index cannot be empty. Please enter a valid index.", 3000, "info")
         return;
     }
+
     let value = prompt("Enter a value:", "");
     if (value === "") {
         showToast("Value cannot be empty. Please enter a valid value.", 3000, "info")
         return;
     }
+    
     database[index] = value;
     saveDatabase();
     showToast("Changes saved.", 3000, "success")

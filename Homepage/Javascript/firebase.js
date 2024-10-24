@@ -105,20 +105,7 @@ onAuthStateChanged(auth, (user) => {
         googleLogin.style.display = "inline-flex";
 
         googleLogin.addEventListener("click", function() {
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    let user = result.user;
-                    const loginMessage = "You are logged in as " + user.displayName + ".";
-                    showToast(loginMessage, 3000, "success");
-                    successfulLogin(user);
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.error(errorCode);
-                    console.error(errorMessage);
-                    showToast(translations[language].error, 3000, "warning");
-                });
+            window.location.href = "/login.html";
         });
     }
 });
@@ -291,6 +278,10 @@ window.onbeforeunload = exportData("auto");
 window.addEventListener('beforeunload', function() {
     exportData("auto");
 });
+
+setInterval(function() {
+    importData("auto");
+},30000)
 
 function showToast(message, duration, type) {
     const toast = document.getElementById("toast");

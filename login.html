@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Login to see the contents of this page.">
+    <link id="stylesheet" rel="stylesheet" href="Login/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/dark.css" />
+    <link rel="icon" href="https://i.ibb.co/qdq1wXW/Bild-2024-10-03-113901995.webp" type="image/webp">
+    <link href="https://fonts.cdnfonts.com/css/minecraft-3" rel="stylesheet">
+    <title>Login - TheVoidNexus</title>
+</head>
+<body>
+    <div class="dynamic-background"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="container">
+        <div id="menuIcon" class="menu-icon" onclick = "openNav()">&#9776;</div>
+        <h1 class="title" id="title">Login</h1>
+        <img src="https://i.ibb.co/QXhsFjL/user.png" id="pfp" class="pfp" alt="">
+    </div>
+
+    <div id="sidebar" class="sidebar">
+        <a class="closebtn" onclick="closeNav()">&times;</a>
+
+        <div class="menu-section">
+            <p id="menu-language">Language</p>
+            <sl-select pill value="" onchange="setLanguage(this.value)" id="language-select">
+                <sl-option value="en">English</sl-option>
+                <sl-option value="de">Deutsch</sl-option>
+              </sl-select>  
+              </div>
+
+        <div class="menu-section">
+            <p class="menu-developer" id="menu-developer">Developer</p>
+            <div class="developer">
+                <div class="developer-container">
+                    <p class="developer-text">TheVoidNexus</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <p class="menu-bugs" id="menu-bugs">If you encounter any bugs or have a suggestion, please contact core staff</p>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <p class="login-code" id="login-code">Logged out</p>
+        <p class="login-info" id="login-info">This website requires authentication to view its content.</p>
+        <button id="google-login" class="google-btn">
+            <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
+            <span class="login-text" id="login-text">Sign in</span>
+        </button>
+        <button id="microsoft-login" class="microsoft-btn">
+            <img src="https://pngimg.com/uploads/microsoft/microsoft_PNG5.png" alt="Microsoft Logo">
+            <span class="login-text" id="login-text2">Sign in</span>
+        </button>
+    </div>
+
+    <script src="Login/script.js"></script>
+    <script src="Login/translation.js"></script>
+    <script src="Login/authentication.js" type="module"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace.js"></script>
+</body>
+</html>

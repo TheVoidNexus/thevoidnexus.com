@@ -1,0 +1,93 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, OAuthProvider } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAalxeqm5oEtMoYHI3irna7CACdUcFilzk",
+    authDomain: "thevoidclicker.firebaseapp.com",
+    databaseURL: "https://thevoidclicker-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "thevoidclicker",
+    storageBucket: "thevoidclicker.appspot.com",
+    messagingSenderId: "394237974349",
+    appId: "1:394237974349:web:c645d91eff47a8b0b30904",
+    measurementId: "G-NYD0V53G7R",
+}
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+
+const GoogleProvider = new GoogleAuthProvider();
+const MicrosoftProvider = new OAuthProvider('microsoft.com');
+
+const googleLogin = document.getElementById("google-login");
+const microsoftLogin = document.getElementById("microsoft-login");
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        successfulLogin(user);
+    }
+});
+
+function successfulLogin(user) {
+    const userEmail = user.email.replace(/[@.]/g, "_");
+    const userRef = ref(database, `users/${userEmail}`);
+
+    get(userRef).then(userSnapshot => {
+        let userType = "User";
+
+        if (userSnapshot.exists()) {
+            const existingData = userSnapshot.val();
+            if (existingData.type === "Administrator") {
+                userType = "Administrator";
+            } else if (existingData.type === "Core") {
+                userType = "Core";
+            }
+        }
+
+        const userData = {
+            name: user.displayName,
+            email: user.email,
+            pfp: user.photoURL,
+            type: userType
+        };
+
+        set(userRef, userData).then(() => {
+            window.location.href = "index.html";
+            localStorage.setItem("FirstLogin", true);
+        }).catch(error => {
+            console.error("Error setting user data:", error);
+        });
+    }).catch(error => {
+        console.error("Error fetching user data:", error);
+    });
+}
+
+
+googleLogin.addEventListener("click", function() {
+    signInWithPopup(auth, GoogleProvider)
+        .then((result) => {
+            let user = result.user;
+            successfulLogin(user);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorCode);
+            console.error(errorMessage);
+        });
+});
+
+microsoftLogin.addEventListener("click", function() {
+    signInWithPopup(auth, MicrosoftProvider)
+        .then((result) => {
+            let user = result.user;
+            successfulLogin(user);
+  })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorCode);
+            console.error(errorMessage);
+  });
+});

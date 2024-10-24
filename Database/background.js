@@ -1,3 +1,4 @@
+
 function createDot() {
     const dot = document.createElement('div');
     dot.classList.add('dot');

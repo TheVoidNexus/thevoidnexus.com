@@ -185,7 +185,6 @@ function setLanguage(lang) {
     menu_privacy.innerHTML = translations[language].privacy_policy
     menu_developer.innerHTML = translations[language].menu_developer
     menu_appearance.innerHTML = translations[language].menu_appearance
-    menu_contribute.innerHTML = translations[language].contribute
     menu_other.innerHTML = translations[language].menu_other
 
     const select = document.getElementById('language-select');
