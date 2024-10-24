@@ -370,7 +370,7 @@ setTimeout(function() {
 function updateMaxHeight(indexText) {
   let contentHeight = indexText.clientHeight;
   let windowHeight = window.innerHeight;
-  let maxHeightPercentage = 82;
+  let maxHeightPercentage = 79;
   let maxHeight = (windowHeight * maxHeightPercentage / 100) + "px";
   
   if (contentHeight >= windowHeight) {

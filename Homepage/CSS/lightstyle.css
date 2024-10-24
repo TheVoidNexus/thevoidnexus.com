@@ -55,9 +55,8 @@ body {
 }
 
 .Button1 {
-    background-color: #b0d45a;
-    border-color: #c3d19d;
-    box-shadow: 0 0 25px #b0d45a;
+    background-color: #43a1e069;
+    border: 3px solid #0452821f;
 }
 
 .ResetButton {
@@ -112,13 +111,13 @@ body {
 }
 
 .google-btn {
-    background-color: #181818;
+    background-color: #4e4e4e;
     border-color: #ccc;
     color: #333;
 }
 
 .google-btn:hover {
-    background-color: #4e4e4e;
+    background-color: #767676;
 }
 
 .pfpInfo {

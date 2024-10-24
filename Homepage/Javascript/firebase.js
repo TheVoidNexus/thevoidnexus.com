@@ -88,6 +88,8 @@ function successfulLogout() {
     pfp.style.display = "none";
     checkmark.style.display = "none";
 
+    localStorage.removeItem("User");
+
     showToast(translations[language].logged_out, 3000, "info");
 }
 
@@ -110,7 +112,6 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-
 const pfp = document.getElementById("pfp");
 const popup = document.getElementById("pfpInfo");
 const usernamePopup = document.getElementById("username");
@@ -121,18 +122,13 @@ const creation = document.getElementById("created");
 
 pfp.addEventListener("click", () => {
     let username = usersave.displayName;
-
     overlay.style.display = "block";
     popup.style.display = "block";
     usernamePopup.style.display = "block";
-
     let emailParts = usersave.email.split('@');
     let hiddenEmail = emailParts[0].replace(/./g, '*') + '@' + emailParts[1];
-
     email.innerHTML = 'Email: <span class="hidden-email" id="email-content">' + hiddenEmail + '</span>';
-
     const emailContent = document.getElementById("email-content");
-
     emailContent.addEventListener('click', () => {
         if (emailContent.classList.contains('hidden-email')) {
             emailContent.innerHTML = '<span class="revealed-email">' + usersave.email + '</span>';
@@ -143,7 +139,7 @@ pfp.addEventListener("click", () => {
         }
     });
 
-    creation.innerHTML = translations[language].created + timeSince(usersave.creationTime);
+    creation.innerHTML = timeSince(usersave.creationTime);
     usernamePopup.innerHTML = translations[language].username + username;
 });
 
@@ -151,7 +147,8 @@ pfp.addEventListener("click", () => {
 function timeSince(date) {
     const now = new Date();
     const past = new Date(date);
-    const prefix = translations[language].ago;
+    const prefix = translations[language].created;
+
     const secondsPast = Math.floor((now - past) / 1000);
     const minutesPast = Math.floor(secondsPast / 60);
     const hoursPast = Math.floor(minutesPast / 60);
@@ -160,22 +157,36 @@ function timeSince(date) {
     const monthsPast = Math.floor(daysPast / 30);
     const yearsPast = Math.floor(monthsPast / 12);
 
-    if (yearsPast > 0) {
-      return prefix + yearsPast + translations[language].year_ago;
+     let timeUnitKey;
+     let timeValue;
+     let timeUnit;
+
+     if (yearsPast > 0) {
+        timeValue = yearsPast;
+        timeUnitKey = timeValue > 1 ? translations[language].years : translations[language].year;
     } else if (monthsPast > 0) {
-      return prefix + monthsPast + translations[language].month_ago;
+        timeValue = monthsPast;
+        timeUnitKey = timeValue > 1 ? translations[language].months : translations[language].month;
     } else if (weeksPast > 0) {
-      return prefix + weeksPast + translations[language].week_ago;
+        timeValue = weeksPast;
+        timeUnitKey = timeValue > 1 ? translations[language].weeks : translations[language].week;
     } else if (daysPast > 0) {
-      return prefix + daysPast + translations[language].day_ago;
+        timeValue = daysPast;
+        timeUnitKey = timeValue > 1 ? translations[language].days : translations[language].day;
     } else if (hoursPast > 0) {
-      return prefix + hoursPast + translations[language].hour_ago;
+        timeValue = hoursPast;
+        timeUnitKey = timeValue > 1 ? translations[language].hours : translations[language].hour;
     } else if (minutesPast > 0) {
-      return prefix + minutesPast + translations[language].minute_ago;
+        timeValue = minutesPast;
+        timeUnitKey = timeValue > 1 ? translations[language].minutes : translations[language].minute;
     } else {
-      return prefix + translations[language].just_now;
+        return prefix + translations[language].just_now;
     }
-  }
+
+    timeUnit = [timeUnitKey];
+
+    return prefix + translations[language].ago + ' ' + timeValue + ' ' + timeUnit; 
+}
 
 signoutButton.addEventListener("click", () => {
     auth.signOut().then(() => {
