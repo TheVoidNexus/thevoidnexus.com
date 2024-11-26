@@ -30,37 +30,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function successfulLogin(user) {
-    const userEmail = user.email.replace(/[@.]/g, "_");
-    const userRef = ref(database, `users/${userEmail}`);
-
-    get(userRef).then(userSnapshot => {
-        let userType = "User";
-
-        if (userSnapshot.exists()) {
-            const existingData = userSnapshot.val();
-            if (existingData.type === "Administrator") {
-                userType = "Administrator";
-            } else if (existingData.type === "Core") {
-                userType = "Core";
-            }
-        }
-
-        const userData = {
-            name: user.displayName,
-            email: user.email,
-            pfp: user.photoURL,
-            type: userType
-        };
-
-        set(userRef, userData).then(() => {
-            window.location.href = "index.html";
-            localStorage.setItem("FirstLogin", true);
-        }).catch(error => {
-            console.error("Error setting user data:", error);
-        });
-    }).catch(error => {
-        console.error("Error fetching user data:", error);
-    });
+    window.location.href = "index.html";
 }
 
 

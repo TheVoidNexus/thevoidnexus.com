@@ -40,8 +40,8 @@ function successfulLogin(user) {
     const pfp = document.getElementById("pfp");
     const pfp2 = document.getElementById("pfp2");
 
-    pfp.src = usersave.profileURL;
-    pfp2.src = usersave.profileURL;
+    pfp.src = usersave.profileURL || "https://i.ibb.co/QXhsFjL/user.png";
+    pfp2.src = usersave.profileURL || "https://i.ibb.co/QXhsFjL/user.png";
     pfp.style.display = "flex";
     googleLogin.style.display = "none";
 

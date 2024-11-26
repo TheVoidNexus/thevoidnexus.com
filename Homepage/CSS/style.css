@@ -556,6 +556,8 @@ body, html {
 
 .pfp2 {
     border-radius: 50px;
+    width: 50%;
+    height: 50%;
 }
 
 .created, .email {
