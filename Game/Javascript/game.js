@@ -297,6 +297,11 @@ function closePopup() {
   overlay.style.display = "none";
 }
 
+const title = document.querySelector(".ClickerTitle");
+title.addEventListener("click", function() {
+  window.location.href = "/index.html";
+});
+
 function redirect() {
   window.location.href = "/database.html";
 }
@@ -309,7 +314,9 @@ function redirect3() {
   window.location.href = "/privacy.html";
 }
 
-// redirect 4 permanently removed
+function redirect4() {
+  window.location.href = "/tvn-manager.html";
+}
 
 function redirect5() {
   window.location.href = "https://github.com/TheVoidNexus";

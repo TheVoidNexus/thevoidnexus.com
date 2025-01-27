@@ -1,0 +1,173 @@
+html, body {
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(240 5.1% 15%);
+  background-attachment: fixed;
+}
+
+body {
+  position: relative;
+}
+
+/* From Uiverse.io by akshat-patel28, modified by TheVoidNexus */ 
+.form-container {
+    width: 350px;
+    height: fit-content;
+    
+    border-radius: 10px;
+    border: 1px solid #444;
+    box-sizing: border-box;
+    padding: 40px 30px;
+    background-color: #ffffff0d;
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .title {
+    text-align: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin: 0 10px 0;
+    font-size: 28px;
+    font-weight: 1200;
+}
+
+
+  .description, .description2, .description3 {
+    text-align: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin: 5px 0 30px 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #cecece;
+  }
+
+  .back-button {
+    display: flex;
+    margin: 20px auto 0 auto;
+    justify-content: center;
+    align-items: center; 
+    padding: 10px 15px; 
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid #444;
+    border-radius: 5px;
+    cursor: pointer; 
+    color: #cecece;
+    transition: all 0.3s ease;
+  }
+  
+  .back-button svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  .back-button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+  }
+
+  .back, .language {
+    text-decoration: none;
+    color: #4d6dff;
+    font-weight: bold;
+  }
+
+  .back:hover, .language:hover {
+    text-decoration: underline;
+  }
+
+  .language {
+    color: #ff643d;
+  }
+  
+  .buttons-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 20px;
+    gap: 15px;
+  }
+  
+  .microsoft-login-button,
+      .google-login-button {
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    gap: 7px;
+    transition: all 0.3s ease;
+  }
+  
+  .microsoft-login-button {
+    background: linear-gradient(to right, #000, #003775);
+    color: #cecece;
+    height: 50px;
+    background-size: 160% 100%;
+    background-position: left center;
+    transition: background-position 1s ease, transform 0.3s ease, box-shadow 1s ease, color 0.3s ease;
+  }
+  
+  .google-login-button {
+    background: linear-gradient(to right, #000, #6e006e);
+    color: #cecece;
+    height: 50px;
+    background-size: 160% 100%;
+    background-position: left center;
+    transition: background-position 1s ease, transform 0.3s ease, box-shadow 1s ease, color 0.3s ease;
+  }
+  
+  .microsoft-login-button:hover, .google-login-button:hover {
+    background-position: right center;
+    color: #ffffff;
+  }
+  
+  .microsoft-login-button:hover {
+    box-shadow: 0 0 0 2px linear-gradient(to right, #000, #003775);
+  }
+  
+  .google-login-button:hover { 
+    box-shadow: 0 0 0 2px linear-gradient(to right, #000, #6e006e);
+  }
+  
+  .microsoft-icon,
+      .google-icon {
+    font-size: 22px;
+    width: 20px;
+    margin-bottom: 1px;
+  }
+
+  @keyframes gradientShiftLeft {
+    0% {
+      background-position: 200% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+.title {
+  background: linear-gradient(to right, #005fcb, #c200c2, #005fcb);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientShiftLeft 5s infinite linear;
+}

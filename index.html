@@ -1,123 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="sl-theme-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Homepage of the VoidNexus universe.">
-    <link id="stylesheet" rel="stylesheet" href="Homepage/CSS/style.css" media="screen and (min-width: 709px)">
-    <link id="lightstyle" rel="stylesheet" href="Homepage/CSS/lightstyle.css" media="screen and (min-width: 709px)" disabled>
-    <link id="mstylesheet" rel="stylesheet" href="Homepage/CSS/mstyle.css" media="screen and (max-width: 710px)">
-    <link id="mlightstyle" rel="stylesheet" href="Homepage/CSS/mlightstyle.css" media="screen and (max-width: 710px)" disabled>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/2767/2767163.png" type="image/png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="https://i.ibb.co/6D99ffD/image.png" type="image/png" media="(prefers-color-scheme: dark)">
-    <title>VoidClicker by TheVoidNexus</title>
+    <meta name="description" content="Login to see the contents of this page.">
+    <link id="stylesheet" rel="stylesheet" href="Homepage/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/dark.css" />
+    <link rel="icon" href="https://i.ibb.co/7WX4k64/abstract.png" type="image/webp">
+    <title>TheVoidNexus</title>
 </head>
 <body>
-    <div id="loading" class="loading"></div>
-    <div id="pfpInfo" class="pfpInfo">
-      <div class="userinfo-container">
-      <img id="pfp2" class="pfp2" alt="">
-      <br>
-      <div class="username-container">
-        <p id="username" class="username"></p>
-        <span class="verified-check" id="verified-check" style="display: none;">
-          <span class="tooltip" id="tooltip">Verified Account</span>
-        </span>
-      </div>
-      <p id="email" class="email"></p>
-      <p id="created" class="created"></p>
-      <button id="signout" class="signout">Sign Out</button>
-      </div>
-    </div>
-    <div id="toast" class="toast"></div>
-    <div class="overlay" id="overlay"></div>
-    <div class="overlay2" id="overlay2"></div>
-<div class="dynamic-background"></div>
-<div class="container">
-  <div id="menuIcon" class="menu-icon">&#9776;</div>
-    <h1 class="ClickerTitle">VoidClicker</h1>
-    <div class="container2">
-      <button id="google-login" class="google-btn" >
-        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
-         <span class="login-text" id="login-text">Sign in</span>
-     </button>
-            <img rel="preload" as="image" id="pfp" class="pfp" alt="">
-    </div>
+    <div class="grid">
+    <h2 class="dev">In Development</h2>
+    <p>Meanwhile, try out my other projects:</p>
+    <br>
+    <p class="link" onclick="redirect()">TVN-Manager</p>
+    <p class="link" onclick="redirect2()">VoidClicker</p>
+    <p class="link" onclick="redirect3()">Calculator</p>
+    <p class="link" onclick="redirect4()">Database</p>
 </div>
-<div id="sidebar" class="sidebar">
-  <a class="closebtn" onclick="closeNav()">&times;</a>
-  <div class="menu-section">
-  <p class="menu-title" id="menu-projects">Other Projects</p>
-  <button onclick="redirect()" class="database" id="database">Database</button>
-  <button onclick="redirect2()" class="calculator" id="calculator">Calculator</button>
-</div>
-<div class="menu-section">
-  <p class="menu-appearance" id="menu-appearance">Appearance</p>
-  <img id="coloricon" class="coloricon" src="https://cdn-icons-png.flaticon.com/128/606/606795.png" alt="Toggle Darkmode/Lightmode">
-</div>
-<div class="menu-section">
-  <p class="menu-language" id="menu-language">Language</p>
-  <select class="language-select" id="language-select" onchange="setLanguage(this.value)">
-    <option class="lang-en" value="en">English</option>
-    <option value="de">German</option>
-    <option value="sv">Swedish</option>
-</select>
-</div>
-<div class="menu-section">
-<p class="menu-privacy" id="menu-other">Other</p>
-<button onclick="redirect3()" class="privacy" id="menu-privacy">Privacy Policy</button>
-</div>
-<div class="menu-section">
-<p class="menu-developer" id="menu-developer">Developer</p>
-<div class="developer">
-  <div class="developer-container">
-  <p class="developer-text">TheVoidNexus</p>
-  <span class="menu-verified" style="display: flex;">
-    <span class="menu-tooltip" id="menu-tooltip">Verified Account</span>
-  </span>
-</div>
-</div>
-<button onclick="redirect5()" class="privacy">GitHub</button>
-<button onclick="redirect6()" class="privacy">Discord</button>
-</div>
-<br><br><br>
-</div>
-<div class="index-container">
-    <button class="Index" onclick="toggleIndex()">Index</button>
-    <p id="indexText" class="indexText">$1K - 10^3<br>$1M - 10^6<br>$1B - 10^9<br>$1T - 10^12<br>$1Qa - 10^15<br>$1Qi - 10^18<br>$1Sx - 10^21<br>$1Sp - 10^24<br>$1Oc - 10^27<br>$1No - 10^30<br>$1Dc - 10^33<br>$1Udc - 10^36<br>$1Ddc - 10^39<br>$1Tdc - 10^42<br>$1Qt - 10^45<br>$1Qd - 10^48<br>$1Sd - 10^51<br>$1St - 10^54<br>$1Ocdc - 10^57<br>$1Nmdc - 10^60<br>$1Vg - 10^63<br>$1Uvg - 10^66<br>$1Dvg - 10^69<br>$1Tvg - 10^72<br>$1Qav - 10^75<br>$1Qvg - 10^78<br>$1Svg - 10^81<br>$1Spv - 10^84<br>$1Ovg - 10^87<br>$1Nvg - 10^90<br>$1Tg - 10^93</p>
-  </div>
-  <div class="container3">
-<p id="playtime" class="playtime">Playtime: ·</p>
-<p id="mps" class="mps">Per second: $ ·</p>
-<p id="mpc" class="mpc">Per click: $ ·</p>
-<p id="balance" class="balance">Balance: $ ·</p>
-</div>
-<div class="container4">
-  <button onclick="clickerUpgrade()" onclick="update()" class="Button2" id="Button2">Money per Second<br>Cost: ·</button>
-<br>
-<button onclick="clicker()" onclick="update()" class="Button1" id="Button1">Earn Money<br>Total clicks: ·</button>
-<br>
-<button onclick="clickerUpgrade2()" onclick="update()" class="Button3" id="Button3">Money per Click<br>Cost: ·</button>
-</div>
-<br>
-<button onclick="gameReset()" class="ResetButton" id="reset">Reset Progress</button>
-<br>
-<div class="popup" id="popup">
-    <div class="popup-container">
-    <img class="warning" src="https://cdn-icons-png.flaticon.com/512/752/752755.png">
-    <p class="PopupText" id="PopupText">Do you want to reset your progress?</p>
-    <div class="buttonContainer">
-      <button id="cancel" class="PopupButton" onclick="closePopup()">Cancel</button>
-      <button id="confirm" class="PopupButton2" onclick="resetProgress()">Confirm</button>
-    </div>
-    </div>
-  </div>
-  </div>
 
-<script src="Homepage/Javascript/game.js"></script>
-<script src="Homepage/Javascript/init.js"></script>
-<script src="Homepage/Javascript/background.js"></script>
-<script src="Homepage/Javascript/translation.js"></script>
-<script src="Homepage/Javascript/firebase.js" type="module"></script>
+    <script src="Homepage/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace.js" type="module"></script>
 </body>
-</html>

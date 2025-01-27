@@ -59,7 +59,7 @@ database.addEventListener("click", function () {
 });
 
 voidclicker.addEventListener("click", function () {
-    window.location.href = "https://thevoidnexus.com";
+    window.location.href = "/index.html";
 });
 
 let usersave = JSON.parse(localStorage.getItem("User"));

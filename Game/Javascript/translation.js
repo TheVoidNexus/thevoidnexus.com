@@ -10,6 +10,7 @@ const translations = {
         "money_per_click": "Per Click<br>",
         "playtime": "Playtime",
         "reset": "Reset Progress",
+        "manager": "Manager",
         "database": "Database",
         "calculator": "Calculator",
         "signOut": "Sign out",
@@ -64,6 +65,7 @@ const translations = {
         "money_per_click": "Pro Klick<br>",
         "playtime": "Spielzeit",
         "reset": "Fortschritt zurücksetzen",
+        "manager": "Manager",
         "database": "Datenbasis",
         "calculator": "Rechner",
         "signOut": "Ausloggen",
@@ -118,6 +120,7 @@ const translations = {
         "money_per_click": "Per klick",
         "playtime": "Speltid",
         "reset": "Återställ framsteg",
+        "manager": "Manager",
         "database": "Databas",
         "calculator": "Kalkylator",
         "signOut": "Logga ut",
@@ -171,6 +174,7 @@ function setLanguage(lang) {
     update();
 
     const reset = document.getElementById("reset");
+    const manager = document.getElementById("manager");
     const database = document.getElementById("database");
     const calculator = document.getElementById("calculator")
     const signOut = document.getElementById("signout")
@@ -188,6 +192,7 @@ function setLanguage(lang) {
     const menu_appearance = document.getElementById("menu-appearance");
 
     reset.innerHTML = translations[language].reset;
+    manager.innerHTML = translations[language].manager
     database.innerHTML = translations[language].database
     calculator.innerHTML = translations[language].calculator
     signOut.innerHTML = translations[language].signOut

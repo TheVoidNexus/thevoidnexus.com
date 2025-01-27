@@ -119,12 +119,18 @@ body, html {
 }
 
 .ClickerTitle {
+    z-index: 100;
     text-align: center;
     color: whitesmoke;
     animation: glow 2s ease-in-out infinite alternate;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.ClickerTitle:hover {
+    user-select: all;
+    cursor: pointer;
 }
 
 .container3 {
@@ -241,7 +247,7 @@ body, html {
    animation: reset-fade 0.5s forwards;
 }
 
-.database, .calculator, .privacy {
+.database, .calculator, .privacy, .manager {
     margin-bottom: 5px;
     width: 80%;
     height: 40px;
@@ -255,7 +261,7 @@ body, html {
     cursor: pointer;
 }
 
-.database:hover, .calculator:hover, .privacy:hover {
+.database:hover, .calculator:hover, .privacy:hover, .manager:hover {
     scale: 1.05;
     
 }
