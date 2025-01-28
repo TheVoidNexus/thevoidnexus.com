@@ -58,9 +58,11 @@ main {
 }
 
 .title {
-  color: white;
-  margin-top: 7.5px;
-  margin-left: 7.5px;
+  color: #81c0ff;
+  position: absolute;
+  top: 7.5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .title:hover {

@@ -1,72 +1,44 @@
-function setLanguage(lang) {
-    if (lang.includes("en")) {
-        lang = "en";
-    }
-
-    if (lang.includes("de")) {
-        lang = "de";
-    }
-
-    language = lang;
-    localStorage.setItem("PreferredLanguage", language);
-
-    const menu_language = document.getElementById("menu-language");
-    const menu_developer = document.getElementById("menu-developer");
-    const menu_bugs = document.getElementById("menu-bugs");
-    const title = document.getElementById("title");
-    const select = document.getElementById('language-select');
-    const login_info = document.getElementById("login-info");
-    const login_text = document.getElementById("login-text");
-    const login_text2 = document.getElementById("login-text2");
-    const login_code = document.getElementById("login-code");
-
-    select.value = language;
-    select.addEventListener('sl-change', (event) => {
-        const selectedValue = event.target.value;
-        setLanguage(selectedValue);
-      });
-
-    menu_language.innerHTML = t[language].menu_language;
-    menu_developer.innerHTML = t[language].menu_developer;
-    menu_bugs.innerHTML = t[language].menu_bugs;
-    title.innerHTML = t[language].title;
-    login_info.innerHTML = t[language].login_info;
-    login_text.innerHTML = t[language].login_text;
-    login_text2.innerHTML = t[language].login_text2;
-    login_code.innerHTML = t[language].login_code;
-
-    document.title = t[language].sitetitle;
-}
-
 const t = {
-    en: {
-        menu_language: "Language",
-        menu_developer: "Developer",
-        menu_bugs: "If you encounter any bugs<br>or have a suggestion,<br>please contact TheVoidNexus.",
-        english: "English",
-        german: "German",
-        title: "Login",
-        login_info: "Log in to sync your progress on all your connected devices.",
-        login_text: "Sign in with Google",
-        login_text2: "Sign in with Microsoft",
-        login_code: "Logged out",
-        sitetitle: "Login - TheVoidNexus",
-
+    "en": {
+        "title": "Login",
+        "description": "Signing in enables the syncing of your progress across all your devices.",
+        "google": "Sign in with Google",
+        "microsoft": "Sign in with Microsoft",
+        "back": "Back",
+        "title2": "VoidClicker - Login",
     },
-    de: {
-        menu_language: "Sprache",
-        menu_developer: "Entwickler",
-        menu_bugs: "Falls du einen Fehler gefunden<br> oder einen Vorschlag hast,<br>kontaktiere bitte TheVoidNexus.",
-        english: "Englisch",
-        german: "Deutsch",
-        title: "Anmelden",
-        login_info: "Melde dich an, um deinen Fortschritt auf all deinen eingeloggten Geräten zu synchronisieren.",
-        login_text: "Anmelden mit Google",
-        login_text2: "Anmelden mit Microsoft",
-        login_code: "Abgemeldet",
-        sitetitle: "Anmelden - TheVoidNexus",
-    }
+
+    "de": {
+        "title": "Anmeldung",
+        "description": "Mit der Anmeldung wird dein Fortschritt auf all deinen Geräten synchronisiert.",
+        "google": "Anmeldung mit Google",
+        "microsoft": "Anmeldung mit Microsoft",
+        "back": "Zurück",
+        "title2": "VoidClicker - Anmeldung",
+    },
+
+    "sv": {
+        "title": "Inloggning",
+        "description": "Genom att logga in kan du synkronisera dina framsteg mellan alla dina enheter.",
+        "google": "Logga in med Google",
+        "microsoft": "Logga in med Microsoft",
+        "back": "Tillbaka",
+        "title2": "VoidClicker - Inloggning",
+    },
 }
 
-let language = localStorage.getItem("PreferredLanguage") || navigator.language || navigator.userLanguage;
-setLanguage(language);
+let language = localStorage.getItem("language") || "en";
+
+const title = document.querySelector(".title");
+const description = document.querySelector(".description");
+const google = document.getElementById("google");
+const microsoft = document.getElementById("microsoft");
+const back = document.querySelector(".back-button");
+
+title.textContent = t[language].title;
+description.textContent = t[language].description;
+google.textContent = t[language].google;
+microsoft.textContent = t[language].microsoft;
+back.querySelector('span').textContent = t[language].back; 
+
+document.title = t[language].title2;

@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, OAuthProvider } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAalxeqm5oEtMoYHI3irna7CACdUcFilzk",
@@ -15,24 +14,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const database = getDatabase(app);
 
 const GoogleProvider = new GoogleAuthProvider();
 const MicrosoftProvider = new OAuthProvider('microsoft.com');
 
-const googleLogin = document.getElementById("google-login");
-const microsoftLogin = document.getElementById("microsoft-login");
+const googleLogin = document.getElementById("google");
+const microsoftLogin = document.getElementById("microsoft");
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        successfulLogin(user);
+        window.location.href = "voidclicker.html";
     }
 });
-
-function successfulLogin(user) {
-    window.location.href = "voidclicker.html";
-}
-
 
 googleLogin.addEventListener("click", function() {
     signInWithPopup(auth, GoogleProvider)
@@ -60,4 +53,9 @@ microsoftLogin.addEventListener("click", function() {
             console.error(errorCode);
             console.error(errorMessage);
   });
+});
+
+const back = document.getElementById("back");
+back.addEventListener("click", function() {
+    window.location.href = "voidclicker.html";
 });
