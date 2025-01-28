@@ -59,14 +59,14 @@ database.addEventListener("click", function () {
 });
 
 voidclicker.addEventListener("click", function () {
-    window.location.href = "/index.html";
+    window.location.href = "/voidclicker.html";
 });
 
 let usersave = JSON.parse(localStorage.getItem("User"));
 const googleLogin = document.getElementById("login");
 const pfp = document.getElementById("pfp");
 
-if(usersave) {
+if(usersave.displayName) {
 pfp.src = usersave.profileURL
 pfp.style.display = "flex";
 googleLogin.style.display = "none";

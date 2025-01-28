@@ -14,8 +14,8 @@ const t = {
         "tabname": "Calculator by TheVoidNexus",
         "toastresult": "Result: ",
         "logged_in": "You are logged in as ",
-        "not_available": "This feature is not available here.<br>You can manage your account on the homepage.",
-        "not_logged_in": "You are not logged in.<br>You can log in on the homepage.",
+        "not_available": "This feature is not available here.",
+        "not_logged_in": "You are not logged in.",
     },
 
     "de": {
@@ -33,8 +33,8 @@ const t = {
         "tabname": "Rechner von TheVoidNexus",
         "toastresult": "Ergebnis: ",
         "logged_in": "Du bist eingeloggt als ",
-        "not_available": "Diese Funktion ist hier nicht verfügbar.<br>Du kannst deinen Account auf der Startseite verwalten.",
-        "not_logged_in": "Du bist nicht eingeloggt.<br>Du kannst dich auf der Startseite einloggen.",
+        "not_available": "Diese Funktion ist hier nicht verfügbar.",
+        "not_logged_in": "Du bist nicht eingeloggt.",
     },
 
     "sv": {
@@ -52,8 +52,8 @@ const t = {
         "tabname": "Kalkylator av TheVoidNexus",
         "toastresult": "Resultat: ",
         "logged_in": "Du är inloggad som ",
-        "not_available": "Denna funktion är inte tillgänglig här.<br>Du kan hantera ditt konto på startsidan.",
-        "not_logged_in": "Du är inte inloggad.<br>Du kan logga in på startsidan.",
+        "not_available": "Denna funktion är inte tillgänglig här.",
+        "not_logged_in": "Du är inte inloggad.",
     }
 }
 

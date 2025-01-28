@@ -1,7 +1,7 @@
 // Created by TheVoidNexus on 22.04.2024
 
 function redirect() {
-    location.href = "https://thevoidnexus.com";
+    location.href = "/voidclicker.html";
 }
 
 function redirect2() {
