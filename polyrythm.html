@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="https://i.ibb.co/0RNtB9dF/programming-code-signs.png" type="image/png" sizes="16x16">
+        <title>Polyrythm</title>
+        <link rel="stylesheet" href="Polyrythm/style.css">
+    </head>
+    <body>
+        <div id="control-bar-wrapper">
+            <div id="control-bar">
+              <button id="sound-toggle" class="toggle" type="button" data-toggled="false" onClick="handleSoundToggle()" title="Toggle Pulse">
+                <i class="fa-solid fa-volume-xmark off"></i>
+                <i class="fa-solid fa-music on"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div id="background-image"></div>
+          
+          <div id="background-filter"></div>
+          
+          <div id="logo">
+            <img src="https://i.ibb.co/0RNtB9dF/programming-code-signs.png" onclick="redirect()" />
+          </div>
+          
+          <div id="sound-message">
+            <p id="sound-message-text">Click anywhere to toggle sound</p>
+          </div>
+          
+          <canvas id="paper"></canvas>
+          <script src="https://kit.fontawesome.com/b5599db175.js" crossorigin="anonymous"></script>
+          <script src="Polyrythm/logic.js"></script>
+          <script src="Polyrythm/translation.js"></script>
+    </body>

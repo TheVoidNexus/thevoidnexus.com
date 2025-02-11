@@ -13,3 +13,7 @@ function redirect3() {
 function redirect4() {
     window.location.href = "database.html";
 }
+
+function redirect5() {
+    window.location.href = "polyrythm.html";
+}
