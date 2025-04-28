@@ -173,23 +173,8 @@ function setLanguage(lang) {
     localStorage.setItem("PreferredLanguage", language);
     update();
 
-    const reset = document.getElementById("reset");
-    const manager = document.getElementById("manager");
-    const database = document.getElementById("database");
-    const calculator = document.getElementById("calculator")
-    const signOut = document.getElementById("signout")
-    const login = document.getElementById("login-text");
-    const popupText = document.getElementById("PopupText");
-    const cancel = document.getElementById("cancel");
-    const confirm = document.getElementById("confirm");
-    const verified = document.getElementById("tooltip");
-    const menu_verified = document.getElementById("menu-tooltip");
-    const menu_project = document.getElementById("menu-projects");
-    const menu_language = document.getElementById("menu-language");
-    const menu_privacy = document.getElementById("menu-privacy");
-    const menu_other = document.getElementById("menu-other");
-    const menu_developer = document.getElementById("menu-developer");
-    const menu_appearance = document.getElementById("menu-appearance");
+    const ids = ["reset", "manager", "database", "calculator", "signout", "login-text", "PopupText", "cancel", "confirm", "tooltip", "menu-tooltip", "menu-projects", "menu-language", "menu-privacy", "menu-other", "menu-developer", "menu-appearance"];
+    const [reset, manager, database, calculator, signOut, login, popupText, cancel, confirm, verified, menu_verified, menu_project, menu_language, menu_privacy, menu_other, menu_developer, menu_appearance] = ids.map(id => document.getElementById(id));
 
     reset.innerHTML = translations[language].reset;
     manager.innerHTML = translations[language].manager
