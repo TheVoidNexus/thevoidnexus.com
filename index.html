@@ -1,26 +1,418 @@
 <!DOCTYPE html>
-<html lang="en" class="sl-theme-dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Login to see the contents of this page.">
-    <link id="stylesheet" rel="stylesheet" href="Homepage/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/dark.css" />
-    <link rel="icon" href="https://i.ibb.co/7WX4k64/abstract.png" type="image/webp">
-    <title>TheVoidNexus</title>
-</head>
-<body>
-    <div class="grid">
-    <h2 class="dev">In Development</h2>
-    <h3>Projects:</h3>
-    <br>
-    <p class="link" onclick="redirect5()">Polyrythm</p>
-    <p class="link" onclick="redirect()">TVN-Manager</p>
-    <p class="link" onclick="redirect2()">VoidClicker</p>
-    <p class="link" onclick="redirect3()">Calculator</p>
-    <p class="link" onclick="redirect4()">Database</p>
-</div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheVoidNexus - Homepage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #646464;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #838383;
+        }
+        * {
+           transition: all 0.3s ease-in-out;
+        }
 
-    <script src="Homepage/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace.js" type="module"></script>
+        html {
+           scroll-behavior: smooth;
+        }
+
+        .info-socials-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            max-width: max-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .location-info-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #2d3748;
+            padding: 20px;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .location-info-container {
+                flex-direction: row; 
+                justify-content: center;
+                gap: 2rem;
+            }
+        }
+
+        .location-text {
+            font-size: 1.125rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .location-text {
+                margin-bottom: 0;
+            }
+        }
+
+        .location-icon {
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .time-weather-container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: #a0aec0;
+        }
+
+         @media (min-width: 768px) { 
+             .time-weather-container {
+                 flex-direction: row; 
+                 gap: 1.5rem; 
+                 align-items: center;
+             }
+         }
+
+        .time-display, .weather-display {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .time-icon, .weather-icon {
+            margin-right: 0.3rem;
+        }
+
+        .error-message {
+            color: #fc8181;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .social-icons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .social-icons-container a, .social-icons-container svg path {
+             transition: color 0.3s ease-in-out, fill 0.3s ease-in-out;
+        }
+
+        header nav a {
+            transition: color 0.3s ease-in-out;
+        }
+        #hero a.inline-block {
+             transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-purple': '#4c1d95',
+                        'dark-bg': '#111827',
+                        'medium-bg': '#1f2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <header class="bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white hover:text-purple-400 transition duration-300">TheVoidNexus</a>
+            <div class="space-x-4">
+                <a href="#about" class="text-gray-300 hover:text-purple-400 transition duration-300">About</a>
+                <a href="#projects" class="text-gray-300 hover:text-purple-400 transition duration-300">Projects</a>
+                <a href="#skills" class="text-gray-300 hover:text-purple-400 transition duration-300">Skills</a>
+                <a href="#contact" class="text-gray-300 hover:text-purple-400 transition duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero" class="bg-gray-900 py-24 px-6 text-center">
+        <div class="container mx-auto flex flex-col items-center">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocJtVxD1Xb1Enc3qypmC1iI1ridjydG-DgMU43mpgzF_bEH_gz2Q=s96-c" alt="Developer Avatar" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 border-4 border-purple-800 shadow-lg" onerror="this.onerror=null; this.src='https://placehold.co/160x160/cccccc/ffffff?text=PfP';">
+
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">TheVoidNexus</h1>
+            <p class="text-xl md:text-2xl text-purple-400 mb-8">Web Developer</p>
+
+            <a href="#projects" class="inline-block bg-purple-800 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-md hover:shadow-lg mb-10">
+                View My Projects
+            </a>
+
+            <div class="info-socials-wrapper">
+                <div class="location-info-container">
+                     <p class="location-text">
+                         <span class="location-icon">📍</span> Västra Götaland, Sweden
+                     </p>
+                     <div class="time-weather-container">
+                         <div class="time-display">
+                             <span class="time-icon">🕒</span> <span id="current-time">00:00</span>
+                         </div>
+                         <div class="weather-display">
+                             <span class="weather-icon" id="weather-icon">☁️</span> <span id="weather-info">0°C - ...</span>
+                         </div>
+                     </div>
+                      <div id="error-message" class="error-message hidden w-full text-center mt-2"></div> </div>
+
+                 <div class="social-icons-container">
+                    <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://discord.com/users/764523667404619817" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 group" aria-label="Discord Profile">
+                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="33" height="33" viewBox="0,0,256,256">
+                           <g fill="#9ca3af" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"
+                              class="group-hover:fill-white"> <path d="M128,256c-70.69245,0 -128,-57.30755 -128,-128v0c0,-70.69245 57.30755,-128 128,-128v0c70.69245,0 128,57.30755 128,128v0c0,70.69245 -57.30755,128 -128,128z" id="shape"></path>
+                           </g>
+                           <g fill="#18212f" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                               <g transform="scale(5.12,5.12)">
+                                   <path d="M41.625,10.76953c-3.98047,-3.20313 -10.27734,-3.74609 -10.54687,-3.76563c-0.41797,-0.03516 -0.81641,0.19922 -0.98828,0.58594c-0.01562,0.02344 -0.15234,0.33984 -0.30469,0.83203c2.63281,0.44531 5.86719,1.33984 8.79297,3.15625c0.46875,0.28906 0.61328,0.90625 0.32422,1.375c-0.19141,0.30859 -0.51562,0.47656 -0.85156,0.47656c-0.17969,0 -0.36328,-0.05078 -0.52734,-0.15234c-5.03125,-3.12109 -11.3125,-3.27734 -12.52344,-3.27734c-1.21094,0 -7.49609,0.15625 -12.52344,3.27734c-0.46875,0.29297 -1.08594,0.14844 -1.375,-0.32031c-0.29297,-0.47266 -0.14844,-1.08594 0.32031,-1.37891c2.92578,-1.8125 6.16016,-2.71094 8.79297,-3.15234c-0.15234,-0.49609 -0.28906,-0.80859 -0.30078,-0.83594c-0.17578,-0.38672 -0.57031,-0.62891 -0.99219,-0.58594c-0.26953,0.01953 -6.56641,0.5625 -10.60156,3.80859c-2.10547,1.94922 -6.32031,13.33984 -6.32031,23.1875c0,0.17578 0.04688,0.34375 0.13281,0.49609c2.90625,5.10938 10.83984,6.44531 12.64844,6.50391c0.00781,0 0.01953,0 0.03125,0c0.32031,0 0.62109,-0.15234 0.80859,-0.41016l1.82813,-2.51562c-4.93359,-1.27344 -7.45312,-3.4375 -7.59766,-3.56641c-0.41406,-0.36328 -0.45312,-0.99609 -0.08594,-1.41016c0.36328,-0.41406 0.99609,-0.45312 1.41016,-0.08984c0.05859,0.05469 4.69922,3.99219 13.82422,3.99219c9.14063,0 13.78125,-3.95312 13.82813,-3.99219c0.41406,-0.35937 1.04297,-0.32422 1.41016,0.09375c0.36328,0.41406 0.32422,1.04297 -0.08984,1.40625c-0.14453,0.12891 -2.66406,2.29297 -7.59766,3.56641l1.82813,2.51563c0.1875,0.25781 0.48828,0.41016 0.80859,0.41016c0.01172,0 0.02344,0 0.03125,0c1.80859,-0.05859 9.74219,-1.39453 12.64844,-6.50391c0.08594,-0.15234 0.13281,-0.32031 0.13281,-0.49609c0,-9.84766 -4.21484,-21.23828 -6.375,-23.23047zM18.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4zM31.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4z"></path>
+                               </g>
+                           </g>
+                       </svg>
+                   </a>
+                 </div>
+             </div> </div>
+    </section>
+
+    <section id="about" class="bg-gray-800 py-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">About Me</h2>
+            <div class="w-20 h-1 bg-purple-700 mx-auto mb-10 rounded"></div>
+            <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                Coming soon
+            </p>
+            <p class="text-lg text-gray-300 leading-relaxed">
+                 
+            </p>
+        </div>
+    </section>
+
+    <section id="projects" class="bg-gray-900 py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-6">Projects</h2>
+            <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">TVN Manager</h3>
+                        <p class="text-gray-400 mb-4">A useful subscription manager with a calender overview, platform sync, multiple currencies and more.</p>
+                        <div class="flex space-x-4">
+                            <a href="tvn-manager" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">VoidClicker</h3>
+                        <p class="text-gray-400 mb-4">Another project description, focusing on different aspects or challenges overcome.</p>
+                         <div class="flex space-x-4">
+                            <a href="voidclicker" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
+                         </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">Polyrythm</h3>
+                        <p class="text-gray-400 mb-4">Description for the third project, maybe mentioning collaboration or specific results.</p>
+                         <div class="flex space-x-4">
+                            <a href="polyrythm" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
+                         </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="skills" class="bg-gray-800 py-20 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">My Skills</h2>
+            <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="text-4xl text-purple-400 mb-3">💻</div>
+                    <h3 class="text-lg font-semibold text-white">JavaScript</h3>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="text-4xl text-purple-400 mb-3">⚛️</div>
+                    <h3 class="text-lg font-semibold text-white">React</h3>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="text-4xl text-purple-400 mb-3">☕</div>
+                    <h3 class="text-lg font-semibold text-white">Java</h3>
+                </div>
+                 </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-gray-900 py-20 px-6">
+        <div class="container mx-auto max-w-3xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Contact Me</h2>
+            <div class="w-20 h-1 bg-purple-700 mx-auto mb-10 rounded"></div>
+            <p class="text-lg text-gray-300 mb-10">
+                Interested in working together or have a question? Feel free to reach out!
+            </p>
+            <div class="flex justify-center space-x-6 mb-10">
+                 <a href="mailto:thevoidnexus2@gmail.com" class="text-purple-400 hover:text-purple-300 transition duration-300 text-lg">thevoidnexus2@gmail.com</a>
+                 </div>
+
+            </div>
+    </section>
+
+    <footer class="bg-gray-800 py-6 px-6 text-center">
+        <div class="container mx-auto">
+            <p class="text-gray-400">© 2025 TheVoidNexus. All rights reserved.</p>
+            </div>
+    </footer>
+
+    <script>
+        const OPENWEATHER_API_KEY = '0c2899c7b4f2e0b4e89c1e3e07d9d799';
+
+        const LATITUDE = 58.52;
+        const LONGITUDE = 13.58;
+
+        function updateTime() {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+            const formattedTime = now.toLocaleTimeString('en-US', options);
+
+            const timeElement = document.getElementById('current-time');
+            if (timeElement) {
+                timeElement.textContent = formattedTime;
+            }
+        }
+
+        setInterval(updateTime, 10000);
+
+        updateTime();
+
+        async function fetchWeather() {
+            if (OPENWEATHER_API_KEY === !OPENWEATHER_API_KEY) {
+                 const errorMessageElement = document.getElementById('error-message');
+                 if (errorMessageElement) {
+                      errorMessageElement.textContent = 'Weather API key not set.';
+                      errorMessageElement.classList.remove('hidden');
+                 }
+                 const weatherInfoElement = document.getElementById('weather-info');
+                 if (weatherInfoElement) weatherInfoElement.textContent = 'Weather unavailable';
+                 const weatherIconElement = document.getElementById('weather-icon');
+                 if (weatherIconElement) weatherIconElement.textContent = '❓';
+                 return;
+            }
+
+
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${OPENWEATHER_API_KEY}&units=metric`;
+
+            const errorMessageElement = document.getElementById('error-message');
+            const weatherInfoElement = document.getElementById('weather-info');
+            const weatherIconElement = document.getElementById('weather-icon');
+
+            try {
+                const response = await fetch(weatherUrl);
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Weather API error: ${response.status} - ${errorData.message || response.statusText}`);
+                }
+                const data = await response.json();
+
+                const temperature = Math.round(data.main.temp);
+                const description = data.weather[0].description;
+                const iconCode = data.weather[0].icon;
+
+                if (weatherInfoElement) weatherInfoElement.textContent = `${temperature}°C - ${description.charAt(0).toUpperCase() + description.slice(1)}`;
+
+                if (weatherIconElement) weatherIconElement.textContent = getWeatherEmoji(iconCode);
+
+                if (errorMessageElement) errorMessageElement.classList.add('hidden');
+
+            } catch (error) {
+                console.error("Failed to fetch weather data:", error);
+                if (weatherInfoElement) weatherInfoElement.textContent = 'Weather unavailable';
+                if (weatherIconElement) weatherIconElement.textContent = '❓'; 
+                if (errorMessageElement) {
+                    errorMessageElement.textContent = `Error fetching weather: ${error.message}`;
+                    errorMessageElement.classList.remove('hidden');
+                }
+            }
+        }
+
+        function getWeatherEmoji(iconCode) {
+            switch (iconCode) {
+                case '01d':
+                case '01n':
+                    return '☀️';
+                case '02d':
+                case '02n':
+                    return '🌤️';
+                case '03d':
+                case '03n':
+                case '04d':
+                case '04n':
+                    return '☁️';
+                case '09d':
+                case '09n':
+                    return '🌧️';
+                case '10d':
+                case '10n':
+                    return '🌦️';
+                case '11d':
+                case '11n':
+                    return '⛈️';
+                case '13d':
+                case '13n':
+                    return '❄️';
+                case '50d':
+                case '50n':
+                    return '🌫️';
+                default:
+                    return '☁️';
+            }
+        }
+
+        fetchWeather();
+    </script>
+
 </body>
+</html>
