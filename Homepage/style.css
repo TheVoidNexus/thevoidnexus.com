@@ -1,48 +1,224 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1f2937;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+::-webkit-scrollbar-thumb {
+    background: #646464;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #838383;
+}
 * {
-    font-weight: bold;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+   transition: all 0.3s ease-in-out;
 }
 
-.dev {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-    color: transparent;
-    background: linear-gradient(to right, purple, rgb(144, 0, 255), blue);
-    background-size: 200% 200%;
-    animation: gradientAnimation 5s ease infinite;
-    background-clip: text;
-    -webkit-background-clip: text;
+html {
+   scroll-behavior: smooth;
 }
 
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+#about, #projects, #skills, #contact {
+    scroll-margin-top: 72px;
 }
 
-.grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
+.bg-medium-bg {
+    background-color: #1F2937;
+}
+.dropdown-item:hover .flag-svg {
+    transform: scale(1.15);
+    opacity: 0.85;
+}
+.flag-svg {
+    transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
+    border-radius: 0.125rem;
+}
+#language-dropdown-menu {
+    z-index: 60;
 }
 
-.link {
-    font-size: large;
-    cursor: pointer;
-    border-radius: 10px;
-    border: 2px rgb(185, 33, 255) solid;
+@keyframes rotateGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.animated-border-container {
     padding: 5px;
-    min-width: 140px;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
+    border-radius: 9999px;
+    background: linear-gradient(45deg, #a90063 0%, #670046 25%, #a607c3 50%, #ac1192 75%, #bc1888 100%);
+    background-size: 400% 400%;
+    animation: rotateGradient 5s ease infinite;
+    display: inline-block;
+    margin-bottom: 15px;
 }
 
-.link:hover {
-    transform: scale(1.05);
+.profile-image {
+    display: block;
+    border-radius: 9999px;
+}
+
+.info-socials-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 768px) {
+    .location-info-container {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+}
+
+.location-text {
+    font-size: 1.125rem;
+    color: #d1d5db;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .location-text {
+        margin-bottom: 0;
+    }
+}
+
+.location-icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.time-weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #a0aec0;
+}
+
+@media (min-width: 768px) {
+    .time-weather-container {
+        flex-direction: row;
+        gap: 1.5rem;
+        align-items: center;
+    }
+}
+
+.weather-icon {
+    height: 25px;
+    width: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img.weather-animation {
+    height: 100%;
+    width: 100%;
+}
+
+
+.time-display, .weather-display {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.time-icon, .weather-icon {
+    margin-right: 0.3rem;
+}
+
+.error-message {
+    color: #fc8181;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.social-icons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.social-icons-container a, .social-icons-container svg path {
+   transition: color 0.3s ease-in-out, fill 0.3s ease-in-out;
+}
+
+header nav a {
+   transition: color 0.3s ease-in-out;
+}
+#hero a.inline-block {
+   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.cursor-trail-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(168, 85, 247, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: fadeAndShrink 0.7s ease-out forwards;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes fadeAndShrink {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0;
+    }
+}
+
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 5s ease infinite;
 }

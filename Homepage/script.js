@@ -1,57 +1,160 @@
-const interactiveCard = document.getElementById('interactive-card');
-        let canCreateTrailDot = true;
-        const trailDotCooldown = 1;
+const LATITUDE = 57.79;
+const LONGITUDE = 13.41;
 
-        if (interactiveCard) {
-            interactiveCard.addEventListener('mousemove', function(e) {
-                if (!canCreateTrailDot) return;
+function updateTime() {
+    const now = new Date();
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: 'Europe/Stockholm'
+    };
+    const formattedTime = now.toLocaleTimeString('sv-SE', options);
+    const timeElement = document.getElementById('current-time');
+    if (timeElement) {
+        timeElement.textContent = formattedTime;
+    }
+}
+setInterval(updateTime, 1000);
+updateTime();
 
-                const rect = interactiveCard.getBoundingClientRect();
-                const cardStyles = window.getComputedStyle(interactiveCard);
-                const paddingLeft = parseFloat(cardStyles.paddingLeft);
-                const paddingTop = parseFloat(cardStyles.paddingTop);
+function getInitialLanguage() {
+    let lang = localStorage.getItem('PreferredLanguage');
+    if (!lang) {
+        const browserLangFull = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        const browserLangBase = browserLangFull.split('-')[0];
+        if (browserLangBase === 'de') lang = 'de';
+        else if (browserLangBase === 'sv') lang = 'sv';
+        else lang = 'en';
+    }
+    const supported = (typeof translations !== 'undefined' && translations) ? Object.keys(translations) : ['en', 'de', 'sv'];
+    if (!supported.includes(lang)) {
+        lang = 'en';
+    }
+    return lang;
+}
 
-                const x = e.clientX - rect.left - paddingLeft + 32;
-                const y = e.clientY - rect.top - paddingTop + 15;
+async function fetchWeather() {
+    const weatherUrl = `https://api.thevoidnexus.com/weather?lat=${LATITUDE}&lon=${LONGITUDE}&lang=${getInitialLanguage()}`;
 
-                const trailDot = document.createElement('span');
-                trailDot.classList.add('cursor-trail-dot');
-                trailDot.style.left = `${x}px`;
-                trailDot.style.top = `${y}px`;
+    const errorMessageElement = document.getElementById('error-message');
+    const weatherInfoElement = document.getElementById('weather-info');
+    const weatherIconContainer = document.getElementById('weather-icon-container');
 
-                interactiveCard.appendChild(trailDot);
+    const showError = (message) => {
+        console.error("Failed to fetch weather data:", message);
+        if (weatherInfoElement) {
+            weatherInfoElement.textContent = 'Weather N/A';
+        }
+        if (weatherIconContainer) {
+            weatherIconContainer.innerHTML = `<img src="https://placehold.co/25x25/2d3748/ff0000?text=!" alt="Error" class="weather-animation">`;
+        }
+    };
 
-                trailDot.addEventListener('animationend', () => {
-                    trailDot.remove();
-                });
+    try {
+        const response = await fetch(weatherUrl);
 
-                canCreateTrailDot = false;
-                setTimeout(() => {
-                    canCreateTrailDot = true;
-                }, trailDotCooldown);
-            });
+        if (!response.ok) {
+            let errorMsg = `Request failed with status ${response.status}`;
+            try {
+                const errorData = await response.json();
+                errorMsg = errorData.error || errorMsg;
+            } catch (e) {
+                console.warn("Could not parse JSON error response:", e);
+            }
+            throw new Error(errorMsg);
         }
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+        const data = await response.json();
 
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
+        if (!data.main || !data.weather || !data.weather[0]) {
+            throw new Error("Incomplete weather data received.");
+        }
 
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        const elementsToAnimate = document.querySelectorAll('.fade-in-element');
-        elementsToAnimate.forEach(el => observer.observe(el));
+        const temperature = Math.round(data.main.temp);
+        const description = data.weather[0].description;
+        const iconCode = data.weather[0].icon;
 
+        if (weatherInfoElement) {
+            const capitalizedDesc = description.charAt(0).toUpperCase() + description.slice(1);
+            weatherInfoElement.textContent = `${temperature}°C - ${capitalizedDesc}`;
+        }
 
+        if (weatherIconContainer) {
+            weatherIconContainer.innerHTML = getAnimatedWeatherIconHTML(iconCode, description);
+        }
+
+        if (errorMessageElement) {
+            errorMessageElement.classList.add('hidden');
+            errorMessageElement.textContent = '';
+        }
+
+    } catch (error) {
+        showError(error.message);
+    }
+}
+
+function getAnimatedWeatherIconHTML(iconCode, altText = "Weather condition") {
+    const iconFileMap = {
+        '01d': 'clear-day.svg',
+        '01n': 'starry-night.svg',
+        '02d': 'partly-cloudy-day.svg',
+        '02n': 'partly-cloudy-night.svg',
+        '03d': 'cloudy.svg',
+        '03n': 'cloudy.svg',
+        '04d': 'overcast-day.svg',
+        '04n': 'overcast-night.svg',
+        '09d': 'partly-cloudy-day-drizzle.svg',
+        '09n': 'partly-cloudy-night-drizzle.svg',
+        '10d': 'rain.svg',
+        '10n': 'partly-cloudy-night-rain.svg',
+        '11d': 'thunderstorms-day-rain.svg',
+        '11n': 'thunderstorms-night-rain.svg',
+        '13d': 'snow.svg',
+        '13n': 'partly-cloudy-night-snow.svg',
+        '50d': 'fog-day.svg',
+        '50n': 'fog-night.svg'
+    };
+
+    const filename = iconFileMap[iconCode] || 'not-available.svg';
+    const iconPath = `https://basmilius.github.io/weather-icons/production/fill/all/${filename}`;
+
+    return `<img src="${iconPath}" alt="${altText}" class="weather-animation" style="width: 25px; height: 25px;">`;
+}
+
+fetchWeather();
+
+const fadeInElements = document.querySelectorAll('.fade-in-element');
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries, observerRef) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        } else {
+        }
+    });
+}, observerOptions);
+
+fadeInElements.forEach(el => {
+    observer.observe(el);
+});
+
+document.addEventListener('mousemove', function(e) {
+    const dot = document.createElement('div');
+    dot.classList.add('cursor-trail-dot');
+    dot.style.left = `${e.pageX}px`;
+    dot.style.top = `${e.pageY}px`;
+    document.body.appendChild(dot);
+
+    dot.addEventListener('animationend', () => {
+        dot.remove();
+    });
+});
 
 
 //

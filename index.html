@@ -3,543 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheVoidNexus - Homepage</title>
+    <meta name="theme-color" content="#1F2937">
+    <title data-translate-title="page_title">TheVoidNexus - Homepage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1f2937;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #646464;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #838383;
-        }
-        * {
-           transition: all 0.3s ease-in-out;
-        }
-
-        html {
-           scroll-behavior: smooth;
-        }
-
-        @keyframes rotateGradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        .animated-border-container {
-            padding: 5px;
-            border-radius: 9999px;
-            background: linear-gradient(45deg, #a90063 0%, #670046 25%, #a607c3 50%, #ac1192 75%, #bc1888 100%);
-            background-size: 400% 400%;
-            animation: rotateGradient 5s ease infinite;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .profile-image {
-            display: block;
-            border-radius: 9999px;
-        }
-
-        .info-socials-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            width: 100%;
-            max-width: max-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .location-info-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #2d3748;
-            padding: 20px;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
-
-        @media (min-width: 768px) {
-            .location-info-container {
-                flex-direction: row; 
-                justify-content: center;
-                gap: 2rem;
-            }
-        }
-
-        .location-text {
-            font-size: 1.125rem;
-            color: #d1d5db;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-        @media (min-width: 768px) {
-            .location-text {
-                margin-bottom: 0;
-            }
-        }
-
-        .location-icon {
-            display: inline-block;
-            margin-right: 0.5rem;
-        }
-
-        .time-weather-container {
-            display: flex;
-            flex-direction: column; 
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            color: #a0aec0;
-        }
-
-         @media (min-width: 768px) { 
-             .time-weather-container {
-                 flex-direction: row; 
-                 gap: 1.5rem; 
-                 align-items: center;
-             }
-         }
-
-         .weather-icon {
-            height: 25px;
-            width: 25px;
-         }
-
-        .time-display, .weather-display {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-        .time-icon, .weather-icon {
-            margin-right: 0.3rem;
-        }
-
-        .error-message {
-            color: #fc8181;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-            width: 100%;
-            text-align: center;
-        }
-
-        .social-icons-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .social-icons-container a, .social-icons-container svg path {
-             transition: color 0.3s ease-in-out, fill 0.3s ease-in-out;
-        }
-
-        header nav a {
-            transition: color 0.3s ease-in-out;
-        }
-        #hero a.inline-block {
-             transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .cursor-trail-dot {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: rgba(168, 85, 247, 0.6);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            animation: fadeAndShrink 0.7s ease-out forwards;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        @keyframes fadeAndShrink {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(0.2);
-                opacity: 0;
-            }
-        }
-
-        .fade-in-element {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'custom-purple': '#4c1d95',
-                        'dark-bg': '#111827',
-                        'medium-bg': '#1f2937',
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="Homepage/style.css" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-gray-200 antialiased">
+<body class="bg-dark-bg text-gray-200 antialiased">
 
-    <header class="bg-gray-800 shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-4 sm:px-6 py-3 flex flex-row sm:flex-row sm:justify-between items-center">
-            
-            <a href="#" class="text-2xl font-bold text-white hover:text-purple-400 transition duration-300 hidden sm:block">TheVoidNexus</a>
-            
-            <div class="w-full sm:w-auto flex flex-row space-y sm:flex-row sm:space-y-0 sm:space-x-4 sm:items-center">
-                <a href="#about" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 sm:py-3 w-full text-center sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">About</a>
-                <a href="#projects" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 w-full text-center sm:py-1 sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">Projects</a>
-                <a href="#skills" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 w-full text-center sm:py-1 sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">Skills</a>
-                <a href="#contact" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 w-full text-center sm:py-1 sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">Contact</a>
+    <header class="bg-medium-bg shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 py-3 flex flex-col sm:flex-row sm:justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white hover:text-purple-400 transition duration-300 hidden sm:block mb-2 sm:mb-0" data-translate="nav_brand">TheVoidNexus</a>
+            <div class="w-full sm:w-auto flex flex-row space-x-1 sm:space-x-4 items-center justify-around sm:justify-center">
+                <a href="#about" class="text-gray-300 hover:text-purple-400 py-2 px-2 sm:px-3 text-center rounded-md hover:bg-gray-700 sm:hover:bg-transparent" data-translate="nav_about">About</a>
+                <a href="#projects" class="text-gray-300 hover:text-purple-400 py-2 px-2 sm:px-3 text-center rounded-md hover:bg-gray-700 sm:hover:bg-transparent" data-translate="nav_projects">Projects</a>
+                <a href="#skills" class="text-gray-300 hover:text-purple-400 py-2 px-2 sm:px-3 text-center rounded-md hover:bg-gray-700 sm:hover:bg-transparent" data-translate="nav_skills">Skills</a>
+                <a href="#contact" class="text-gray-300 hover:text-purple-400 py-2 px-2 sm:px-3 text-center rounded-md hover:bg-gray-700 sm:hover:bg-transparent" data-translate="nav_contact">Contact</a>
             </div>
         </nav>
     </header>
 
-    <section id="hero" class="bg-gray-900 py-24 px-6 text-center">
+    <section id="hero" class="bg-dark-bg py-20 md:py-24 px-6 text-center">
         <div class="container mx-auto flex flex-col items-center">
             <div class="animated-border-container shadow-lg">
                 <img src="https://lh3.googleusercontent.com/a/ACg8ocJtVxD1Xb1Enc3qypmC1iI1ridjydG-DgMU43mpgzF_bEH_gz2Q=s96-c"
                      alt="Developer Avatar"
                      class="profile-image w-32 h-32 md:w-40 md:h-40"
-                     onerror="this.onerror=null; this.src='https://placehold.co/160x160/cccccc/ffffff?text=PfP';">
+                     data-translate-alt="hero_avatar_alt"
+                     onerror="this.onerror=null; this.src='https://placehold.co/160x160/1F2937/E5E7EB?text=Avatar';">
             </div>
 
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">TheVoidNexus</h1>
-            <p class="text-xl md:text-2xl text-purple-400 mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 bg-clip-text text-transparent animate-gradient">Web Developer</p>
-            <style>
-                @keyframes gradient {
-                    0% {
-                        background-position: 0% 50%;
-                    }
-                    50% {
-                        background-position: 100% 50%;
-                    }
-                    100% {
-                        background-position: 0% 50%;
-                    }
-                }
-                .animate-gradient {
-                    background-size: 200% 200%;
-                    animation: gradient 5s ease infinite;
-                }
-            </style>
-
-            <a href="#projects" class="inline-block bg-purple-800 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-md hover:shadow-lg mb-10">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 mt-4" data-translate="hero_name">TheVoidNexus</h1>
+            <p class="text-xl md:text-2xl text-purple-400 mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 bg-clip-text text-transparent animate-gradient" data-translate="hero_title">Web Developer</p>
+            <a href="#projects" class="inline-block bg-purple-800 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-md hover:shadow-lg mb-10" data-translate="hero_cta_button">
                 View My Projects
             </a>
 
             <div class="info-socials-wrapper">
                 <div class="location-info-container">
-                     <p class="location-text">
-                         <span class="location-icon">📍</span> Västra Götaland, Sweden
-                     </p>
-                     <div class="time-weather-container">
-                         <div class="time-display">
-                             <span class="time-icon">🕒</span> <span id="current-time">00:00</span>
-                         </div>
-                         <div class="weather-display">
-                             <span class="weather-icon" id="weather-icon">☁️</span> <span id="weather-info">0°C - ...</span>
-                         </div>
-                     </div>
-                      <div id="error-message" class="error-message hidden w-full text-center mt-2"></div> </div>
+                    <p class="location-text">
+                        <span class="location-icon">📍</span> <span data-translate="hero_location_combined">Västra Götaland, Sweden</span>
+                    </p>
+                    <div class="time-weather-container">
+                        <div class="time-display">
+                            <span class="time-icon">🕒</span> <span id="current-time">00:00</span>
+                        </div>
+                        <div class="weather-display">
+                            <span class="weather-icon" id="weather-icon-container"><img src="https://placehold.co/25x25/2d3748/d1d5db?text=..." alt="Weather loading" class="weather-animation" data-translate-alt="hero_weather_icon_alt" onerror="this.onerror=null; this.src='https://placehold.co/25x25/2d3748/d1d5db?text=W';"></span> <span id="weather-info" data-translate="hero_weather_loading">Loading...</span>
+                        </div>
+                    </div>
+                    <div id="error-message" class="error-message hidden w-full text-center mt-2"></div>
+                </div>
 
-                 <div class="social-icons-container">
-                    <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile">
+                <div class="social-icons-container">
+                    <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile" data-translate-aria-label="github_aria_label">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </a>
-                    <a href="https://discord.com/users/764523667404619817" target="_blank" rel="noopener noreferrer"
-                    class="text-gray-400 group" aria-label="Discord Profile">
-                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="33" height="33" viewBox="0,0,256,256">
-                           <g fill="#9ca3af" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"
-                              class="group-hover:fill-white"> <path d="M128,256c-70.69245,0 -128,-57.30755 -128,-128v0c0,-70.69245 57.30755,-128 128,-128v0c70.69245,0 128,57.30755 128,128v0c0,70.69245 -57.30755,128 -128,128z" id="shape"></path>
-                           </g>
-                           <g fill="#18212f" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                               <g transform="scale(5.12,5.12)">
-                                   <path d="M41.625,10.76953c-3.98047,-3.20313 -10.27734,-3.74609 -10.54687,-3.76563c-0.41797,-0.03516 -0.81641,0.19922 -0.98828,0.58594c-0.01562,0.02344 -0.15234,0.33984 -0.30469,0.83203c2.63281,0.44531 5.86719,1.33984 8.79297,3.15625c0.46875,0.28906 0.61328,0.90625 0.32422,1.375c-0.19141,0.30859 -0.51562,0.47656 -0.85156,0.47656c-0.17969,0 -0.36328,-0.05078 -0.52734,-0.15234c-5.03125,-3.12109 -11.3125,-3.27734 -12.52344,-3.27734c-1.21094,0 -7.49609,0.15625 -12.52344,3.27734c-0.46875,0.29297 -1.08594,0.14844 -1.375,-0.32031c-0.29297,-0.47266 -0.14844,-1.08594 0.32031,-1.37891c2.92578,-1.8125 6.16016,-2.71094 8.79297,-3.15234c-0.15234,-0.49609 -0.28906,-0.80859 -0.30078,-0.83594c-0.17578,-0.38672 -0.57031,-0.62891 -0.99219,-0.58594c-0.26953,0.01953 -6.56641,0.5625 -10.60156,3.80859c-2.10547,1.94922 -6.32031,13.33984 -6.32031,23.1875c0,0.17578 0.04688,0.34375 0.13281,0.49609c2.90625,5.10938 10.83984,6.44531 12.64844,6.50391c0.00781,0 0.01953,0 0.03125,0c0.32031,0 0.62109,-0.15234 0.80859,-0.41016l1.82813,-2.51562c-4.93359,-1.27344 -7.45312,-3.4375 -7.59766,-3.56641c-0.41406,-0.36328 -0.45312,-0.99609 -0.08594,-1.41016c0.36328,-0.41406 0.99609,-0.45312 1.41016,-0.08984c0.05859,0.05469 4.69922,3.99219 13.82422,3.99219c9.14063,0 13.78125,-3.95312 13.82813,-3.99219c0.41406,-0.35937 1.04297,-0.32422 1.41016,0.09375c0.36328,0.41406 0.32422,1.04297 -0.08984,1.40625c-0.14453,0.12891 -2.66406,2.29297 -7.59766,3.56641l1.82813,2.51563c0.1875,0.25781 0.48828,0.41016 0.80859,0.41016c0.01172,0 0.02344,0 0.03125,0c1.80859,-0.05859 9.74219,-1.39453 12.64844,-6.50391c0.08594,-0.15234 0.13281,-0.32031 0.13281,-0.49609c0,-9.84766 -4.21484,-21.23828 -6.375,-23.23047zM18.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4zM31.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4z"></path>
-                               </g>
-                           </g>
-                       </svg>
-                   </a>
-                 </div>
-             </div> </div>
+                    <a href="https://discord.com/users/764523667404619817" target="_blank" rel="noopener noreferrer" class="text-gray-400 group" aria-label="Discord Profile" data-translate-aria-label="discord_aria_label">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="33" height="33" viewBox="0,0,256,256" class="group-hover:fill-white transition-colors duration-300">
+                            <g fill="#9ca3af" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"> <path d="M128,256c-70.69245,0 -128,-57.30755 -128,-128v0c0,-70.69245 57.30755,-128 128,-128v0c70.69245,0 128,57.30755 128,128v0c0,70.69245 -57.30755,128 -128,128z" id="shape"></path> </g>
+                            <g fill="#111827" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <g transform="scale(5.12,5.12)">
+                                    <path d="M41.625,10.76953c-3.98047,-3.20313 -10.27734,-3.74609 -10.54687,-3.76563c-0.41797,-0.03516 -0.81641,0.19922 -0.98828,0.58594c-0.01562,0.02344 -0.15234,0.33984 -0.30469,0.83203c2.63281,0.44531 5.86719,1.33984 8.79297,3.15625c0.46875,0.28906 0.61328,0.90625 0.32422,1.375c-0.19141,0.30859 -0.51562,0.47656 -0.85156,0.47656c-0.17969,0 -0.36328,-0.05078 -0.52734,-0.15234c-5.03125,-3.12109 -11.3125,-3.27734 -12.52344,-3.27734c-1.21094,0 -7.49609,0.15625 -12.52344,3.27734c-0.46875,0.29297 -1.08594,0.14844 -1.375,-0.32031c-0.29297,-0.47266 -0.14844,-1.08594 0.32031,-1.37891c2.92578,-1.8125 6.16016,-2.71094 8.79297,-3.15234c-0.15234,-0.49609 -0.28906,-0.80859 -0.30078,-0.83594c-0.17578,-0.38672 -0.57031,-0.62891 -0.99219,-0.58594c-0.26953,0.01953 -6.56641,0.5625 -10.60156,3.80859c-2.10547,1.94922 -6.32031,13.33984 -6.32031,23.1875c0,0.17578 0.04688,0.34375 0.13281,0.49609c2.90625,5.10938 10.83984,6.44531 12.64844,6.50391c0.00781,0 0.01953,0 0.03125,0c0.32031,0 0.62109,-0.15234 0.80859,-0.41016l1.82813,-2.51562c-4.93359,-1.27344 -7.45312,-3.4375 -7.59766,-3.56641c-0.41406,-0.36328 -0.45312,-0.99609 -0.08594,-1.41016c0.36328,0.41406 0.99609,-0.45312 1.41016,-0.08984c0.05859,0.05469 4.69922,3.99219 13.82422,3.99219c9.14063,0 13.78125,-3.95312 13.82813,-3.99219c0.41406,-0.35937 1.04297,-0.32422 1.41016,0.09375c0.36328,0.41406 0.32422,1.04297 -0.08984,1.40625c-0.14453,0.12891 -2.66406,2.29297 -7.59766,3.56641l1.82813,2.51563c0.1875,0.25781 0.48828,0.41016 0.80859,0.41016c0.01172,0 0.02344,0 0.03125,0c1.80859,-0.05859 9.74219,-1.39453 12.64844,-6.50391c0.08594,-0.15234 0.13281,-0.32031 0.13281,-0.49609c0,-9.84766 -4.21484,-21.23828 -6.375,-23.23047zM18.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4zM31.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4z"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="about" class="relative bg-gray-800 py-12 px-6 overflow-hidden flex flex-col justify-center">
+    <section id="about" class="relative bg-medium-bg py-16 md:py-20 px-6 overflow-hidden flex flex-col justify-center min-h-[calc(100vh-72px)] sm:min-h-fit">
         <div class="container mx-auto max-w-3xl text-center relative z-10 space-y-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-white fade-in-element">About Me</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white fade-in-element" data-translate="about_title">About Me</h2>
+            <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
 
-            <div id="interactive-card" class="relative overflow-hidden bg-gray-700/50 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-xl space-y-4">
-                <p class="text-lg text-gray-200 leading-relaxed fade-in-element delay-3">
-                    Hi, I'm <span class="text-purple-400 font-semibold">TheVoidNexus</span>.
+            <div id="interactive-card" class="relative bg-gray-700/50 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-xl space-y-4">
+                <p class="text-lg text-gray-200 leading-relaxed fade-in-element">
+                    <span data-translate="about_p1_text1">Hi, I'm </span><span class="text-purple-400 font-semibold" data-translate="about_p1_name">TheVoidNexus</span><span data-translate="about_p1_text2">.</span>
                 </p>
-                <p class="text-lg text-gray-200 leading-relaxed fade-in-element delay-4"></p>
-                    When I'm not coding, I like learning about new technologies, playing games, and enjoying the peaceful beauty of <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-yellow-400 font-semibold">Sweden</span>.
+                <p class="text-lg text-gray-200 leading-relaxed fade-in-element delay-4">
+                    <span data-translate="about_p2_text1">When I'm not coding, I like learning about new technologies, playing games, and enjoying the peaceful beauty of </span><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-yellow-400 font-semibold" data-translate="about_p2_country">Sweden</span><span data-translate="about_p2_text2">.</span>
                 </p>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="bg-gray-900 py-20 px-6">
+    <section id="projects" class="bg-dark-bg py-20 px-6">
         <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-6">Projects</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-6" data-translate="projects_title">Projects</h2>
             <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-medium-bg rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white mb-2">TVN Manager</h3>
-                        <p class="text-gray-400 mb-4">A useful subscription manager with a calender overview, platform sync, multiple currencies and more.</p>
+                        <h3 class="text-xl font-semibold text-white mb-2" data-translate="project1_title">TVN Manager</h3>
+                        <p class="text-gray-400 mb-4" data-translate="project1_desc">A useful subscription manager with a calender overview, platform sync, multiple currencies and more.</p>
                         <div class="flex space-x-4">
-                            <a href="tvn-manager" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
-                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/TVN-Manager" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
+                            <a href="tvn-manager" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300" data-translate="project_view_live">View Live</a>
+                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/TVN-Manager" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300" data-translate="project_github_repo">GitHub Repo</a>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-medium-bg rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white mb-2">VoidClicker</h3>
-                        <p class="text-gray-400 mb-4">An engaging clicker game inspired by Cookie Clicker, with interesting mechanics and upgrades.</p>
-                         <div class="flex space-x-4">
-                            <a href="voidclicker" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
-                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/Game" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
-                         </div>
+                        <h3 class="text-xl font-semibold text-white mb-2" data-translate="project2_title">VoidClicker</h3>
+                        <p class="text-gray-400 mb-4" data-translate="project2_desc">An engaging clicker game inspired by Cookie Clicker, with interesting mechanics and upgrades.</p>
+                        <div class="flex space-x-4">
+                            <a href="voidclicker" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300" data-translate="project_view_live">View Live</a>
+                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/Game" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300" data-translate="project_github_repo">GitHub Repo</a>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-medium-bg rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white mb-2">Polyrythm</h3>
-                        <p class="text-gray-400 mb-4">A rhythm-based program with dynamic beats and patterns.</p>
-                         <div class="flex space-x-4">
-                            <a href="polyrythm" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
-                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/Polyrythm" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
-                         </div>
+                        <h3 class="text-xl font-semibold text-white mb-2" data-translate="project3_title">Polyrythm</h3>
+                        <p class="text-gray-400 mb-4" data-translate="project3_desc">A rhythm-based program with dynamic beats and patterns.</p>
+                        <div class="flex space-x-4">
+                            <a href="polyrythm" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300" data-translate="project_view_live">View Live</a>
+                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/Polyrythm" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300" data-translate="project_github_repo">GitHub Repo</a>
+                        </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
     </section>
 
-    <section id="skills" class="bg-gray-800 py-20 px-6">
+    <section id="skills" class="bg-medium-bg py-20 px-6">
         <div class="container mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">My Skills</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" data-translate="skills_title">My Skills</h2>
             <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 sm:grid-cols-4 gap-8 max-w-5xl mx-auto">
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
-                    <div class="mb-3">
-                         <img src="https://www.svgrepo.com/show/349419/javascript.svg" alt="JavaScript" class="w-10 h-10 mx-auto">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="mb-3 flex justify-center items-center h-12">
+                        <img src="https://www.svgrepo.com/show/349419/javascript.svg" alt="JavaScript" class="w-10 h-10 mx-auto" data-translate-alt="skill_js_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=JS';">
                     </div>
-                    <h3 class="text-lg font-semibold text-white">JavaScript</h3>
+                    <h3 class="text-lg font-semibold text-white" data-translate="skill_js_name">JavaScript</h3>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
-                    <div class="mb-3">
-                         <img src="https://www.svgrepo.com/show/452092/react.svg" alt="React" class="w-10 h-10 mx-auto">
+                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="mb-3 flex justify-center items-center h-12">
+                        <img src="https://www.svgrepo.com/show/452092/react.svg" alt="React" class="w-10 h-10 mx-auto" data-translate-alt="skill_react_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=Re';">
                     </div>
-                    <h3 class="text-lg font-semibold text-white">React</h3>
+                    <h3 class="text-lg font-semibold text-white" data-translate="skill_react_name">React</h3>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
-                    <div class="mb-3">
-                         <img src="https://www.svgrepo.com/show/452234/java.svg" alt="Java" class="w-10 h-10 mx-auto">
+                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="mb-3 flex justify-center items-center h-12">
+                        <img src="https://www.svgrepo.com/show/452234/java.svg" alt="Java" class="w-10 h-10 mx-auto" data-translate-alt="skill_java_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=Ja';">
                     </div>
-                    <h3 class="text-lg font-semibold text-white">Java</h3>
+                    <h3 class="text-lg font-semibold text-white" data-translate="skill_java_name">Java</h3>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
-                    <div class="mb-3">
-                         <img src="https://www.svgrepo.com/show/333609/tailwind-css.svg" alt="Tailwind CSS" class="h-10 w-10 mx-auto invert">
+                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="mb-3 flex justify-center items-center h-12">
+                        <img src="https://www.svgrepo.com/show/333609/tailwind-css.svg" alt="Tailwind CSS" class="h-10 w-auto mx-auto filter dark:invert" data-translate-alt="skill_tailwind_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=Tw';">
                     </div>
-                    <h3 class="text-lg font-semibold text-white">Tailwind CSS</h3>
+                    <h3 class="text-lg font-semibold text-white" data-translate="skill_tailwind_name">Tailwind CSS</h3>
                 </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="bg-gray-900 py-20 px-6">
+    <section id="contact" class="bg-dark-bg py-20 px-6">
         <div class="container mx-auto max-w-3xl text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Contact Me</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" data-translate="contact_title">Contact Me</h2>
             <div class="w-20 h-1 bg-purple-700 mx-auto mb-10 rounded"></div>
-            <p class="text-lg text-gray-300 mb-10">
+            <p class="text-lg text-gray-300 mb-10" data-translate="contact_intro">
                 Interested in working together or have a question? Feel free to reach out!
             </p>
             <div class="flex justify-center space-x-6 mb-10">
-                 <a href="mailto:thevoidnexus2@gmail.com" class="text-purple-400 hover:text-purple-300 transition duration-300 text-lg">thevoidnexus2@gmail.com</a>
-                 </div>
+                <a href="mailto:thevoidnexus2@gmail.com" class="text-purple-400 hover:text-purple-300 transition duration-300 text-lg" data-translate="contact_email">thevoidnexus2@gmail.com</a>
             </div>
-            <div class="social-icons-container">
-                <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-                <a href="https://discord.com/users/764523667404619817" target="_blank" rel="noopener noreferrer"
-                class="text-gray-400 group" aria-label="Discord Profile">
-                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="33" height="33" viewBox="0,0,256,256">
-                       <g fill="#9ca3af" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"
-                          class="group-hover:fill-white"> <path d="M128,256c-70.69245,0 -128,-57.30755 -128,-128v0c0,-70.69245 57.30755,-128 128,-128v0c70.69245,0 128,57.30755 128,128v0c0,70.69245 -57.30755,128 -128,128z" id="shape"></path>
-                       </g>
-                       <g fill="#18212f" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                           <g transform="scale(5.12,5.12)">
-                               <path d="M41.625,10.76953c-3.98047,-3.20313 -10.27734,-3.74609 -10.54687,-3.76563c-0.41797,-0.03516 -0.81641,0.19922 -0.98828,0.58594c-0.01562,0.02344 -0.15234,0.33984 -0.30469,0.83203c2.63281,0.44531 5.86719,1.33984 8.79297,3.15625c0.46875,0.28906 0.61328,0.90625 0.32422,1.375c-0.19141,0.30859 -0.51562,0.47656 -0.85156,0.47656c-0.17969,0 -0.36328,-0.05078 -0.52734,-0.15234c-5.03125,-3.12109 -11.3125,-3.27734 -12.52344,-3.27734c-1.21094,0 -7.49609,0.15625 -12.52344,3.27734c-0.46875,0.29297 -1.08594,0.14844 -1.375,-0.32031c-0.29297,-0.47266 -0.14844,-1.08594 0.32031,-1.37891c2.92578,-1.8125 6.16016,-2.71094 8.79297,-3.15234c-0.15234,-0.49609 -0.28906,-0.80859 -0.30078,-0.83594c-0.17578,-0.38672 -0.57031,-0.62891 -0.99219,-0.58594c-0.26953,0.01953 -6.56641,0.5625 -10.60156,3.80859c-2.10547,1.94922 -6.32031,13.33984 -6.32031,23.1875c0,0.17578 0.04688,0.34375 0.13281,0.49609c2.90625,5.10938 10.83984,6.44531 12.64844,6.50391c0.00781,0 0.01953,0 0.03125,0c0.32031,0 0.62109,-0.15234 0.80859,-0.41016l1.82813,-2.51562c-4.93359,-1.27344 -7.45312,-3.4375 -7.59766,-3.56641c-0.41406,-0.36328 -0.45312,-0.99609 -0.08594,-1.41016c0.36328,-0.41406 0.99609,-0.45312 1.41016,-0.08984c0.05859,0.05469 4.69922,3.99219 13.82422,3.99219c9.14063,0 13.78125,-3.95312 13.82813,-3.99219c0.41406,-0.35937 1.04297,-0.32422 1.41016,0.09375c0.36328,0.41406 0.32422,1.04297 -0.08984,1.40625c-0.14453,0.12891 -2.66406,2.29297 -7.59766,3.56641l1.82813,2.51563c0.1875,0.25781 0.48828,0.41016 0.80859,0.41016c0.01172,0 0.02344,0 0.03125,0c1.80859,-0.05859 9.74219,-1.39453 12.64844,-6.50391c0.08594,-0.15234 0.13281,-0.32031 0.13281,-0.49609c0,-9.84766 -4.21484,-21.23828 -6.375,-23.23047zM18.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4zM31.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4z"></path>
-                           </g>
-                       </g>
-                   </svg>
-               </a>
-             </div>
+        </div>
+        <div class="social-icons-container">
+            <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile" data-translate-aria-label="github_aria_label">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://discord.com/users/764523667404619817" target="_blank" rel="noopener noreferrer" class="text-gray-400 group" aria-label="Discord Profile" data-translate-aria-label="discord_aria_label">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="33" height="33" viewBox="0,0,256,256" class="group-hover:fill-white transition-colors duration-300">
+                    <g fill="#9ca3af" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"> <path d="M128,256c-70.69245,0 -128,-57.30755 -128,-128v0c0,-70.69245 57.30755,-128 128,-128v0c70.69245,0 128,57.30755 128,128v0c0,70.69245 -57.30755,128 -128,128z" id="shape"></path> </g>
+                    <g fill="#111827" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                        <g transform="scale(5.12,5.12)">
+                            <path d="M41.625,10.76953c-3.98047,-3.20313 -10.27734,-3.74609 -10.54687,-3.76563c-0.41797,-0.03516 -0.81641,0.19922 -0.98828,0.58594c-0.01562,0.02344 -0.15234,0.33984 -0.30469,0.83203c2.63281,0.44531 5.86719,1.33984 8.79297,3.15625c0.46875,0.28906 0.61328,0.90625 0.32422,1.375c-0.19141,0.30859 -0.51562,0.47656 -0.85156,0.47656c-0.17969,0 -0.36328,-0.05078 -0.52734,-0.15234c-5.03125,-3.12109 -11.3125,-3.27734 -12.52344,-3.27734c-1.21094,0 -7.49609,0.15625 -12.52344,3.27734c-0.46875,0.29297 -1.08594,0.14844 -1.375,-0.32031c-0.29297,-0.47266 -0.14844,-1.08594 0.32031,-1.37891c2.92578,-1.8125 6.16016,-2.71094 8.79297,-3.15234c-0.15234,-0.49609 -0.28906,-0.80859 -0.30078,-0.83594c-0.17578,-0.38672 -0.57031,-0.62891 -0.99219,-0.58594c-0.26953,0.01953 -6.56641,0.5625 -10.60156,3.80859c-2.10547,1.94922 -6.32031,13.33984 -6.32031,23.1875c0,0.17578 0.04688,0.34375 0.13281,0.49609c2.90625,5.10938 10.83984,6.44531 12.64844,6.50391c0.00781,0 0.01953,0 0.03125,0c0.32031,0 0.62109,-0.15234 0.80859,-0.41016l1.82813,-2.51562c-4.93359,-1.27344 -7.45312,-3.4375 -7.59766,-3.56641c-0.41406,-0.36328 -0.45312,-0.99609 -0.08594,-1.41016c0.36328,0.41406 0.99609,-0.45312 1.41016,-0.08984c0.05859,0.05469 4.69922,3.99219 13.82422,3.99219c9.14063,0 13.78125,-3.95312 13.82813,-3.99219c0.41406,-0.35937 1.04297,-0.32422 1.41016,0.09375c0.36328,0.41406 0.32422,1.04297 -0.08984,1.40625c-0.14453,0.12891 -2.66406,2.29297 -7.59766,3.56641l1.82813,2.51563c0.1875,0.25781 0.48828,0.41016 0.80859,0.41016c0.01172,0 0.02344,0 0.03125,0c1.80859,-0.05859 9.74219,-1.39453 12.64844,-6.50391c0.08594,-0.15234 0.13281,-0.32031 0.13281,-0.49609c0,-9.84766 -4.21484,-21.23828 -6.375,-23.23047zM18.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4zM31.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4z"></path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </div>
     </section>
 
-    <footer class="bg-gray-800 py-6 px-6 text-center">
+    <footer class="bg-medium-bg py-8 px-6 text-center">
         <div class="container mx-auto">
-            <p class="text-gray-400">© 2025 TheVoidNexus. All rights reserved.</p>
+            <div class="relative inline-block text-left" id="language-dropdown-container">
+                <button type="button"
+                        class="flex items-center text-sm sm:text-xs text-gray-300 hover:text-purple-400 py-2 px-2 sm:px-3 text-center rounded-md hover:bg-gray-700 sm:hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 max-w-[120px] sm:max-w-[180px] overflow-hidden whitespace-nowrap text-ellipsis"
+                        id="language-dropdown-button"
+                        aria-expanded="false"
+                        aria-haspopup="true">
+                    <span id="selected-lang-flag-container" class="mr-2 flex items-center"></span>
+                    <span id="selected-lang-text" class="hidden">English</span>
+                    <svg class="-mr-1 ml-1 sm:ml-2 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                         fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div id="language-dropdown-menu" class="origin-top absolute left-1/2 transform -translate-x-1/2 top-[-400%] mt-2 w-40 rounded-md shadow-lg bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="language-dropdown-button">
+                    <div class="py-1" role="none">
+                        <a href="#" class="text-gray-300 hover:bg-gray-600 hover:text-purple-400 group flex items-center px-4 py-2 text-sm dropdown-item" role="menuitem" data-lang="EN" id="lang-en-dropdown">
+                            <span class="flag-icon-placeholder mr-3 flex items-center"></span> English
+                        </a>
+                        <a href="#" class="text-gray-300 hover:bg-gray-600 hover:text-purple-400 group flex items-center px-4 py-2 text-sm dropdown-item" role="menuitem" data-lang="DE" id="lang-de-dropdown">
+                            <span class="flag-icon-placeholder mr-3 flex items-center"></span> Deutsch
+                        </a>
+                        <a href="#" class="text-gray-300 hover:bg-gray-600 hover:text-purple-400 group flex items-center px-4 py-2 text-sm dropdown-item" role="menuitem" data-lang="SV" id="lang-sv-dropdown">
+                            <span class="flag-icon-placeholder mr-3 flex items-center"></span> Svenska
+                        </a>
+                    </div>
+                </div>
             </div>
-    </footer>
+        </div>
+        <p class="text-gray-400 mt-4" data-translate="footer_copyright">© 2025 TheVoidNexus</p>
+    </footer>    
 
-    <script>
-        const LATITUDE = 57.79;
-        const LONGITUDE = 13.41;
-    
-        function updateTime() {
-            const now = new Date();
-            const options = {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-                timeZone: 'Europe/Stockholm'
-            };
-            const formattedTime = now.toLocaleTimeString('sv-SE', options);
-            const timeElement = document.getElementById('current-time');
-            if (timeElement) {
-                timeElement.textContent = formattedTime;
-            }
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-    
-        async function fetchWeather() {
-            const weatherUrl = `https://api.thevoidnexus.com/weather?lat=${LATITUDE}&lon=${LONGITUDE}`;
-        
-            const errorMessageElement = document.getElementById('error-message');
-            const weatherInfoElement = document.getElementById('weather-info');
-            const weatherIconElement = document.getElementById('weather-icon');
-        
-            const showError = (message) => {
-            console.error("Failed to fetch weather data:", message);
-            if (weatherInfoElement) {
-                weatherInfoElement.textContent = '';
-                weatherInfoElement.classList.add('hidden');
-            }
-            if (weatherIconElement) {
-                weatherIconElement.textContent = '';
-                weatherIconElement.classList.add('hidden');
-            }
-            };
-        
-            try {
-            const response = await fetch(weatherUrl);
-    
-                if (!response.ok) {
-                    let errorMsg = `Request failed with status ${response.status}`;
-                    try {
-                        const errorData = await response.json();
-                        errorMsg = errorData.error || errorMsg;
-                    } catch (e) {
-                        console.warn("Could not parse JSON error response:", e);
-                    }
-                    throw new Error(errorMsg);
-                }
-    
-                const data = await response.json();
-    
-                 if (!data.main || !data.weather || !data.weather[0]) {
-                    throw new Error("Incomplete weather data received.");
-                }
-    
-                const temperature = Math.round(data.main.temp);
-                const description = data.weather[0].description;
-                const iconCode = data.weather[0].icon;
-    
-                if (weatherInfoElement) {
-                    const capitalizedDesc = description.charAt(0).toUpperCase() + description.slice(1);
-                    weatherInfoElement.textContent = `${temperature}°C - ${capitalizedDesc}`;
-                }
-    
-                if (weatherIconElement) {
-                weatherIconElement.innerHTML = getAnimatedWeatherIconHTML(iconCode, description);
-                }
-    
-                if (errorMessageElement) {
-                    errorMessageElement.classList.add('hidden');
-                    errorMessageElement.textContent = '';
-                }
-    
-            } catch (error) {
-                showError(error.message);
-            }
-        }
-
-        function getAnimatedWeatherIconHTML(iconCode, altText = "Weather condition") {
-            const iconFileMap = {
-                '01d': 'clear-day.svg',
-                '01n': 'starry-night.svg',
-                '02d': 'partly-cloudy-day.svg',
-                '02n': 'partly-cloudy-night.svg',
-                '03d': 'cloudy.svg',
-                '03n': 'cloudy.svg',
-                '04d': 'overcast-day.svg',
-                '04n': 'overcast-night.svg',
-                '09d': 'partly-cloudy-day-drizzle.svg',
-                '09n': 'partly-cloudy-night-drizzle.svg',
-                '10d': 'rain.svg',
-                '10n': 'partly-cloudy-night-rain.svg',
-                '11d': 'thunderstorms-day-rain.svg',
-                '11n': 'thunderstorms-night-rain.svg',
-                '13d': 'snow.svg',
-                '13n': 'partly-cloudy-night-snow.svg',
-                '50d': 'fog-day.svg',
-                '50n': 'fog-night.svg'
-            };
-
-            const filename = iconFileMap[iconCode] || 'not-available.svg';
-            const iconPath = `https://basmilius.github.io/weather-icons/production/fill/all/${filename}`;
-
-            return `<img src="${iconPath}" alt="${altText}" class="weather-animation">`;
-        }
-
-        fetchWeather();
-    </script>
+    <script src="Homepage/translations.js"></script>
     <script src="Homepage/script.js"></script>
+    <script src="Homepage/tailwind.js"></script>
 </body>
 </html>
