@@ -33,6 +33,32 @@
            scroll-behavior: smooth;
         }
 
+        @keyframes rotateGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .animated-border-container {
+            padding: 5px;
+            border-radius: 9999px;
+            background: linear-gradient(45deg, #a90063 0%, #670046 25%, #a607c3 50%, #ac1192 75%, #bc1888 100%);
+            background-size: 400% 400%;
+            animation: rotateGradient 5s ease infinite;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .profile-image {
+            display: block;
+            border-radius: 9999px;
+        }
+
         .info-socials-wrapper {
             display: flex;
             flex-direction: column;
@@ -100,6 +126,11 @@
              }
          }
 
+         .weather-icon {
+            height: 25px;
+            width: 25px;
+         }
+
         .time-display, .weather-display {
             display: flex;
             align-items: center;
@@ -135,6 +166,39 @@
         #hero a.inline-block {
              transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
+        .cursor-trail-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(168, 85, 247, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            animation: fadeAndShrink 0.7s ease-out forwards;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes fadeAndShrink {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.2);
+                opacity: 0;
+            }
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         
     </style>
     <script>
@@ -154,23 +218,47 @@
 <body class="bg-gray-900 text-gray-200 antialiased">
 
     <header class="bg-gray-800 shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white hover:text-purple-400 transition duration-300">TheVoidNexus</a>
-            <div class="space-x-4">
-                <a href="#about" class="text-gray-300 hover:text-purple-400 transition duration-300">About</a>
-                <a href="#projects" class="text-gray-300 hover:text-purple-400 transition duration-300">Projects</a>
-                <a href="#skills" class="text-gray-300 hover:text-purple-400 transition duration-300">Skills</a>
-                <a href="#contact" class="text-gray-300 hover:text-purple-400 transition duration-300">Contact</a>
+        <nav class="container mx-auto px-4 sm:px-6 py-3 flex flex-row sm:flex-row sm:justify-between items-center">
+            
+            <a href="#" class="text-2xl font-bold text-white hover:text-purple-400 transition duration-300 hidden sm:block">TheVoidNexus</a>
+            
+            <div class="w-full sm:w-auto flex flex-row space-y sm:flex-row sm:space-y-0 sm:space-x-4 sm:items-center">
+                <a href="#about" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 sm:py-3 w-full text-center sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">About</a>
+                <a href="#projects" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 w-full text-center sm:py-1 sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">Projects</a>
+                <a href="#skills" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 w-full text-center sm:py-1 sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">Skills</a>
+                <a href="#contact" class="text-gray-300 hover:text-purple-400 transition duration-300 py-2 w-full text-center sm:py-1 sm:w-auto sm:text-left rounded-md hover:bg-gray-700 sm:hover:bg-transparent flex-1">Contact</a>
             </div>
         </nav>
     </header>
 
     <section id="hero" class="bg-gray-900 py-24 px-6 text-center">
         <div class="container mx-auto flex flex-col items-center">
-            <img src="https://lh3.googleusercontent.com/a/ACg8ocJtVxD1Xb1Enc3qypmC1iI1ridjydG-DgMU43mpgzF_bEH_gz2Q=s96-c" alt="Developer Avatar" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 border-4 border-purple-800 shadow-lg" onerror="this.onerror=null; this.src='https://placehold.co/160x160/cccccc/ffffff?text=PfP';">
+            <div class="animated-border-container shadow-lg">
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocJtVxD1Xb1Enc3qypmC1iI1ridjydG-DgMU43mpgzF_bEH_gz2Q=s96-c"
+                     alt="Developer Avatar"
+                     class="profile-image w-32 h-32 md:w-40 md:h-40"
+                     onerror="this.onerror=null; this.src='https://placehold.co/160x160/cccccc/ffffff?text=PfP';">
+            </div>
 
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">TheVoidNexus</h1>
-            <p class="text-xl md:text-2xl text-purple-400 mb-8">Web Developer</p>
+            <p class="text-xl md:text-2xl text-purple-400 mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 bg-clip-text text-transparent animate-gradient">Web Developer</p>
+            <style>
+                @keyframes gradient {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                    }
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+                .animate-gradient {
+                    background-size: 200% 200%;
+                    animation: gradient 5s ease infinite;
+                }
+            </style>
 
             <a href="#projects" class="inline-block bg-purple-800 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-md hover:shadow-lg mb-10">
                 View My Projects
@@ -214,16 +302,18 @@
              </div> </div>
     </section>
 
-    <section id="about" class="bg-gray-800 py-20 px-6">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">About Me</h2>
-            <div class="w-20 h-1 bg-purple-700 mx-auto mb-10 rounded"></div>
-            <p class="text-lg text-gray-300 leading-relaxed mb-6">
-                Coming soon
-            </p>
-            <p class="text-lg text-gray-300 leading-relaxed">
-                 
-            </p>
+    <section id="about" class="relative bg-gray-800 py-12 px-6 overflow-hidden flex flex-col justify-center">
+        <div class="container mx-auto max-w-3xl text-center relative z-10 space-y-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-white fade-in-element">About Me</h2>
+
+            <div id="interactive-card" class="relative overflow-hidden bg-gray-700/50 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-xl space-y-4">
+                <p class="text-lg text-gray-200 leading-relaxed fade-in-element delay-3">
+                    Hi, I'm <span class="text-purple-400 font-semibold">TheVoidNexus</span>.
+                </p>
+                <p class="text-lg text-gray-200 leading-relaxed fade-in-element delay-4"></p>
+                    When I'm not coding, I like learning about new technologies, playing games, and enjoying the peaceful beauty of <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-yellow-400 font-semibold">Sweden</span>.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -238,27 +328,27 @@
                         <p class="text-gray-400 mb-4">A useful subscription manager with a calender overview, platform sync, multiple currencies and more.</p>
                         <div class="flex space-x-4">
                             <a href="tvn-manager" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
+                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/TVN-Manager" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
                         </div>
                     </div>
                 </div>
                 <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-white mb-2">VoidClicker</h3>
-                        <p class="text-gray-400 mb-4">Another project description, focusing on different aspects or challenges overcome.</p>
+                        <p class="text-gray-400 mb-4">An engaging clicker game inspired by Cookie Clicker, with interesting mechanics and upgrades.</p>
                          <div class="flex space-x-4">
                             <a href="voidclicker" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
+                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/Game" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
                          </div>
                     </div>
                 </div>
                 <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-white mb-2">Polyrythm</h3>
-                        <p class="text-gray-400 mb-4">Description for the third project, maybe mentioning collaboration or specific results.</p>
+                        <p class="text-gray-400 mb-4">A rhythm-based program with dynamic beats and patterns.</p>
                          <div class="flex space-x-4">
                             <a href="polyrythm" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">View Live</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
+                            <a href="https://github.com/TheVoidNexus/thevoidnexus.com/tree/main/Polyrythm" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition duration-300">GitHub Repo</a>
                          </div>
                     </div>
                 </div>
@@ -270,20 +360,31 @@
         <div class="container mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">My Skills</h2>
             <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 sm:grid-cols-3 sm:grid-cols-4 gap-8 max-w-5xl mx-auto">
                 <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
-                    <div class="text-4xl text-purple-400 mb-3">💻</div>
+                    <div class="mb-3">
+                         <img src="https://www.svgrepo.com/show/349419/javascript.svg" alt="JavaScript" class="w-10 h-10 mx-auto">
+                    </div>
                     <h3 class="text-lg font-semibold text-white">JavaScript</h3>
                 </div>
                 <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
-                    <div class="text-4xl text-purple-400 mb-3">⚛️</div>
+                    <div class="mb-3">
+                         <img src="https://www.svgrepo.com/show/452092/react.svg" alt="React" class="w-10 h-10 mx-auto">
+                    </div>
                     <h3 class="text-lg font-semibold text-white">React</h3>
                 </div>
                 <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
-                    <div class="text-4xl text-purple-400 mb-3">☕</div>
+                    <div class="mb-3">
+                         <img src="https://www.svgrepo.com/show/452234/java.svg" alt="Java" class="w-10 h-10 mx-auto">
+                    </div>
                     <h3 class="text-lg font-semibold text-white">Java</h3>
                 </div>
-                 </div>
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                    <div class="mb-3">
+                         <img src="https://www.svgrepo.com/show/333609/tailwind-css.svg" alt="Tailwind CSS" class="h-10 w-10 mx-auto invert">
+                    </div>
+                    <h3 class="text-lg font-semibold text-white">Tailwind CSS</h3>
+                </div>
         </div>
     </section>
 
@@ -297,8 +398,27 @@
             <div class="flex justify-center space-x-6 mb-10">
                  <a href="mailto:thevoidnexus2@gmail.com" class="text-purple-400 hover:text-purple-300 transition duration-300 text-lg">thevoidnexus2@gmail.com</a>
                  </div>
-
             </div>
+            <div class="social-icons-container">
+                <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://discord.com/users/764523667404619817" target="_blank" rel="noopener noreferrer"
+                class="text-gray-400 group" aria-label="Discord Profile">
+                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="33" height="33" viewBox="0,0,256,256">
+                       <g fill="#9ca3af" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"
+                          class="group-hover:fill-white"> <path d="M128,256c-70.69245,0 -128,-57.30755 -128,-128v0c0,-70.69245 57.30755,-128 128,-128v0c70.69245,0 128,57.30755 128,128v0c0,70.69245 -57.30755,128 -128,128z" id="shape"></path>
+                       </g>
+                       <g fill="#18212f" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                           <g transform="scale(5.12,5.12)">
+                               <path d="M41.625,10.76953c-3.98047,-3.20313 -10.27734,-3.74609 -10.54687,-3.76563c-0.41797,-0.03516 -0.81641,0.19922 -0.98828,0.58594c-0.01562,0.02344 -0.15234,0.33984 -0.30469,0.83203c2.63281,0.44531 5.86719,1.33984 8.79297,3.15625c0.46875,0.28906 0.61328,0.90625 0.32422,1.375c-0.19141,0.30859 -0.51562,0.47656 -0.85156,0.47656c-0.17969,0 -0.36328,-0.05078 -0.52734,-0.15234c-5.03125,-3.12109 -11.3125,-3.27734 -12.52344,-3.27734c-1.21094,0 -7.49609,0.15625 -12.52344,3.27734c-0.46875,0.29297 -1.08594,0.14844 -1.375,-0.32031c-0.29297,-0.47266 -0.14844,-1.08594 0.32031,-1.37891c2.92578,-1.8125 6.16016,-2.71094 8.79297,-3.15234c-0.15234,-0.49609 -0.28906,-0.80859 -0.30078,-0.83594c-0.17578,-0.38672 -0.57031,-0.62891 -0.99219,-0.58594c-0.26953,0.01953 -6.56641,0.5625 -10.60156,3.80859c-2.10547,1.94922 -6.32031,13.33984 -6.32031,23.1875c0,0.17578 0.04688,0.34375 0.13281,0.49609c2.90625,5.10938 10.83984,6.44531 12.64844,6.50391c0.00781,0 0.01953,0 0.03125,0c0.32031,0 0.62109,-0.15234 0.80859,-0.41016l1.82813,-2.51562c-4.93359,-1.27344 -7.45312,-3.4375 -7.59766,-3.56641c-0.41406,-0.36328 -0.45312,-0.99609 -0.08594,-1.41016c0.36328,-0.41406 0.99609,-0.45312 1.41016,-0.08984c0.05859,0.05469 4.69922,3.99219 13.82422,3.99219c9.14063,0 13.78125,-3.95312 13.82813,-3.99219c0.41406,-0.35937 1.04297,-0.32422 1.41016,0.09375c0.36328,0.41406 0.32422,1.04297 -0.08984,1.40625c-0.14453,0.12891 -2.66406,2.29297 -7.59766,3.56641l1.82813,2.51563c0.1875,0.25781 0.48828,0.41016 0.80859,0.41016c0.01172,0 0.02344,0 0.03125,0c1.80859,-0.05859 9.74219,-1.39453 12.64844,-6.50391c0.08594,-0.15234 0.13281,-0.32031 0.13281,-0.49609c0,-9.84766 -4.21484,-21.23828 -6.375,-23.23047zM18.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4zM31.5,30c-1.93359,0 -3.5,-1.78906 -3.5,-4c0,-2.21094 1.56641,-4 3.5,-4c1.93359,0 3.5,1.78906 3.5,4c0,2.21094 -1.56641,4 -3.5,4z"></path>
+                           </g>
+                       </g>
+                   </svg>
+               </a>
+             </div>
     </section>
 
     <footer class="bg-gray-800 py-6 px-6 text-center">
@@ -308,111 +428,118 @@
     </footer>
 
     <script>
-        const OPENWEATHER_API_KEY = '0c2899c7b4f2e0b4e89c1e3e07d9d799';
-
-        const LATITUDE = 58.52;
-        const LONGITUDE = 13.58;
-
+        const LATITUDE = 57.79;
+        const LONGITUDE = 13.41;
+    
         function updateTime() {
             const now = new Date();
-            const options = { hour: '2-digit', minute: '2-digit', hour12: false };
-            const formattedTime = now.toLocaleTimeString('en-US', options);
-
+            const options = {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+                timeZone: 'Europe/Stockholm'
+            };
+            const formattedTime = now.toLocaleTimeString('sv-SE', options);
             const timeElement = document.getElementById('current-time');
             if (timeElement) {
                 timeElement.textContent = formattedTime;
             }
         }
-
-        setInterval(updateTime, 10000);
-
+        setInterval(updateTime, 1000);
         updateTime();
-
+    
         async function fetchWeather() {
-            if (OPENWEATHER_API_KEY === !OPENWEATHER_API_KEY) {
-                 const errorMessageElement = document.getElementById('error-message');
-                 if (errorMessageElement) {
-                      errorMessageElement.textContent = 'Weather API key not set.';
-                      errorMessageElement.classList.remove('hidden');
-                 }
-                 const weatherInfoElement = document.getElementById('weather-info');
-                 if (weatherInfoElement) weatherInfoElement.textContent = 'Weather unavailable';
-                 const weatherIconElement = document.getElementById('weather-icon');
-                 if (weatherIconElement) weatherIconElement.textContent = '❓';
-                 return;
-            }
-
-
-            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${OPENWEATHER_API_KEY}&units=metric`;
-
+            const weatherUrl = `https://api.thevoidnexus.com/weather?lat=${LATITUDE}&lon=${LONGITUDE}`;
+        
             const errorMessageElement = document.getElementById('error-message');
             const weatherInfoElement = document.getElementById('weather-info');
             const weatherIconElement = document.getElementById('weather-icon');
-
+        
+            const showError = (message) => {
+            console.error("Failed to fetch weather data:", message);
+            if (weatherInfoElement) {
+                weatherInfoElement.textContent = '';
+                weatherInfoElement.classList.add('hidden');
+            }
+            if (weatherIconElement) {
+                weatherIconElement.textContent = '';
+                weatherIconElement.classList.add('hidden');
+            }
+            };
+        
             try {
-                const response = await fetch(weatherUrl);
+            const response = await fetch(weatherUrl);
+    
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`Weather API error: ${response.status} - ${errorData.message || response.statusText}`);
+                    let errorMsg = `Request failed with status ${response.status}`;
+                    try {
+                        const errorData = await response.json();
+                        errorMsg = errorData.error || errorMsg;
+                    } catch (e) {
+                        console.warn("Could not parse JSON error response:", e);
+                    }
+                    throw new Error(errorMsg);
                 }
+    
                 const data = await response.json();
-
+    
+                 if (!data.main || !data.weather || !data.weather[0]) {
+                    throw new Error("Incomplete weather data received.");
+                }
+    
                 const temperature = Math.round(data.main.temp);
                 const description = data.weather[0].description;
                 const iconCode = data.weather[0].icon;
-
-                if (weatherInfoElement) weatherInfoElement.textContent = `${temperature}°C - ${description.charAt(0).toUpperCase() + description.slice(1)}`;
-
-                if (weatherIconElement) weatherIconElement.textContent = getWeatherEmoji(iconCode);
-
-                if (errorMessageElement) errorMessageElement.classList.add('hidden');
-
-            } catch (error) {
-                console.error("Failed to fetch weather data:", error);
-                if (weatherInfoElement) weatherInfoElement.textContent = 'Weather unavailable';
-                if (weatherIconElement) weatherIconElement.textContent = '❓'; 
-                if (errorMessageElement) {
-                    errorMessageElement.textContent = `Error fetching weather: ${error.message}`;
-                    errorMessageElement.classList.remove('hidden');
+    
+                if (weatherInfoElement) {
+                    const capitalizedDesc = description.charAt(0).toUpperCase() + description.slice(1);
+                    weatherInfoElement.textContent = `${temperature}°C - ${capitalizedDesc}`;
                 }
+    
+                if (weatherIconElement) {
+                weatherIconElement.innerHTML = getAnimatedWeatherIconHTML(iconCode, description);
+                }
+    
+                if (errorMessageElement) {
+                    errorMessageElement.classList.add('hidden');
+                    errorMessageElement.textContent = '';
+                }
+    
+            } catch (error) {
+                showError(error.message);
             }
         }
 
-        function getWeatherEmoji(iconCode) {
-            switch (iconCode) {
-                case '01d':
-                case '01n':
-                    return '☀️';
-                case '02d':
-                case '02n':
-                    return '🌤️';
-                case '03d':
-                case '03n':
-                case '04d':
-                case '04n':
-                    return '☁️';
-                case '09d':
-                case '09n':
-                    return '🌧️';
-                case '10d':
-                case '10n':
-                    return '🌦️';
-                case '11d':
-                case '11n':
-                    return '⛈️';
-                case '13d':
-                case '13n':
-                    return '❄️';
-                case '50d':
-                case '50n':
-                    return '🌫️';
-                default:
-                    return '☁️';
-            }
+        function getAnimatedWeatherIconHTML(iconCode, altText = "Weather condition") {
+            const iconFileMap = {
+                '01d': 'clear-day.svg',
+                '01n': 'starry-night.svg',
+                '02d': 'partly-cloudy-day.svg',
+                '02n': 'partly-cloudy-night.svg',
+                '03d': 'cloudy.svg',
+                '03n': 'cloudy.svg',
+                '04d': 'overcast-day.svg',
+                '04n': 'overcast-night.svg',
+                '09d': 'partly-cloudy-day-drizzle.svg',
+                '09n': 'partly-cloudy-night-drizzle.svg',
+                '10d': 'rain.svg',
+                '10n': 'partly-cloudy-night-rain.svg',
+                '11d': 'thunderstorms-day-rain.svg',
+                '11n': 'thunderstorms-night-rain.svg',
+                '13d': 'snow.svg',
+                '13n': 'partly-cloudy-night-snow.svg',
+                '50d': 'fog-day.svg',
+                '50n': 'fog-night.svg'
+            };
+
+            const filename = iconFileMap[iconCode] || 'not-available.svg';
+            const iconPath = `https://basmilius.github.io/weather-icons/production/fill/all/${filename}`;
+
+            return `<img src="${iconPath}" alt="${altText}" class="weather-animation">`;
         }
 
         fetchWeather();
     </script>
-
+    <script src="Homepage/script.js"></script>
 </body>
 </html>
