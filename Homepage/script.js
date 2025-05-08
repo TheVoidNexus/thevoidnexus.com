@@ -35,7 +35,7 @@ function getInitialLanguage() {
 }
 
 async function fetchWeather() {
-    const weatherUrl = `https://api.thevoidnexus.com/weather?llat=${LATITUDE}&lon=${LONGITUDE}&lang=${getInitialLanguage()}`;
+    const weatherUrl = `https://api.thevoidnexus.com/weather?lat=${LATITUDE}&lon=${LONGITUDE}&lang=${getInitialLanguage()}`;
 
     const errorMessageElement = document.getElementById('error-message');
     const weatherInfoElement = document.getElementById('weather-info');
