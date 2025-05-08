@@ -35,21 +35,40 @@ function getInitialLanguage() {
 }
 
 async function fetchWeather() {
-    const weatherUrl = `https://api.thevoidnexus.com/weather?lat=${LATITUDE}&lon=${LONGITUDE}&lang=${getInitialLanguage()}`;
+    const weatherUrl = `https://api.thevoidnexus.com/weather?llat=${LATITUDE}&lon=${LONGITUDE}&lang=${getInitialLanguage()}`;
 
     const errorMessageElement = document.getElementById('error-message');
     const weatherInfoElement = document.getElementById('weather-info');
     const weatherIconContainer = document.getElementById('weather-icon-container');
 
     const showError = (message) => {
-        console.error("Failed to fetch weather data:", message);
-        if (weatherInfoElement) {
-            weatherInfoElement.textContent = 'Weather N/A';
-        }
-        if (weatherIconContainer) {
-            weatherIconContainer.innerHTML = `<img src="https://placehold.co/25x25/2d3748/ff0000?text=!" alt="Error" class="weather-animation">`;
-        }
-    };
+      console.error("Failed to fetch weather data:", message);
+      if (weatherInfoElement) {
+          weatherInfoElement.textContent = translations[getInitialLanguage()]['weather_error'];
+      }
+      if (weatherIconContainer) {
+          weatherIconContainer.innerHTML = `
+              <dotlottie-player
+                  id="error-lottie"
+                  src="https://lottie.host/94f6a996-7400-4025-ae3e-6d2187712a16/0YpS4bRkMF.lottie"
+                  background="transparent"
+                  speed="0.7"
+                  style="width: 100px; height: 100px"
+                  autoplay
+              ></dotlottie-player>
+          `;
+  
+          const lottiePlayer = document.getElementById('error-lottie');
+  
+          lottiePlayer.addEventListener('complete', () => {
+              lottiePlayer.pause();
+              setTimeout(() => {
+                  lottiePlayer.seek(0);
+                  lottiePlayer.play();
+              }, 5000);
+          });
+      }
+  };   
 
     try {
         const response = await fetch(weatherUrl);
@@ -90,7 +109,7 @@ async function fetchWeather() {
         }
 
     } catch (error) {
-        showError(error.message);
+        showError(error);
     }
 }
 
@@ -145,17 +164,25 @@ fadeInElements.forEach(el => {
 });
 
 document.addEventListener('mousemove', function(e) {
-    const dot = document.createElement('div');
-    dot.classList.add('cursor-trail-dot');
-    dot.style.left = `${e.pageX}px`;
-    dot.style.top = `${e.pageY}px`;
-    document.body.appendChild(dot);
+  const dot = document.createElement('div');
+  dot.classList.add('cursor-trail-dot');
+  dot.style.left = `${e.pageX}px`;
+  dot.style.top = `${e.pageY}px`;
+  document.body.appendChild(dot);
 
-    dot.addEventListener('animationend', () => {
-        dot.remove();
-    });
+  dot.animate([
+    { transform: 'scale(1)', opacity: 1 },
+    { transform: 'scale(1.5)', opacity: 0 }
+  ], {
+    duration: 500,
+    easing: 'ease-out',
+    fill: 'forwards'
+  });
+
+  setTimeout(() => {
+    dot.remove();
+  }, 500);
 });
-
 
 //
 

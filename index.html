@@ -31,8 +31,7 @@
                 <img src="https://lh3.googleusercontent.com/a/ACg8ocJtVxD1Xb1Enc3qypmC1iI1ridjydG-DgMU43mpgzF_bEH_gz2Q=s96-c"
                      alt="Developer Avatar"
                      class="profile-image w-32 h-32 md:w-40 md:h-40"
-                     data-translate-alt="hero_avatar_alt"
-                     onerror="this.onerror=null; this.src='https://placehold.co/160x160/1F2937/E5E7EB?text=Avatar';">
+                     data-translate-alt="hero_avatar_alt">
             </div>
 
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 mt-4" data-translate="hero_name">TheVoidNexus</h1>
@@ -42,20 +41,28 @@
             </a>
 
             <div class="info-socials-wrapper">
-                <div class="location-info-container">
-                    <p class="location-text">
-                        <span class="location-icon">📍</span> <span data-translate="hero_location_combined">Västra Götaland, Sweden</span>
-                    </p>
-                    <div class="time-weather-container">
-                        <div class="time-display">
-                            <span class="time-icon">🕒</span> <span id="current-time">00:00</span>
+                <div class="location-info-box bg-slate-700/50 z-10 text-gray-100 rounded-xl p-4 shadow-lg mx-auto backdrop-blur-sm">
+                    <div class="flex items-center justify-center">
+                        <span data-translate="hero_location_combined" class="text-lg ml-2">Västra Götaland, Sweden</span>
+                    </div>
+                
+                    <div class="time-weather-container flex flex-nowrap items-center justify-center gap-2 sm:gap-8 mt-3">
+                        <div class="time-display flex items-center leading-none">
+                            <dotlottie-player src="https://lottie.host/787f1a16-b92a-4f00-a43d-985b0fb02c9e/C2NE6rOHHK.lottie"
+                                background="transparent" speed="0.2" style="width: 35px; height: 35px;" autoplay loop
+                                class="invert inline-block m-0 p-0"></dotlottie-player>
+                            <span id="current-time" class="ml-2 leading-none">00:00</span>
                         </div>
-                        <div class="weather-display">
-                            <span class="weather-icon" id="weather-icon-container"><img src="https://placehold.co/25x25/2d3748/d1d5db?text=..." alt="Weather loading" class="weather-animation" data-translate-alt="hero_weather_icon_alt" onerror="this.onerror=null; this.src='https://placehold.co/25x25/2d3748/d1d5db?text=W';"></span> <span id="weather-info" data-translate="hero_weather_loading">Loading...</span>
+                        <div class="weather-display flex items-center leading-none">
+                            <span class="weather-icon" id="weather-icon-container">
+                                <img src="https://samherbert.net/svg-loaders/svg-loaders/puff.svg" alt="Weather loading"
+                                    class="weather-animation inline-block m-0 p-0" data-translate-alt="hero_weather_icon_alt">
+                            </span>
+                            <span id="weather-info" class="ml-2 leading-none" data-translate="hero_weather_loading">0°C - Loading...</span>
                         </div>
                     </div>
-                    <div id="error-message" class="error-message hidden w-full text-center mt-2"></div>
-                </div>
+                </div>                
+                
 
                 <div class="social-icons-container">
                     <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile" data-translate-aria-label="github_aria_label">
@@ -78,7 +85,7 @@
         </div>
     </section>
 
-    <section id="about" class="relative bg-medium-bg py-16 md:py-20 px-6 overflow-hidden flex flex-col justify-center min-h-[calc(100vh-72px)] sm:min-h-fit">
+    <section id="about" class="relative bg-medium-bg py-14 md:py-20 px-6 overflow-hidden flex flex-col justify-center sm:min-h-fit">
         <div class="container mx-auto max-w-3xl text-center relative z-10 space-y-6">
             <h2 class="text-3xl md:text-4xl font-bold text-white fade-in-element" data-translate="about_title">About Me</h2>
             <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
@@ -99,7 +106,7 @@
             <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-6" data-translate="projects_title">Projects</h2>
             <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="bg-medium-bg rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-gray-700/50 rounded-lg shadow-lg overflow-hidden z-10 transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50 backdrop-blur-sm">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-white mb-2" data-translate="project1_title">TVN Manager</h3>
                         <p class="text-gray-400 mb-4" data-translate="project1_desc">A useful subscription manager with a calender overview, platform sync, multiple currencies and more.</p>
@@ -109,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-medium-bg rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-gray-700/50 rounded-lg shadow-lg overflow-hidden z-10 transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50 backdrop-blur-sm">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-white mb-2" data-translate="project2_title">VoidClicker</h3>
                         <p class="text-gray-400 mb-4" data-translate="project2_desc">An engaging clicker game inspired by Cookie Clicker, with interesting mechanics and upgrades.</p>
@@ -119,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-medium-bg rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-gray-700/50 rounded-lg shadow-lg overflow-hidden z-10 transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50 backdrop-blur-sm">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-white mb-2" data-translate="project3_title">Polyrythm</h3>
                         <p class="text-gray-400 mb-4" data-translate="project3_desc">A rhythm-based program with dynamic beats and patterns.</p>
@@ -138,25 +145,25 @@
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" data-translate="skills_title">My Skills</h2>
             <div class="w-20 h-1 bg-purple-700 mx-auto mb-12 rounded"></div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-gray-900/60 p-6 rounded-lg shadow-lg text-center z-10 transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50 backdrop-blur-sm">
                     <div class="mb-3 flex justify-center items-center h-12">
                         <img src="https://www.svgrepo.com/show/349419/javascript.svg" alt="JavaScript" class="w-10 h-10 mx-auto" data-translate-alt="skill_js_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=JS';">
                     </div>
                     <h3 class="text-lg font-semibold text-white" data-translate="skill_js_name">JavaScript</h3>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-gray-900/60 p-6 rounded-lg shadow-lg text-center z-10 transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50 backdrop-blur-sm">
                     <div class="mb-3 flex justify-center items-center h-12">
                         <img src="https://www.svgrepo.com/show/452092/react.svg" alt="React" class="w-10 h-10 mx-auto" data-translate-alt="skill_react_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=Re';">
                     </div>
                     <h3 class="text-lg font-semibold text-white" data-translate="skill_react_name">React</h3>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-gray-900/60 p-6 rounded-lg shadow-lg text-center z-10 transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50 backdrop-blur-sm">
                     <div class="mb-3 flex justify-center items-center h-12">
                         <img src="https://www.svgrepo.com/show/452234/java.svg" alt="Java" class="w-10 h-10 mx-auto" data-translate-alt="skill_java_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=Ja';">
                     </div>
                     <h3 class="text-lg font-semibold text-white" data-translate="skill_java_name">Java</h3>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50">
+                <div class="bg-gray-900/60 p-6 rounded-lg shadow-lg text-center z-10 transform transition duration-300 hover:scale-105 hover:shadow-purple-900/50 backdrop-blur-sm">
                     <div class="mb-3 flex justify-center items-center h-12">
                         <img src="https://www.svgrepo.com/show/333609/tailwind-css.svg" alt="Tailwind CSS" class="h-10 w-auto mx-auto filter dark:invert" data-translate-alt="skill_tailwind_alt" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1F2937/E5E7EB?text=Tw';">
                     </div>
@@ -196,7 +203,7 @@
         </div>
     </section>
 
-    <footer class="bg-medium-bg py-8 px-6 text-center">
+    <footer class="bg-gray-700/50 z-10 py-8 px-6 text-center backdrop-blur-sm">
         <div class="container mx-auto">
             <div class="relative inline-block text-left" id="language-dropdown-container">
                 <button type="button"
@@ -235,5 +242,6 @@
     <script src="Homepage/translations.js"></script>
     <script src="Homepage/script.js"></script>
     <script src="Homepage/tailwind.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </body>
 </html>

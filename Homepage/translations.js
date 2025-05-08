@@ -19,7 +19,7 @@ const translations = {
         about_p1_text1: "Hi, I'm ",
         about_p1_name: "TheVoidNexus",
         about_p1_text2: ".",
-        about_p2_text1: "When I'm not coding, I like learning about new technologies, playing games, and enjoying the peaceful beauty of ",
+        about_p2_text1: "I live in ",
         about_p2_country: "Sweden",
         about_p2_text2: ".",
         projects_title: "Projects",
@@ -43,7 +43,8 @@ const translations = {
         contact_title: "Contact Me",
         contact_intro: "Interested in working together or have a question? Feel free to reach out!",
         contact_email: "thevoidnexus2@gmail.com",
-        footer_copyright: "© 2025 TheVoidNexus"
+        footer_copyright: "© 2025 TheVoidNexus",
+        weather_error: "No weather data"
     },
     sv: {
         page_title: "TheVoidNexus - Hemsida",
@@ -65,7 +66,7 @@ const translations = {
         about_p1_text1: "Hej, jag är ",
         about_p1_name: "TheVoidNexus",
         about_p1_text2: ".",
-        about_p2_text1: "När jag inte kodar gillar jag att lära mig om ny teknik, spela spel och njuta av den fridfulla skönheten i ",
+        about_p2_text1: "Jag bor i ",
         about_p2_country: "Sverige",
         about_p2_text2: ".",
         projects_title: "Projekt",
@@ -89,7 +90,8 @@ const translations = {
         contact_title: "Kontakta Mig",
         contact_intro: "Intresserad av att arbeta tillsammans eller har du en fråga? Hör gärna av dig!",
         contact_email: "thevoidnexus2@gmail.com",
-        footer_copyright: "© 2025 TheVoidNexus"
+        footer_copyright: "© 2025 TheVoidNexus",
+        weather_error: "Inget väderdata"
     },
     de: {
         page_title: "TheVoidNexus - Startseite",
@@ -111,7 +113,7 @@ const translations = {
         about_p1_text1: "Hallo, ich bin ",
         about_p1_name: "TheVoidNexus",
         about_p1_text2: ".",
-        about_p2_text1: "Wenn ich nicht gerade programmiere, lerne ich gerne neue Technologien kennen, spiele Spiele und genieße die friedliche Schönheit von ",
+        about_p2_text1: "Ich lebe in ",
         about_p2_country: "Schweden",
         about_p2_text2: ".",
         projects_title: "Projekte",
@@ -135,7 +137,8 @@ const translations = {
         contact_title: "Kontaktiere mich",
         contact_intro: "Interessiert an einer Zusammenarbeit oder hast du eine Frage? Zögere nicht, mich zu kontaktieren!",
         contact_email: "thevoidnexus2@gmail.com",
-        footer_copyright: "© 2025 TheVoidNexus"
+        footer_copyright: "© 2025 TheVoidNexus",
+        weather_error: "Keine Wetterdaten"
     }
 };
 
