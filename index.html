@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1F2937">
+    <meta description="Welcome to TheVoidNexus, a web developer's portfolio showcasing projects, skills, and contact information.">
     <title data-translate-title="page_title">TheVoidNexus - Homepage</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="Homepage/style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"></noscript>
+  <link href="Homepage/style.css" rel="stylesheet">
 </head>
 <body class="bg-dark-bg text-gray-200 antialiased">
 
@@ -206,11 +208,12 @@
     <footer class="bg-gray-700/50 z-10 py-8 px-6 text-center backdrop-blur-sm">
         <div class="container mx-auto">
             <div class="relative inline-block text-left" id="language-dropdown-container">
-                <button type="button"
+                <button type="button" 
                         class="flex items-center text-sm sm:text-xs text-gray-300 hover:text-purple-400 py-2 px-2 sm:px-3 text-center rounded-md hover:bg-gray-700 sm:hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 max-w-[120px] sm:max-w-[180px] overflow-hidden whitespace-nowrap text-ellipsis"
                         id="language-dropdown-button"
                         aria-expanded="false"
-                        aria-haspopup="true">
+                        aria-haspopup="true"
+                        aria-label="Language Selector">
                     <span id="selected-lang-flag-container" class="mr-2 flex items-center"></span>
                     <span id="selected-lang-text" class="hidden">English</span>
                     <svg class="-mr-1 ml-1 sm:ml-2 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
