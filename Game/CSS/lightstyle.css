@@ -1,0 +1,210 @@
+body {
+    background-color: #ffffff;
+    color: #333;
+}
+
+@keyframes glow {
+    from {
+      text-shadow: 0 0 20px darkgray
+    }
+    to {
+      text-shadow: 0 0 20px lightslategray
+    }
+}
+
+.ClickerTitle {
+    color: black;
+}
+
+.dynamic-background {
+    background-color: #f1f1f1;
+}
+
+.Index {
+    background-color: #fff; 
+    color: #333;
+    border-color: #ccc; 
+}
+
+.indexText {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    color: #333;
+}
+
+.indexElement:hover {
+    color: #007bff; 
+}
+
+.container3 {
+    background-color: #fff; 
+}
+
+.balance, .mpc, .mps, .playtime {
+    color: #333; 
+    background-color: #e0e0e0; 
+}
+
+.container4 {
+    background-color: #fff; 
+}
+
+.Button1, .Button2, .Button3 {
+    color: #333;
+    background-color: #e0e0e0; 
+}
+
+.Button1 {
+    background-color: #43a1e069;
+    border: 3px solid #0452821f;
+}
+
+.ResetButton {
+    color: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255, 17, 0, 0.5);
+}
+
+.ResetButton:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.database, .calculator, .privacy, .manager {
+    border-color: #ccc; 
+    color: #333; 
+}
+
+
+.container {
+    background-color: #e0e0e0;
+    border: #d1d1d1 1px solid;
+}
+
+.popup {
+    background-color: #f0f0f0; 
+    border-color: #ccc; 
+}
+
+.popup-container {
+    border-color: #ccc; 
+    background-color: #e0e0e0; 
+}
+
+.PopupText {
+    color: #333; 
+}
+
+.PopupButton, .PopupButton2 {
+    background-color: rgba(255, 0, 0, 0.6);
+    transition: transform 0.5s ease, background-color 0.5s ease;
+}
+
+.PopupButton:hover, .PopupButton2:hover {
+    transform: scale(1.05);
+}
+
+.PopupButton2:hover {
+    background-color: red;
+}
+
+.coloricon {
+    filter: none;
+}
+
+.google-btn {
+    background-color: #4e4e4e;
+    border-color: #ccc;
+    color: #333;
+}
+
+.google-btn:hover {
+    background-color: #767676;
+}
+
+.pfpInfo {
+    background-color: #f0f0f0; 
+    border: #0056b3 2px solid;
+}
+
+.username {
+    color: #333; 
+}
+
+.toast {
+    color: #333; 
+}
+
+.pfp {
+    border: 3px #e0e0e0 solid;
+}
+
+.pfp:hover {
+    border: 3px solid #a0a0a0; 
+}
+
+.language-select {
+    border-color: #333;
+    color: #333;
+}
+
+option:nth-child(1), option:nth-child(2), option:nth-child(3) {
+    background-color: #f0f0f0;
+}
+
+.userinfo-container {
+    border-color: #ccc;
+    background-color: #e0e0e0;
+}
+
+.created, .email {
+    color: #333;
+}
+
+.hidden-email {
+    color: #666;
+}
+
+.hidden-email:hover {
+    color: black;
+    transform: scale(1.5);
+}
+
+.revealed-email {
+    color: #333;
+}
+
+.menu-icon {
+    color: #333;
+}
+
+.menu-title, .menu-language, .menu-appearance, .menu-privacy, .menu-developer {
+    color: #333;
+}
+
+.sidebar {
+    background-color: #f0f0f0;
+}
+
+.sidebar a {
+    color: #666;
+}
+
+.sidebar a:hover {
+    color: #333;
+}
+
+.menu-section {
+    background-color: #e0e0e0;
+}
+
+.signout {
+    border-color: #0056b3;
+    color: black;
+    background-color: #00a2ff6b;
+}
+
+.developer {
+    background: linear-gradient(to right, purple, orange, purple);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+}

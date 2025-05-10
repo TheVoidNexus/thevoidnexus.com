@@ -46,143 +46,26 @@ window.onbeforeunload = function() {
 };
 
 function moneyRounder(thisMoney) {
-  let suffix = "";
-  let roundedMoney = thisMoney;
-
-  if (thisMoney >= 10**3) {
-    roundedMoney = (thisMoney / 10**3).toFixed(0);
-    suffix = "K";
+  const suffixes = [
+    "", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc", "Udc", 
+    "Ddc", "Tdc", "Qt", "Qd", "Sd", "St", "Ocdc", "Nmdc", "Vg", "Uvg", "Dvg", 
+    "Tvg", "Qav", "Qvg", "Svg", "Spv", "Ovg", "Nvg", "Tg"
+  ];
+  
+  let index = 0;
+  while (thisMoney >= 1000 && index < suffixes.length - 1) {
+    thisMoney /= 1000;
+    index++;
   }
-  if (thisMoney >= 10**6) {
-    roundedMoney = (thisMoney / 10**6).toFixed(0);
-    suffix = "M";
-  }
-  if (thisMoney >= 10**9) {
-    roundedMoney = (thisMoney / 10**9).toFixed(0);
-    suffix = "B";
-  }
-  if (thisMoney >= 10**12) {
-    roundedMoney = (thisMoney / 10**12).toFixed(0);
-    suffix = "T";
-  }
-  if (thisMoney >= 10**15) {
-    roundedMoney = (thisMoney / 10**15).toFixed(0);
-    suffix = "Qa";
-  }
-  if (thisMoney >= 10**18) {
-    roundedMoney = (thisMoney / 10**18).toFixed(0);
-    suffix = "Qi";
-  }
-  if (thisMoney >= 10**21) {
-    roundedMoney = (thisMoney / 10**21).toFixed(0);
-    suffix = "Sx";
-  }
-  if (thisMoney >= 10**24) {
-    roundedMoney = (thisMoney / 10**24).toFixed(0);
-    suffix = "Sp";
-  }
-  if (thisMoney >= 10**27) {
-    roundedMoney = (thisMoney / 10**27).toFixed(0);
-    suffix = "Oc";
-  }
-  if (thisMoney >= 10**30) {
-    roundedMoney = (thisMoney / 10**30).toFixed(0);
-    suffix = "No";
-  }
-  if (thisMoney >= 10**33) {
-    roundedMoney = (thisMoney / 10**33).toFixed(0);
-    suffix = "Dc";
-  }
-  if (thisMoney >= 10**36) {
-    roundedMoney = (thisMoney / 10**36).toFixed(0);
-    suffix = "Udc";
-  }
-  if (thisMoney >= 10**39) {
-    roundedMoney = (thisMoney / 10**39).toFixed(0);
-    suffix = "Ddc";
-  }
-  if (thisMoney >= 10**42) {
-    roundedMoney = (thisMoney / 10**42).toFixed(0);
-    suffix = "Tdc";
-  }
-  if (thisMoney >= 10**45) {
-    roundedMoney = (thisMoney / 10**45).toFixed(0);
-    suffix = "Qt";
-  }
-  if (thisMoney >= 10**48) {
-    roundedMoney = (thisMoney / 10**48).toFixed(0);
-    suffix = "Qd";
-  }
-  if (thisMoney >= 10**51) {
-    roundedMoney = (thisMoney / 10**51).toFixed(0);
-    suffix = "Sd";
-  }
-  if (thisMoney >= 10**54) {
-    roundedMoney = (thisMoney / 10**54).toFixed(0);
-    suffix = "St";
-  }
-  if (thisMoney >= 10**57) {
-    roundedMoney = (thisMoney / 10**57).toFixed(0);
-    suffix = "Ocdc";
-  }
-  if (thisMoney >= 10**60) {
-    roundedMoney = (thisMoney / 10**60).toFixed(0);
-    suffix = "Nmdc";
-  }
-  if (thisMoney >= 10**63) {
-    roundedMoney = (thisMoney / 10**63).toFixed(0);
-    suffix = "Vg";
-  }
-  if (thisMoney >= 10**66) {
-    roundedMoney = (thisMoney / 10**66).toFixed(0);
-    suffix = "Uvg";
-  }
-  if (thisMoney >= 10**69) {
-    roundedMoney = (thisMoney / 10**69).toFixed(0);
-    suffix = "Dvg";
-  }
-  if (thisMoney >= 10**72) {
-    roundedMoney = (thisMoney / 10**72).toFixed(0);
-    suffix = "Tvg";
-  }
-  if (thisMoney >= 10**75) {
-    roundedMoney = (thisMoney / 10**75).toFixed(0);
-    suffix = "Qav";
-  }
-  if (thisMoney >= 10**78) {
-    roundedMoney = (thisMoney / 10**78).toFixed(0);
-    suffix = "Qvg";
-  }
-  if (thisMoney >= 10**81) {
-    roundedMoney = (thisMoney / 10**81).toFixed(0);
-    suffix = "Svg";
-  }
-  if (thisMoney >= 10**84) {
-    roundedMoney = (thisMoney / 10**84).toFixed(0);
-    suffix = "Spv";
-  }
-  if (thisMoney >= 10**87) {
-    roundedMoney = (thisMoney / 10**87).toFixed(0);
-    suffix = "Ovg";
-  }
-  if (thisMoney >= 10**90) {
-    roundedMoney = (thisMoney / 10**90).toFixed(0);
-    suffix = "Nvg";
-  }
-  if (thisMoney >= 10**93) {
-    roundedMoney = (thisMoney / 10**93).toFixed(0);
-    suffix = "Tg";
-  }
-  if (thisMoney >= 10**96) {
-    roundedMoney = "∞";
-    suffix = "";
+  
+  if (index === suffixes.length - 1 && thisMoney >= 1000) {
+    thisMoney = "∞";
     save.verified = true;
+  } else {
+    thisMoney = thisMoney.toFixed(0);
   }
 
-  return {
-    amount: roundedMoney,
-    suffix: suffix
-  };
+  return { amount: thisMoney, suffix: suffixes[index] };
 }
 
 function update() {
@@ -195,10 +78,12 @@ function update() {
     const formattedMPS = moneyRounder(MPS);
     const formattedMPC = moneyRounder(MPC);
 
-    const Info = document.getElementById(`Info`);
     const Button1 = document.getElementById(`Button1`);
     const Button2 = document.getElementById(`Button2`);
     const Button3 = document.getElementById(`Button3`);
+    const balance = document.getElementById(`balance`);
+    const mpc = document.getElementById(`mpc`);
+    const mps = document.getElementById(`mps`);
     const playtime = document.getElementById(`playtime`);
 
     const BalanceT = translations[language].balance;
@@ -211,16 +96,18 @@ function update() {
     const MoneyPerClickT = translations[language].money_per_click;
     const PlaytimeT = translations[language].playtime;
 
-    Info.innerHTML = `${BalanceT}: $${formattedMoney.amount}${formattedMoney.suffix}<br>${SecondT}: $${formattedMPS.amount}${formattedMPS.suffix}<br>${ClickT}: $${formattedMPC.amount}${formattedMPC.suffix}`;
-    Button1.innerHTML = `${EarnMoneyT}<br>${TotalClicksT}: ${totalClicks}`;
-    Button2.innerHTML = `${MoneyPerSecondT}<br>${CostT}: $${formattedUpgradeMoney.amount}${formattedUpgradeMoney.suffix}`;
-    Button3.innerHTML = `${MoneyPerClickT}<br>${CostT}: $${formattedUpgradeMoney2.amount}${formattedUpgradeMoney2.suffix}`;
-
     const hoursIndex = playtimeHours < 10 ? "0" : "";
     const minutesIndex = playtimeMinutes < 10 ? "0" : "";
     const secondsIndex = playtimeSeconds < 10 ? "0" : "";
     const playtimeLog = `${PlaytimeT}: ${hoursIndex}${playtimeHours}h ${minutesIndex}${playtimeMinutes}m ${secondsIndex}${playtimeSeconds}s`;
-    playtime.innerHTML = playtimeLog;
+
+    balance.innerHTML = `${BalanceT}: $${formattedMoney.amount}${formattedMoney.suffix}`;
+    mps.innerHTML = `${SecondT}: $${formattedMPS.amount}${formattedMPS.suffix}`;
+    mpc.innerHTML = `${ClickT}: $${formattedMPC.amount}${formattedMPC.suffix}`;
+    playtime.innerHTML = `${playtimeLog}`
+    Button1.innerHTML = `${EarnMoneyT}<br><br>${TotalClicksT}: <br>${totalClicks}`;
+    Button2.innerHTML = `${MoneyPerSecondT}<br>${CostT}: <br>$${formattedUpgradeMoney.amount}${formattedUpgradeMoney.suffix}`;
+    Button3.innerHTML = `${MoneyPerClickT}<br>${CostT}: <br>$${formattedUpgradeMoney2.amount}${formattedUpgradeMoney2.suffix}`;
 
     }, 100)
   });
@@ -293,12 +180,33 @@ function closePopup() {
   overlay.style.display = "none";
 }
 
+const title = document.querySelector(".ClickerTitle");
+title.addEventListener("click", function() {
+  window.location.href = "/index.html";
+});
+
 function redirect() {
-  window.location.href = "https://thevoidnexus.github.io/database/";
+  window.location.href = "/database.html";
 }
 
 function redirect2() {
-  window.location.href = "https://thevoidnexus.github.io/calc/";
+  window.location.href = "/calculator.html";
+}
+
+function redirect3() {
+  window.location.href = "/privacy.html";
+}
+
+function redirect4() {
+  window.location.href = "/tvn-manager.html";
+}
+
+function redirect5() {
+  window.location.href = "https://github.com/TheVoidNexus";
+}
+
+function redirect6() {
+  window.location.href = "https://discord.com/invite/U4aZrk32Yv";
 }
 
 function toggleIndex() {
@@ -352,7 +260,7 @@ setTimeout(function() {
 function updateMaxHeight(indexText) {
   let contentHeight = indexText.clientHeight;
   let windowHeight = window.innerHeight;
-  let maxHeightPercentage = 82;
+  let maxHeightPercentage = 79;
   let maxHeight = (windowHeight * maxHeightPercentage / 100) + "px";
   
   if (contentHeight >= windowHeight) {
@@ -371,3 +279,29 @@ window.addEventListener("resize", function() {
 window.addEventListener("load", function() {
   updateMaxHeight(document.getElementById('indexText'))
 })
+
+function openNav() {
+  const sidebar = document.getElementById("sidebar");
+  if (window.innerWidth <= 768) {
+    sidebar.style.width = "80%";
+  } else {
+    sidebar.style.width = "400px";
+  }
+  overlay.style.display = "flex";
+  overlay.addEventListener("click", function() {
+    closeNav();
+  })
+}
+
+function closeNav() {
+  document.getElementById("sidebar").style.width = "0";
+  overlay.style.display = "none";
+}
+
+document.getElementById("menuIcon").addEventListener("click", function() {
+  if (document.getElementById("sidebar").style.width === "400px" || document.getElementById("sidebar").style.width === "80%") {
+      closeNav();
+  } else {
+      openNav();
+  }
+});

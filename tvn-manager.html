@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="sl-theme-dark">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <meta name="description" content="Manage your subscriptions, keep track of upcoming billing dates and sync it across all your devices.">
+        <link rel="icon" href="https://i.ibb.co/7WX4k64/abstract.png" >
+        <link rel="stylesheet" href="TVN-Manager/calendar.css">
+        <link rel="stylesheet" href="TVN-Manager/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/themes/dark.css" />
+        <title>TVN Manager - Subscriptions</title>
+    </head>
+    <body>
+
+        <div class="overlay"></div>
+        <div class="invisibleOverlay"></div>
+        <div class="gradientBackground"></div>
+        <div id="date" style="display: none;"></div>
+
+        <h2 class="title" onclick="redirect()">TVN Manager</h2>
+
+        <i class="fa fa-gear" id="dropdown"></i>
+
+        <button id="login-button" class="login-button" >
+          <img src="https://i.ibb.co/BCbs1rR/login-2.png" alt="Login Logo">
+           <span class="login-text" id="login-text">Sign in</span>
+       </button>
+
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button id="prev-month" class="nav-button">◄</button>
+                <h2 id="month-year"></h2>
+                <button id="next-month" class="nav-button">►</button>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+
+        <div id="event-display-modal" class="modal">
+            <div class="modal-content">
+                <span id="close-display-modal" class="close">&times;</span>
+                <h3 id="selected-date"></h3>
+                <ul id="event-list" class="event-list"></ul>
+                <button id="open-add-event-modal">Add Event</button>
+            </div>
+        </div>
+    
+        <div id="add-event-modal" class="modal">
+            <div class="modal-content">
+                <span id="close-add-event-modal" class="close">&times;</span>
+                <h3 id="selected-date2"></h3>
+                <ul id="event-list"></ul>
+                <div class="add-event">
+                    <label for="event-name">Subscription Name:</label>
+                    <input type="text" id="event-name" maxlength="25" placeholder="Enter name">
+        
+                    <sl-select value="" label="Billing Cycle" id="billing-cycle" size="small" placeholder="Select the recurring cycle">
+                            <sl-option value="Weekly">Weekly</sl-option>
+                            <sl-option value="Monthly">Monthly</sl-option>
+                            <sl-option value="Quarterly">Quarterly</sl-option>
+                            <sl-option value="Yearly">Yearly</sl-option>
+                    </sl-select>
+        
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" placeholder="Enter amount" min="0" step="1">
+        
+                    <button id="save-event-button">Add</button>
+                </div>
+            </div>
+        </div>        
+
+        <div class="input2" id="input2">
+          <button class="value2" id="profile">
+            <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="m1.5 13v1a.5.5 0 0 0 .3379.4731 18.9718 18.9718 0 0 0 6.1621 1.0269 18.9629 18.9629 0 0 0 6.1621-1.0269.5.5 0 0 0 .3379-.4731v-1a6.5083 6.5083 0 0 0 -4.461-6.1676 3.5 3.5 0 1 0 -4.078 0 6.5083 6.5083 0 0 0 -4.461 6.1676zm4-9a2.5 2.5 0 1 1 2.5 2.5 2.5026 2.5026 0 0 1 -2.5-2.5zm2.5 3.5a5.5066 5.5066 0 0 1 5.5 5.5v.6392a18.08 18.08 0 0 1 -11 0v-.6392a5.5066 5.5066 0 0 1 5.5-5.5z" fill="#7D8590"></path></svg>
+            Profile
+          </button>
+          <button class="value2" id="settings">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Line"><path d="m17.074 30h-2.148c-1.038 0-1.914-.811-1.994-1.846l-.125-1.635c-.687-.208-1.351-.484-1.985-.824l-1.246 1.067c-.788.677-1.98.631-2.715-.104l-1.52-1.52c-.734-.734-.78-1.927-.104-2.715l1.067-1.246c-.34-.635-.616-1.299-.824-1.985l-1.634-.125c-1.035-.079-1.846-.955-1.846-1.993v-2.148c0-1.038.811-1.914 1.846-1.994l1.635-.125c.208-.687.484-1.351.824-1.985l-1.068-1.247c-.676-.788-.631-1.98.104-2.715l1.52-1.52c.734-.734 1.927-.779 2.715-.104l1.246 1.067c.635-.34 1.299-.616 1.985-.824l.125-1.634c.08-1.034.956-1.845 1.994-1.845h2.148c1.038 0 1.914.811 1.994 1.846l.125 1.635c.687.208 1.351.484 1.985.824l1.246-1.067c.787-.676 1.98-.631 2.715.104l1.52 1.52c.734.734.78 1.927.104 2.715l-1.067 1.246c.34.635.616 1.299.824 1.985l1.634.125c1.035.079 1.846.955 1.846 1.993v2.148c0 1.038-.811 1.914-1.846 1.994l-1.635.125c-.208.687-.484 1.351-.824 1.985l1.067 1.246c.677.788.631 1.98-.104 2.715l-1.52 1.52c-.734.734-1.928.78-2.715.104l-1.246-1.067c-.635.34-1.299.616-1.985.824l-.125 1.634c-.079 1.035-.955 1.846-1.993 1.846zm-5.835-6.373c.848.53 1.768.912 2.734 1.135.426.099.739.462.772.898l.18 2.341 2.149-.001.18-2.34c.033-.437.347-.8.772-.898.967-.223 1.887-.604 2.734-1.135.371-.232.849-.197 1.181.089l1.784 1.529 1.52-1.52-1.529-1.784c-.285-.332-.321-.811-.089-1.181.53-.848.912-1.768 1.135-2.734.099-.426.462-.739.898-.772l2.341-.18h-.001v-2.148l-2.34-.18c-.437-.033-.8-.347-.898-.772-.223-.967-.604-1.887-1.135-2.734-.232-.37-.196-.849.089-1.181l1.529-1.784-1.52-1.52-1.784 1.529c-.332.286-.81.321-1.181.089-.848-.53-1.768-.912-2.734-1.135-.426-.099-.739-.462-.772-.898l-.18-2.341-2.148.001-.18 2.34c-.033.437-.347.8-.772.898-.967.223-1.887.604-2.734 1.135-.37.232-.849.197-1.181-.089l-1.785-1.529-1.52 1.52 1.529 1.784c.285.332.321.811.089 1.181-.53.848-.912 1.768-1.135 2.734-.099.426-.462.739-.898.772l-2.341.18.002 2.148 2.34.18c.437.033.8.347.898.772.223.967.604 1.887 1.135 2.734.232.37.196.849-.089 1.181l-1.529 1.784 1.52 1.52 1.784-1.529c.332-.287.813-.32 1.18-.089z" id="XMLID_1646_" fill="#7D8590"></path><path d="m16 23c-3.859 0-7-3.141-7-7s3.141-7 7-7 7 3.141 7 7-3.141 7-7 7zm0-12c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" fill="#7D8590" id="XMLID_1645_"></path></svg>
+            Settings
+          </button>
+        </div>
+
+        <sl-dialog label="Confirm" class="dialog" id="switchDialog" hidden>
+          <sl-switch id="switch" style="display: flex; justify-content: center; margin-top: 15px;">Do you really want to delete {subscription}?</sl-switch>
+          <br><br>
+          <sl-button variant="primary" id="deleteConfirm" style="display: flex; justify-content: center; margin: 0 20px 0 20px" disabled>Delete</sl-button>
+        </sl-dialog>
+
+        <sl-dialog label="Settings" class="dialog" id="dialog" hidden>
+          <div class="dialog-body">
+            <div class="languages">
+              <p id="language">Language</p>
+              <sl-select pill value="" size="small" onchange="setLanguage(this.value)" id="language-select-sl" style="width: 110px; height: 28px; margin-left: 4px;">
+                <sl-option value="en">English</sl-option>
+                <sl-option value="de">Deutsch</sl-option>
+                <sl-option value="sv">Svenska</sl-option>
+              </sl-select>  
+            </div>
+        
+            <div class="currency">
+              <p id="currency">Currency</p>
+              <sl-select pill value="$" size="small" id="currency-select" style="width: 110px; height: 28px; margin-left: 10px;">
+                <sl-option class="lang-en" value="$">$ (USD)</sl-option>
+                <sl-option value="€">€ (EUR)</sl-option>
+                <sl-option value="£">£ (GBP)</sl-option>
+                <sl-option value="¥">¥ (JPY)</sl-option>
+                <sl-option value="kr">kr (SEK)</sl-option>
+              </sl-select>
+            </div>
+        
+            <hr>
+        
+            <p id="timeformat">Time Formats:<br><br></p>
+            <p id="englishFormat">English: month/day/year</p>
+            <p id="germanFormat">German: day.month.year</p>
+            <p id="swedishFormat" style="margin-bottom: 0;">Swedish: year-month-day</p>
+          </div>
+        
+          <p slot="footer" class="settingsInfo" id="settingsInfo">
+            Attention! Clicking on "Save" will reload the page.
+          </p>
+          <sl-button slot="footer" class="settingsSave" variant="primary">Close</sl-button>
+        </sl-dialog>        
+    
+        <main class="main2">
+            <section id="subscription-list">
+              <h2 id="subscription-list-title">Your Subscriptions</h2>
+                  <div class="card2">
+                    <div class="card_content"></div>
+                </div>
+              
+              <ul id="subscriptions"></ul>
+            </section>            
+        </main>
+
+<div class="card-container">
+<div class="card" id="profileCard">
+    <div class="card__img"><svg width="100%" xmlns="http://www.w3.org/2000/svg"><rect height="450" width="540" fill="#ffffff"></rect><defs><linearGradient gradientTransform="rotate(222,648,379)" y2="100%" y1="0" x2="0" x1="0" gradientUnits="userSpaceOnUse" id="a"><stop stop-color="#ffffff" offset="0"></stop><stop stop-color="#FC726E" offset="1"></stop></linearGradient><pattern viewBox="0 0 1080 900" y="0" x="0" height="250" width="300" id="b" patternUnits="userSpaceOnUse"><g fill-opacity="0.5"><polygon points="90 150 0 300 180 300" fill="#444"></polygon><polygon points="90 150 180 0 0 0"></polygon><polygon points="270 150 360 0 180 0" fill="#AAA"></polygon><polygon points="450 150 360 300 540 300" fill="#DDD"></polygon><polygon points="450 150 540 0 360 0" fill="#999"></polygon><polygon points="630 150 540 300 720 300"></polygon><polygon points="630 150 720 0 540 0" fill="#DDD"></polygon><polygon points="810 150 720 300 900 300" fill="#444"></polygon><polygon points="810 150 900 0 720 0" fill="#FFF"></polygon><polygon points="990 150 900 300 1080 300" fill="#DDD"></polygon><polygon points="990 150 1080 0 900 0" fill="#444"></polygon><polygon points="90 450 0 600 180 600" fill="#DDD"></polygon><polygon points="90 450 180 300 0 300"></polygon><polygon points="270 450 180 600 360 600" fill="#666"></polygon><polygon points="270 450 360 300 180 300" fill="#AAA"></polygon><polygon points="450 450 360 600 540 600" fill="#DDD"></polygon><polygon points="450 450 540 300 360 300" fill="#999"></polygon><polygon points="630 450 540 600 720 600" fill="#999"></polygon><polygon points="630 450 720 300 540 300" fill="#FFF"></polygon><polygon points="810 450 720 600 900 600"></polygon><polygon points="810 450 900 300 720 300" fill="#DDD"></polygon><polygon points="990 450 900 600 1080 600" fill="#AAA"></polygon><polygon points="990 450 1080 300 900 300" fill="#444"></polygon><polygon points="90 750 0 900 180 900" fill="#222"></polygon><polygon points="270 750 180 900 360 900"></polygon><polygon points="270 750 360 600 180 600" fill="#DDD"></polygon><polygon points="450 750 540 600 360 600"></polygon><polygon points="630 750 540 900 720 900"></polygon><polygon points="630 750 720 600 540 600" fill="#444"></polygon><polygon points="810 750 720 900 900 900" fill="#AAA"></polygon><polygon points="810 750 900 600 720 600" fill="#666"></polygon><polygon points="990 750 900 900 1080 900" fill="#999"></polygon><polygon points="180 0 90 150 270 150" fill="#999"></polygon><polygon points="360 0 270 150 450 150" fill="#444"></polygon><polygon points="540 0 450 150 630 150" fill="#FFF"></polygon><polygon points="900 0 810 150 990 150"></polygon><polygon points="0 300 -90 450 90 450" fill="#222"></polygon><polygon points="0 300 90 150 -90 150" fill="#FFF"></polygon><polygon points="180 300 90 450 270 450" fill="#FFF"></polygon><polygon points="180 300 270 150 90 150" fill="#666"></polygon><polygon points="360 300 270 450 450 450" fill="#222"></polygon><polygon points="360 300 450 150 270 150" fill="#FFF"></polygon><polygon points="540 300 450 450 630 450" fill="#444"></polygon><polygon points="540 300 630 150 450 150" fill="#222"></polygon><polygon points="720 300 630 450 810 450" fill="#AAA"></polygon><polygon points="720 300 810 150 630 150" fill="#666"></polygon><polygon points="900 300 810 450 990 450" fill="#FFF"></polygon><polygon points="900 300 990 150 810 150" fill="#999"></polygon><polygon points="0 600 -90 750 90 750"></polygon><polygon points="0 600 90 450 -90 450" fill="#666"></polygon><polygon points="180 600 90 750 270 750" fill="#AAA"></polygon><polygon points="180 600 270 450 90 450" fill="#444"></polygon><polygon points="360 600 270 750 450 750" fill="#444"></polygon><polygon points="360 600 450 450 270 450" fill="#999"></polygon><polygon points="540 600 630 450 450 450" fill="#666"></polygon><polygon points="720 600 630 750 810 750" fill="#222"></polygon><polygon points="900 600 810 750 990 750" fill="#FFF"></polygon><polygon points="900 600 990 450 810 450" fill="#222"></polygon><polygon points="0 900 90 750 -90 750" fill="#DDD"></polygon><polygon points="180 900 270 750 90 750" fill="#444"></polygon><polygon points="360 900 450 750 270 750" fill="#FFF"></polygon><polygon points="540 900 630 750 450 750" fill="#AAA"></polygon><polygon points="720 900 810 750 630 750" fill="#FFF"></polygon><polygon points="900 900 990 750 810 750" fill="#222"></polygon><polygon points="1080 300 990 450 1170 450" fill="#222"></polygon><polygon points="1080 300 1170 150 990 150" fill="#FFF"></polygon><polygon points="1080 600 990 750 1170 750"></polygon><polygon points="1080 600 1170 450 990 450" fill="#666"></polygon><polygon points="1080 900 1170 750 990 750" fill="#DDD"></polygon></g></pattern></defs><rect height="100%" width="100%" fill="url(#a)" y="0" x="0"></rect><rect height="100%" width="100%" fill="url(#b)" y="0" x="0"></rect></svg></div>
+    <div class="card__avatar"><img class="pfp2" id="pfp" src="https://lh3.googleusercontent.com/a/ACg8ocKJPF-r35MhCFQeEyvHk2eZXU4DbSONRfOUGBrTVHr3h5MGkJc=s96-c"></div>
+    <div class="username-container">
+      <p id="username" class="card__title"></p>
+      <span class="verified-check" id="verified-check" style="display: none">
+        <span class="tooltip" id="tooltip">Verified Account</span>
+      </span>
+    </div>
+    
+    <div class="card__subtitle" id="created">Creation Date</div>
+    <div class="card__wrapper">
+<button class="Btn" id="signoutButton">
+  
+  <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+  
+  <div class="text" id="signout">Sign out</div>
+</button>
+<button class="card__btn" id="close">Close</button>
+
+    </div>
+</div>
+</div>
+
+    <script src="TVN-Manager/translations.js"></script>
+    <script src="TVN-Manager/script.js"></script>
+    <script src="TVN-Manager/calendar.js" type="module"></script>
+    <script src="TVN-Manager/account.js" type="module"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.0/cdn/shoelace-autoloader.js"></script>
+    </body>
+</html>

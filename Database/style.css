@@ -1,0 +1,242 @@
+@keyframes move {
+  0% {
+      left: -10%;
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(50px);
+  }
+  100% {
+      left: 110%;
+      transform: translateY(calc(50px + calc(100px * calc(1 - var(--rand)))));
+  }
+}
+
+body {
+  background-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.dynamic-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: -1;
+}
+
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: move 10s linear infinite;
+}
+
+.header {
+    font-size: 25px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .main:hover {
+    color: lightblue;
+  }
+  
+  .main {
+    font-size: 23px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .main2 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+  }  
+
+  .title {
+    margin: 0;
+    display: block;
+    margin-left: 100px;
+  }
+
+  .title:hover {
+    color: lightblue;
+  }
+
+  .redirect:hover, .redirect2:hover {
+    border-color: lightblue;
+    color: lightblue;
+  }
+
+  .add,.remove, .get, .modify, .copy, .list {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5%;
+    width: 30%;
+    height: 15%;
+    border-radius: 10px;
+    border: white solid;
+    background-color: rgb(0, 0, 0, 0.4);
+    color: white;
+    font-size: 20px;
+  }
+
+  .add:hover, .remove:hover, .get:hover, .modify:hover, .copy:hover, .list:hover {
+    border-color: lightblue;
+    opacity: 0.9;
+  }
+
+  .clear {
+    margin-left: 10px;
+    position: absolute;
+    justify-content: center;
+    width: 12%;
+    height: 8%;
+    border-radius: 10px;
+    border: rgb(252, 89, 89) solid;
+    background-color: rgb(0, 0, 0, 0.4);
+    color: white;
+    font-size: 15px;
+    transform: opacity 0.5s ease-in-out;;
+  }
+
+  .clear:hover {
+    border-color: rgb(255, 58, 58);
+  }
+
+  .username {
+    color: white;
+  }
+
+  .google-log-in {
+    border-radius: 15px;
+    background-color: transparent;
+    border-color: lightblue;
+    color: white;
+    padding: 10px;
+    margin-left: 50px;
+  }
+
+  .google-log-in:hover {
+    border-color: rgb(219, 246, 255);
+    opacity: 0.8;
+  }
+
+
+  .redirect, .redirect2 {
+    border-color: white;
+    border-radius: 15px;
+    border-style: solid;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: transparent;
+    color: white;
+  }
+
+  .pfp {
+    display: inline-block;
+    border-radius: 50%;
+    border: 3px black solid;
+    width: 35%;
+    height: 35%;
+    margin-left: auto;
+}
+
+  .pfp:hover {
+    border: 3px solid rgb(90, 90, 90);
+  }
+
+.header2 {
+    display: flex;
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 70px;
+  background-color: rgb(0, 0, 0);
+  border: 2px solid rgb(80, 80, 80);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  max-width: 300px;
+  width: 100%;
+}
+
+.signout, .import, .export {
+  margin-top: 10px;
+  background-color: transparent;
+  border: 2px solid darkcyan;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+}
+
+.signout:hover, .import:hover, .export:hover {
+  border-color: rgb(0, 177, 177);
+}
+
+.username {
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  margin-bottom: 20px;
+  white-space: inherit;
+}
+
+.toast {
+  position: fixed;
+  top: 75px;
+  right: 10px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out, display 0.5s ease-in-out;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 99;
+}
