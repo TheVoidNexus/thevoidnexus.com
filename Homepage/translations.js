@@ -44,7 +44,8 @@ const translations = {
         contact_intro: "Interested in working together or have a question? Feel free to reach out!",
         contact_email: "thevoidnexus2@gmail.com",
         footer_copyright: "© 2025 TheVoidNexus",
-        weather_error: "No weather data"
+        weather_error: "No weather data",
+        data_from: "Data from ",
     },
     sv: {
         page_title: "TheVoidNexus - Hemsida",
@@ -91,7 +92,8 @@ const translations = {
         contact_intro: "Intresserad av att arbeta tillsammans eller har du en fråga? Hör gärna av dig!",
         contact_email: "thevoidnexus2@gmail.com",
         footer_copyright: "© 2025 TheVoidNexus",
-        weather_error: "Inget väderdata"
+        weather_error: "Inget väderdata",
+        data_from: "Data från ",
     },
     de: {
         page_title: "TheVoidNexus - Startseite",
@@ -138,7 +140,8 @@ const translations = {
         contact_intro: "Interessiert an einer Zusammenarbeit oder hast du eine Frage? Zögere nicht, mich zu kontaktieren!",
         contact_email: "thevoidnexus2@gmail.com",
         footer_copyright: "© 2025 TheVoidNexus",
-        weather_error: "Keine Wetterdaten"
+        weather_error: "Keine Wetterdaten",
+        data_from: "Daten von ",
     }
 };
 

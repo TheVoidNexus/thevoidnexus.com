@@ -184,8 +184,6 @@ document.addEventListener('mousemove', function(e) {
   }, 500);
 });
 
-//
-
   document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section[id]');
     let scrollTimeout;
