@@ -86,22 +86,20 @@ async function fetchWeather() {
 
         const data = await response.json();
 
-        if (!data.main || !data.weather || !data.weather[0]) {
+        if (!data.current) {
             throw new Error("Incomplete weather data received.");
         }
 
-        const temperature = Math.round(data.main.temp);
-        const description = data.weather[0].description;
-        const iconCode = data.weather[0].icon;
+        const temperature = Math.round(data.current.temp_c);
+        const description = data.current.condition.text;
+        const iconCode = data.current.condition.code;
 
         if (weatherInfoElement) {
             const capitalizedDesc = description.charAt(0).toUpperCase() + description.slice(1);
-            weatherInfoElement.textContent = `${temperature}°C - ${capitalizedDesc}`;
+            weatherInfoElement.innerHTML = `<strong style="color:rgb(85, 136, 255);">${temperature}°C</strong> &nbsp; ${capitalizedDesc}`;
         }
 
-        if (weatherIconContainer) {
             weatherIconContainer.innerHTML = getAnimatedWeatherIconHTML(iconCode, description);
-        }
 
         if (errorMessageElement) {
             errorMessageElement.classList.add('hidden');
@@ -114,34 +112,60 @@ async function fetchWeather() {
 }
 
 function getAnimatedWeatherIconHTML(iconCode, altText = "Weather condition") {
-    const iconFileMap = {
-        '01d': 'clear-day.svg',
-        '01n': 'starry-night.svg',
-        '02d': 'partly-cloudy-day.svg',
-        '02n': 'partly-cloudy-night.svg',
-        '03d': 'cloudy.svg',
-        '03n': 'cloudy.svg',
-        '04d': 'overcast-day.svg',
-        '04n': 'overcast-night.svg',
-        '09d': 'partly-cloudy-day-drizzle.svg',
-        '09n': 'partly-cloudy-night-drizzle.svg',
-        '10d': 'rain.svg',
-        '10n': 'partly-cloudy-night-rain.svg',
-        '11d': 'thunderstorms-day-rain.svg',
-        '11n': 'thunderstorms-night-rain.svg',
-        '13d': 'snow.svg',
-        '13n': 'partly-cloudy-night-snow.svg',
-        '50d': 'fog-day.svg',
-        '50n': 'fog-night.svg'
-    };
+  const iconFileMap = {
+    '1000': 'clear-day.svg',
+    '1003': 'partly-cloudy-day.svg',
+    '1006': 'cloudy.svg',
+    '1009': 'overcast-day.svg',
+    '1030': 'mist.svg',
+    '1063': 'partly-cloudy-day-rain.svg',
+    '1066': 'partly-cloudy-day-snow.svg',
+    '1069': 'partly-cloudy-day-sleet.svg',
+    '1072': 'partly-cloudy-day-drizzle.svg',
+    '1087': 'thunderstorms-day.svg',
+    '1135': 'fog-day.svg',
+    '1150': 'partly-cloudy-day-drizzle.svg',
+    '1153': 'drizzle.svg',
+    '1168': 'partly-cloudy-day-sleet.svg',
+    '1171': 'sleet.svg',
+    '1180': 'partly-cloudy-day-rain.svg',
+    '1183': 'rain.svg',
+    '1186': 'rain.svg',
+    '1189': 'rain.svg',
+    '1198': 'freezing-rain.svg',
+    '1201': 'freezing-rain.svg',
+    '1204': 'sleet.svg',
+    '1207': 'sleet.svg',
+    '1210': 'partly-cloudy-day-snow.svg',
+    '1213': 'snow.svg',
+    '1216': 'partly-cloudy-day-snow.svg',
+    '1219': 'snow.svg',
+    '1222': 'extreme-day-snow.svg',
+    '1225': 'extreme-day-snow.svg',
+    '1237': 'hail.svg',
+    '1240': 'partly-cloudy-day-rain.svg',
+    '1243': 'rain.svg',
+    '1246': 'extreme-day-rain.svg',
+    '1249': 'partly-cloudy-day-sleet.svg',
+    '1252': 'sleet.svg',
+    '1255': 'partly-cloudy-day-snow.svg',
+    '1258': 'snow.svg',
+    '1261': 'partly-cloudy-day-sleet.svg',
+    '1264': 'sleet.svg',
+    '1273': 'thunderstorms-day-rain.svg',
+    '1276': 'thunderstorms-rain.svg',
+    '1279': 'thunderstorms-day-snow.svg',
+    '1282': 'thunderstorms-snow.svg'
+  };
 
-    const filename = iconFileMap[iconCode] || 'not-available.svg';
-    const iconPath = `https://basmilius.github.io/weather-icons/production/fill/all/${filename}`;
+  const filename = iconFileMap[iconCode] || 'not-available.svg';
+  const iconPath = `https://basmilius.github.io/weather-icons/production/fill/all/${filename}`;
 
-    return `<img src="${iconPath}" alt="${altText}" class="weather-animation" style="width: 25px; height: 25px;">`;
+  const isNotAvailable = filename === 'not-available.svg';
+  const style = `width: 75px; height: 75px;${isNotAvailable ? ' filter: invert(1);' : ''}`;
+
+  return `<img src="${iconPath}" alt="${altText}" class="weather-animation" style="${style}">`;
 }
-
-fetchWeather();
 
 const fadeInElements = document.querySelectorAll('.fade-in-element');
 const observerOptions = {

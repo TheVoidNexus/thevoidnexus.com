@@ -12,7 +12,7 @@ const translations = {
         hero_cta_button: "View My Projects",
         hero_location_combined: "Västra Götaland, Sweden",
         hero_weather_icon_alt: "Weather loading icon",
-        hero_weather_loading: "Loading...",
+        hero_weather_loading: "<strong color=\"rgb(85, 136, 255)\">--°C</strong> &nbsp; Loading data",
         github_aria_label: "GitHub Profile",
         discord_aria_label: "Discord Profile",
         about_title: "About Me",
@@ -45,7 +45,6 @@ const translations = {
         contact_email: "thevoidnexus2@gmail.com",
         footer_copyright: "© 2025 TheVoidNexus",
         weather_error: "No weather data",
-        data_from: "Data from ",
     },
     sv: {
         page_title: "TheVoidNexus - Hemsida",
@@ -60,7 +59,7 @@ const translations = {
         hero_cta_button: "Visa Mina Projekt",
         hero_location_combined: "Västra Götaland, Sverige",
         hero_weather_icon_alt: "Väderikon laddas",
-        hero_weather_loading: "Laddar...",
+        hero_weather_loading: "<strong color=\"rgb(85, 136, 255)\">--°C</strong> &nbsp; Laddar data",
         github_aria_label: "GitHub-profil",
         discord_aria_label: "Discord-profil",
         about_title: "Om Mig",
@@ -108,7 +107,7 @@ const translations = {
         hero_cta_button: "Meine Projekte ansehen",
         hero_location_combined: "Västra Götaland, Schweden",
         hero_weather_icon_alt: "Wetter Ladesymbol",
-        hero_weather_loading: "Lädt...",
+        hero_weather_loading: "<strong color=\"rgb(85, 136, 255)\">--°C</strong> &nbsp; Lädt Daten",
         github_aria_label: "GitHub Profil",
         discord_aria_label: "Discord Profil",
         about_title: "Über mich",
@@ -164,59 +163,69 @@ function getInitialLanguage() {
 }
 
 function setLanguage(lang) {
-    if (!lang) {
-        return;
+  if (!lang) return;
+
+  const normalizedLang = lang.toLowerCase();
+
+  if (!translations[normalizedLang]) {
+    console.warn(`Language not supported: ${normalizedLang}`);
+    if (normalizedLang !== 'en') {
+      setLanguage('en');
     }
-    const normalizedLang = lang.toLowerCase();
+    return;
+  }
 
-    if (typeof translations === 'undefined' || !translations || !translations[normalizedLang]) {
-        if (normalizedLang !== 'en') {
-            setLanguage('en');
-        }
-        return;
+  console.log(`Setting language: ${normalizedLang}`);
+  localStorage.setItem('PreferredLanguage', normalizedLang);
+  document.documentElement.lang = normalizedLang;
+  currentActiveLanguage = normalizedLang;
+
+  // Set document title
+  const titleElement = document.querySelector('title[data-translate-title]');
+  if (titleElement) {
+    const titleKey = titleElement.getAttribute('data-translate-title');
+    if (translations[normalizedLang][titleKey]) {
+      document.title = translations[normalizedLang][titleKey];
     }
+  }
 
-    localStorage.setItem('PreferredLanguage', normalizedLang);
-    document.documentElement.lang = normalizedLang;
-    currentActiveLanguage = normalizedLang;
+  // Loop through elements with translation keys
+  document.querySelectorAll('[data-translate], [data-translate-alt], [data-translate-aria-label]').forEach(element => {
+    const translateKey = element.getAttribute('data-translate');
+    const altKey = element.getAttribute('data-translate-alt');
+    const ariaLabelKey = element.getAttribute('data-translate-aria-label');
 
-    const titleElement = document.querySelector('title[data-translate-title]');
-    if (titleElement) {
-        const titleKey = titleElement.getAttribute('data-translate-title');
-        if (translations[normalizedLang][titleKey]) {
-            document.title = translations[normalizedLang][titleKey];
-        }
-    }
-
-    document.querySelectorAll('[data-translate], [data-translate-alt], [data-translate-aria-label]').forEach(element => {
-        const translateKey = element.getAttribute('data-translate');
-        const altKey = element.getAttribute('data-translate-alt');
-        const ariaLabelKey = element.getAttribute('data-translate-aria-label');
-
-        if (translateKey && translations[normalizedLang][translateKey]) {
-            if (element.hasAttribute('placeholder')) element.placeholder = translations[normalizedLang][translateKey];
-            else element.textContent = translations[normalizedLang][translateKey];
-        }
-
-        if (altKey && translations[normalizedLang][altKey]) {
-            element.alt = translations[normalizedLang][altKey];
-        }
-
-        if (ariaLabelKey && translations[normalizedLang][ariaLabelKey]) {
-            element.setAttribute('aria-label', translations[normalizedLang][ariaLabelKey]);
-        }
-    });
-
-    updateLanguageSwitcherUI(normalizedLang);
-
-    if (typeof window.updateDropdownDisplayCallback === 'function') {
-        window.updateDropdownDisplayCallback(normalizedLang);
+    if (translateKey && translations[normalizedLang][translateKey]) {
+      // If key has HTML, use innerHTML (like weather_loading)
+      if (translateKey === 'hero_weather_loading') {
+        element.innerHTML = translations[normalizedLang][translateKey];
+      } else if (element.hasAttribute('placeholder')) {
+        element.placeholder = translations[normalizedLang][translateKey];
+      } else {
+        element.textContent = translations[normalizedLang][translateKey];
+      }
     }
 
-    if (typeof fetchWeather === 'function') {
-        fetchWeather();
+    if (altKey && translations[normalizedLang][altKey]) {
+      element.alt = translations[normalizedLang][altKey];
     }
+
+    if (ariaLabelKey && translations[normalizedLang][ariaLabelKey]) {
+      element.setAttribute('aria-label', translations[normalizedLang][ariaLabelKey]);
+    }
+  });
+
+  updateLanguageSwitcherUI(normalizedLang);
+
+  if (typeof window.updateDropdownDisplayCallback === 'function') {
+    window.updateDropdownDisplayCallback(normalizedLang);
+  }
+
+  if (typeof fetchWeather === 'function') {
+    fetchWeather();
+  }
 }
+
 
 function updateLanguageSwitcherUI(activeLangLowercase) {
     const langsToUpdate = ['en', 'de', 'sv'];

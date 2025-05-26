@@ -42,33 +42,34 @@
                 View My Projects
             </a>
 
-<div class="info-socials-wrapper">
-    <div class="location-info-box bg-slate-700/50 z-10 text-gray-100 rounded-xl p-4 shadow-lg mx-auto backdrop-blur-sm">
-        <div class="flex items-center justify-center">
-            <span data-translate="hero_location_combined" class="text-lg ml-2">Västra Götaland, Sweden</span>
-        </div>
-
-        <div class="time-weather-container flex flex-nowrap items-center justify-center gap-2 sm:gap-8 mt-3">
-            <div class="time-display flex items-center leading-none">
-                <dotlottie-player src="https://lottie.host/787f1a16-b92a-4f00-a43d-985b0fb02c9e/C2NE6rOHHK.lottie"
-                    background="transparent" speed="0.2" style="width: 35px; height: 35px;" autoplay loop
-                    class="invert inline-block m-0 p-0"></dotlottie-player>
-                <span id="current-time" class="ml-2 leading-none">00:00</span>
+<div class="info-socials-wrapper px-6 py-4">
+    <div class="location-info-box bg-slate-700/50 text-gray-100 rounded-xl p-6 shadow-lg mx-auto backdrop-blur-sm flex flex-col md:flex-row justify-between items-center gap-6 max-w-2xl">
+        <div class="flex items-center gap-4">
+            <div class="weather-icon-container" id="weather-icon-container">
+                <img
+                    src="https://samherbert.net/svg-loaders/svg-loaders/puff.svg"
+                    alt="Weather loading"
+                    width="75"
+                    height="75"
+                    class="weather-animation"
+                    data-translate-alt="hero_weather_icon_alt"
+                />
             </div>
-            <div class="weather-display flex items-center leading-none">
-                <span class="weather-icon" id="weather-icon-container">
-                    <img src="https://samherbert.net/svg-loaders/svg-loaders/puff.svg" alt="Weather loading"
-                        class="weather-animation inline-block m-0 p-0" data-translate-alt="hero_weather_icon_alt">
-                </span>
-                <span id="weather-info" class="ml-2 leading-none" data-translate="hero_weather_loading">0°C - Loading...</span>
+            <div>
+                <div class="flex items-center">
+                    <span data-translate="hero_location_combined" class="text-lg font-semibold">
+                        Västra Götaland, Sweden
+                    </span>
+                </div>
+                <div class="weather-display flex items-center mt-1">
+                    <span id="weather-info" class="text-lg text-gray-400" data-translate="hero_weather_loading">
+                        <strong color="rgb(85, 136, 255)">--°C</strong> &nbsp; Loading data
+                    </span>
+                </div>
             </div>
         </div>
-
-        <div class="text-center mt-2">
-            <span class="text-sm text-gray-500" data-translate="data_from">Data from </span>
-            <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer" class="text-sm text-purple-500 hover:text-purple-400">OpenWeatherMap</a>
-        </div>
-    </div> 
+    </div>
+</div>
 
                 <div class="social-icons-container">
                     <a href="https://github.com/thevoidnexus" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" aria-label="GitHub Profile" data-translate-aria-label="github_aria_label">
