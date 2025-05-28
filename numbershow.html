@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/png" href="https://i.ibb.co/zhnxd5n0/number-1.png" />
+<title>Number Show</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #111827;
+        color: #f3f4f6;
+        overflow: hidden;
+    }
+    #container {
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+        max-width: 600px;
+    }
+    #languageToggle {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 24rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #languageToggle button {
+        background: transparent;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        border: 2px solid #fb923c;
+        color: #fb923c;
+        flex: 1 1 0;
+        min-width: 0;
+    }
+    #languageToggle button.active,
+    #languageToggle button:hover {
+        background-color: #fb923c;
+        color: #111827;
+    }
+
+    #infoTypeToggle {
+        margin-bottom: 1rem;
+        width: 100%;
+        max-width: 24rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        padding: 0.25rem;
+        background-color: #1f2937;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #infoTypeToggleIndicator {
+        width: calc(50% - 0.125rem);
+        height: 2rem;
+        background-color: #fb923c;
+        border-radius: 9999px;
+    }
+    .toggle-option {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+    .toggle-option span {
+        transition: color 0.3s ease;
+    }
+    .toggle-option.active-type span {
+        color: black;
+    }
+    .toggle-option:not(.active-type) span {
+        color: #9ca3af;
+    }
+    .checkmark-icon {
+        color: black;
+    }
+
+    .input-wrapper {
+        position: relative;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0.5rem;
+    }
+    #inputNumber {
+        width: fit-content;
+        font-size: 1.75rem;
+        padding: 0.75rem 1rem;
+        padding-bottom: 0;
+        border: none;
+        border-bottom: 3px solid #fb923c;
+        color: #f3f4f6;
+        background: transparent;
+        text-align: center;
+        outline: none;
+        appearance: textfield;
+        -moz-appearance: textfield;
+        transition: border-color 0.3s ease, opacity 0.3s ease;
+    }
+    #inputNumber.slider-active {
+        border-bottom-color: transparent;
+    }
+    #inputSliderFill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background-color: #fb923c;
+        width: 0%;
+        opacity: 0;
+    }
+    #inputNumber::placeholder {
+        color: #6b7280;
+        font-size: 1.25rem;
+    }
+    #inputNumber::-webkit-outer-spin-button,
+    #inputNumber::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    #inputNumber:focus {
+        border-color: #f97316;
+    }
+    #inputNumber.slider-active:focus {
+         border-bottom-color: transparent;
+    }
+
+    #descriptionText {
+        font-size: 0.9rem;
+        color: #9ca3af;
+        margin-top: 1.5rem;
+        max-width: 100%;
+        line-height: 1.5;
+        transition: opacity 0.5s ease;
+    }
+    .gradient-text {
+        background: linear-gradient(to right, #a855f7, #d946ef, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        font-weight: 600;
+    }
+     .gradient-text:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    #bigNumber {
+        font-size: 6rem;
+        font-weight: 900;
+        color: #f3f4f6;
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        position: fixed;
+        will-change: transform, opacity, color, top, left, font-size;
+        text-shadow: none;
+        z-index: 5;
+        user-select: none;
+    }
+    #infoText {
+        font-size: 1.25rem;
+        opacity: 0;
+        transition: opacity 0.8s ease, top 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), transformY 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        color: #d1d5db;
+        line-height: 1.6;
+        padding: 0 1rem;
+        min-height: 3em;
+        z-index: 5;
+        text-align: center;
+    }
+    #skipButton {
+        opacity: 0;
+        margin-top: 30px;
+        padding: 0.3rem 0.8rem;
+        background-color: #111827;
+        color: #fb923c;
+        border: 2px solid #fb923c;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, opacity 0.3s ease, top 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        z-index: 5;
+    }
+    #skipButton:hover {
+        background-color: #3e351b;
+    }
+    #progressBar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 5px;
+        width: 100%;
+        background-color: #fb923c;
+        z-index: 10;
+        opacity: 0;
+    }
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid #fb923c;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 6;
+    }
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @media (max-width: 640px) {
+        #mainTitle { font-size: 2.25rem; margin-bottom: 1rem; }
+        #languageToggle { max-width: none; }
+        #infoTypeToggle { max-width: none; width: 10rem; }
+        #errorDisplay { max-width: 80%; font-size: 0.875rem; }
+        #inputNumber { width: 100%; font-size: 1.5rem; }
+        .input-wrapper { width: 80%; }
+        #descriptionText { font-size: 0.8rem; margin-top: 1rem;}
+        #infoText { font-size: 1.1rem; }
+        #progressBar { height: 3px; }
+    }
+</style>
+</head>
+<body>
+    <div id="progressBar"></div>
+    <div id="container" class="flex flex-col items-center justify-center w-full h-screen relative">
+        <h1 id="mainTitle" class="text-4xl sm:text-5xl font-bold text-white mb-6 text-center">Number Show</h1>
+
+        <div id="languageToggle" aria-label="Language selection" role="region">
+            <button type="button" data-lang="en" class="active" aria-pressed="true">English</button>
+            <button type="button" data-lang="de" aria-pressed="false">Deutsch</button>
+            <button type="button" data-lang="sv" aria-pressed="false">Svenska</button>
+        </div>
+
+        <div id="infoTypeToggle" class="relative flex items-center mx-auto" role="radiogroup">
+            <div id="infoTypeToggleIndicator" class="absolute top-1 left-1 transition-transform duration-300 ease-in-out"></div>
+            <div class="toggle-option w-1/2 h-full flex items-center justify-center z-10 cursor-pointer" data-type="year" role="radio" aria-checked="true">
+                <svg class="checkmark-icon w-4 h-4 mr-1 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-sm toggle-text-year">Year</span>
+            </div>
+            <div class="toggle-option w-1/2 h-full flex items-center justify-center z-10 cursor-pointer" data-type="number" role="radio" aria-checked="false">
+                <svg class="checkmark-icon w-4 h-4 mr-1 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-sm toggle-text-number">Number</span>
+            </div>
+        </div>
+
+        <div class="input-wrapper">
+            <input
+                id="inputNumber"
+                type="number"
+                aria-label="Enter a number or year to get a fun fact"
+                autocomplete="off"
+                spellcheck="false"
+            />
+            <div id="inputSliderFill"></div>
+        </div>
+        
+        <div id="errorDisplay" class="hidden mt-3 mb-3 p-3 bg-red-200 border border-red-600 text-red-700 px-4 py-3 rounded-lg relative text-left w-full max-w-sm mx-auto items-center" role="alert">
+            <svg class="w-6 h-6 mr-2 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span id="errorMessage" class="block sm:inline"></span>
+        </div>
+
+        <div id="descriptionText">Developed by <span class="gradient-text">TheVoidNexus</span></div>
+
+        <div id="bigNumber" aria-live="polite" aria-atomic="true"></div>
+        <div id="spinner" class="spinner"></div>
+        <div id="infoText" aria-live="polite" aria-atomic="true"></div>
+        <button id="skipButton" aria-label="Skip and enter another number">Next</button>
+    </div>
+
+<script>
+    const inputField = document.getElementById('inputNumber');
+    const inputSliderFill = document.getElementById('inputSliderFill');
+    const descriptionTextElement = document.getElementById('descriptionText');
+    const bigNumberDisplay = document.getElementById('bigNumber');
+    const infoTextDisplay = document.getElementById('infoText');
+    const languageToggleContainer = document.getElementById('languageToggle');
+    const langButtons = languageToggleContainer.querySelectorAll('button');
+    const infoTypeToggleContainer = document.getElementById('infoTypeToggle');
+    const infoTypeToggleIndicator = document.getElementById('infoTypeToggleIndicator');
+    const infoTypeOptions = infoTypeToggleContainer.querySelectorAll('.toggle-option');
+    const skipButton = document.getElementById('skipButton');
+    const progressBar = document.getElementById('progressBar');
+    const spinner = document.getElementById('spinner');
+    const mainTitle = document.getElementById('mainTitle');
+    const errorDisplay = document.getElementById('errorDisplay');
+    const errorMessageSpan = document.getElementById('errorMessage');
+    const footerTextTranslation = document.querySelector('#descriptionText');
+
+    let animationTimeoutId = null;
+    const RESET_DELAY = 30000;
+    let currentLang = localStorage.getItem("language") || 'en';
+    let currentInfoType = localStorage.getItem("infoType") || 'year';
+    
+    let autoSubmitTimer = null;
+    const INPUT_TIMEOUT_DURATION = 3000;
+
+    const uiStrings = {
+        en: {
+            tabTitle: "Number Show",
+            mainTitle: "Number Show",
+            inputPlaceholderYear: "Enter a year",
+            inputPlaceholderNumber: "Enter a number",
+            skipButtonText: "Next",
+            errorFetch: "An error occurred.",
+            errorNotFound: "Couldn't find a fun fact. Try another value?",
+            errorGeneral: "An error occurred while fetching the fact.",
+            toggleYear: "Year",
+            toggleNumber: "Number",
+            footerText: "Developed by ",
+        },
+        de: {
+            tabTitle: "Zahlenschau",
+            mainTitle: "Zahlenschau",
+            inputPlaceholderYear: "Jahr eingeben",
+            inputPlaceholderNumber: "Zahl eingeben",
+            skipButtonText: "Weiter",
+            errorFetch: "Ein Fehler ist aufgetreten.",
+            errorNotFound: "Konnte keinen Fakt finden. Versuche einen anderen Wert.",
+            errorGeneral: "Beim Abrufen des Fakts ist ein Fehler aufgetreten.",
+            toggleYear: "Jahr",
+            toggleNumber: "Zahl",
+            footerText: "Entwickelt von ",
+        },
+        sv: {
+            tabTitle: "Nummershow",
+            mainTitle: "Nummershow",
+            inputPlaceholderYear: "Ange ett årtal",
+            inputPlaceholderNumber: "Ange ett nummer",
+            skipButtonText: "Nästa",
+            errorFetch: "Ett fel inträffade.",
+            errorNotFound: "Kunde inte hitta ett fakta. Prova ett annat värde?",
+            errorGeneral: "Ett fel inträffade när fakta hämtades.",
+            toggleYear: "År",
+            toggleNumber: "Nummer",
+            footerText: "Utvecklad av ",
+        }
+    };
+
+    function showError(message) {
+        errorMessageSpan.textContent = message;
+        errorDisplay.classList.remove('hidden');
+        errorDisplay.classList.add('flex');
+        infoTextDisplay.style.opacity = '0';
+        infoTextDisplay.textContent = '';
+        bigNumberDisplay.style.opacity = '0';
+    }
+
+    function hideError() {
+        errorDisplay.classList.add('hidden');
+        errorDisplay.classList.remove('flex');
+        errorMessageSpan.textContent = '';
+    }
+
+    function updateUITextForLanguage() {
+        document.title = "TheVoidNexus - " + uiStrings[currentLang].tabTitle;
+        mainTitle.textContent = uiStrings[currentLang].mainTitle;
+        const placeholderSuffix = currentInfoType.charAt(0).toUpperCase() + currentInfoType.slice(1);
+        inputField.placeholder = uiStrings[currentLang]['inputPlaceholder' + placeholderSuffix] || uiStrings[currentLang].inputPlaceholderYear;
+        skipButton.textContent = uiStrings[currentLang].skipButtonText;
+        footerTextTranslation.innerHTML = uiStrings[currentLang].footerText + '<span class="gradient-text">TheVoidNexus</span>';
+
+        infoTypeOptions.forEach(option => {
+            const span = option.querySelector('span');
+            if (option.dataset.type === 'year') span.textContent = uiStrings[currentLang].toggleYear;
+            if (option.dataset.type === 'number') span.textContent = uiStrings[currentLang].toggleNumber;
+        });
+    }
+
+    function updateInfoTypeToggleVisuals() {
+        const yearOption = infoTypeToggleContainer.querySelector('[data-type="year"]');
+        const numberOption = infoTypeToggleContainer.querySelector('[data-type="number"]');
+        
+        if (yearOption && numberOption) {
+            const indicatorOffset = numberOption.offsetLeft - yearOption.offsetLeft;
+            infoTypeToggleIndicator.style.transform = currentInfoType === 'year' ? `translateX(0px)` : `translateX(${indicatorOffset}px)`;
+        }
+
+        infoTypeOptions.forEach(opt => {
+            const checkmark = opt.querySelector('.checkmark-icon');
+            if (opt.dataset.type === currentInfoType) {
+                opt.setAttribute('aria-checked', 'true');
+                opt.classList.add('active-type');
+                checkmark.classList.remove('hidden');
+            } else {
+                opt.setAttribute('aria-checked', 'false');
+                opt.classList.remove('active-type');
+                checkmark.classList.add('hidden');
+            }
+        });
+    }
+
+    langButtons.forEach(button => {
+        button.classList.toggle('active', button.dataset.lang === currentLang);
+        button.setAttribute('aria-pressed', button.dataset.lang === currentLang ? 'true' : 'false');
+        button.addEventListener('click', () => {
+            const selectedLang = button.dataset.lang;
+            if (selectedLang === currentLang) return;
+            localStorage.setItem("language", selectedLang);
+            currentLang = selectedLang;
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+                btn.setAttribute('aria-pressed', btn.dataset.lang === currentLang ? 'true' : 'false');
+            });
+            updateUITextForLanguage();
+            if (document.activeElement !== inputField) inputField.focus();
+        });
+    });
+
+    infoTypeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const selectedType = option.dataset.type;
+            if (selectedType === currentInfoType) return;
+            currentInfoType = selectedType;
+            localStorage.setItem("infoType", currentInfoType);
+            updateInfoTypeToggleVisuals();
+            updateUITextForLanguage();
+            clearTimeout(autoSubmitTimer);
+            inputSliderFill.style.opacity = '0';
+            inputSliderFill.style.width = '0%';
+            inputField.classList.remove('slider-active');
+            hideError(); 
+            if (document.activeElement !== inputField) inputField.focus();
+        });
+    });
+    
+    function handleInputInteraction() {
+        const value = inputField.value.trim();
+        clearTimeout(autoSubmitTimer);
+        hideError(); 
+
+        if (!value) {
+            inputSliderFill.style.opacity = '0';
+            inputSliderFill.style.width = '0%';
+            inputField.classList.remove('slider-active');
+            return;
+        }
+
+        inputField.classList.add('slider-active');
+        inputSliderFill.style.opacity = '1';
+        inputSliderFill.style.transition = 'none';
+        inputSliderFill.style.width = '100%';
+        
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                 inputSliderFill.style.transition = `width ${INPUT_TIMEOUT_DURATION}ms linear`;
+                 inputSliderFill.style.width = '0%';
+            });
+        });
+
+        autoSubmitTimer = setTimeout(() => {
+            const currentValue = inputField.value.trim();
+            if (currentValue) {
+                displayFunFact(currentValue);
+            }
+        }, INPUT_TIMEOUT_DURATION);
+    }
+
+    inputField.addEventListener('input', handleInputInteraction);
+
+    function toggleElementsVisibility(show) { 
+        const displayValue = show ? 'flex' : 'none';
+        mainTitle.style.display = show ? 'block' : 'none'; 
+        languageToggleContainer.style.display = displayValue;
+        infoTypeToggleContainer.style.display = show ? 'flex' : 'none';
+        descriptionTextElement.style.opacity = show ? '1' : '0';
+        if (show) { 
+            hideError();
+        }
+    }
+
+    const footerText = document.querySelector('#descriptionText .gradient-text');
+    if (footerText) { 
+        footerText.addEventListener('click', () => {
+            window.open('https://thevoidnexus.com', '_blank');
+        });
+    }
+
+    inputField.addEventListener('keydown', async (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const number = inputField.value.trim();
+            if (number) {
+                clearTimeout(autoSubmitTimer);
+                inputSliderFill.style.opacity = '0';
+                inputSliderFill.style.width = '0%';
+                inputField.classList.remove('slider-active');
+                displayFunFact(number);
+            }
+        }
+    });
+
+    async function getFunFact(number, lang, type) {
+  const apiUrl = `https://api.thevoidnexus.com/number?number=${number}&lang=${lang}&type=${type}`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ number, lang, type }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('API request failed:', response.status, errorText);
+      return { type: 'error', message: `API request failed with status ${response.status}` };
+    }
+
+    const result = await response.json();
+
+    if (result.type === 'success') {
+      return { type: 'success', data: result.data };
+    } else if (result.type === 'error') {
+      console.warn('API returned error:', result.message);
+      return { type: 'error', message: result.message };
+    } else {
+      console.warn('Unexpected API response:', result);
+      return { type: 'error', message: 'Unexpected response from API' };
+    }
+
+  } catch (error) {
+    console.error('Error fetching fact:', error);
+    return { type: 'error', message: `An error occurred: ${error.message}` };
+  }
+}
+
+
+    async function animateNumberCountUp(targetNumberStr, duration = 700) {
+        const target = parseInt(targetNumberStr, 10);
+        if (isNaN(target)) {
+            bigNumberDisplay.textContent = targetNumberStr;
+            return;
+        }
+
+        let startNumber = target > 20 ? target - Math.min(20, Math.floor(target * 0.1)) : 0;
+        if (target < 0) startNumber = target + Math.min(20, Math.floor(Math.abs(target) * 0.1));
+
+        if (startNumber < 0 && target >= 0) startNumber = 0; 
+        if (startNumber > 0 && target <=0) startNumber = 0; 
+
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const currentDisplayNumber = Math.floor(startNumber + (target - startNumber) * progress);
+            bigNumberDisplay.textContent = currentDisplayNumber;
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                bigNumberDisplay.textContent = target;
+            }
+        };
+        requestAnimationFrame(step);
+    }
+
+
+    async function displayFunFact(number) {
+        hideError();
+        toggleElementsVisibility(false);
+        if (animationTimeoutId) clearTimeout(animationTimeoutId);
+        clearTimeout(autoSubmitTimer);
+        inputField.classList.remove('slider-active');
+        inputSliderFill.style.opacity = '0';
+        inputSliderFill.style.transition = 'none';
+        inputSliderFill.style.width = '0%';
+        
+        inputField.style.transition = 'opacity 0.3s';
+        inputField.style.opacity = '0';
+
+        skipButton.style.display = 'none'; 
+        skipButton.style.opacity = '0';
+        infoTextDisplay.style.opacity = '0'; 
+        spinner.style.opacity = '0';
+
+        await new Promise(r => setTimeout(r, 300));
+
+        bigNumberDisplay.style.transition = 'none';
+
+        const isMobile = window.innerWidth <= 640;
+        const baseSize = isMobile ? 5 : 8;
+        const maxDigits = isMobile ? 5 : 12;
+
+        const parsedNum = parseInt(number, 10);
+        const lengthForSizing = isNaN(parsedNum) ? number.length : String(parsedNum).length;
+        const minScale = isMobile ? 0.35 : 0.5;
+        const scaleFactor = Math.min(1, Math.max(minScale, maxDigits / Math.max(1, lengthForSizing)));
+        const adjustedSize = baseSize * scaleFactor;
+
+        const entryAnimationStartTop = isMobile ? `${window.innerHeight * 0.42}px` : `${window.innerHeight * 0.45}px`;
+        document.querySelector("#progressBar").style.height = isMobile ? '5.5px' : '3px';
+        
+        bigNumberDisplay.style.top = entryAnimationStartTop;
+        bigNumberDisplay.style.left = `${window.innerWidth / 2}px`;
+        bigNumberDisplay.style.fontSize = `${adjustedSize * 0.8}rem`;
+        bigNumberDisplay.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        bigNumberDisplay.style.color = '#f3f4f6';
+        bigNumberDisplay.style.opacity = '0';
+        bigNumberDisplay.textContent = isNaN(parsedNum) ? number : '';
+        
+        bigNumberDisplay.offsetHeight;
+
+        bigNumberDisplay.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+        bigNumberDisplay.style.opacity = '1';
+        bigNumberDisplay.style.transform = 'translate(-50%, -50%) scale(1)';
+        bigNumberDisplay.style.fontSize = `${adjustedSize}rem`;
+        
+        await new Promise(r => setTimeout(r, 600));
+
+        if (!isNaN(parsedNum)) {
+            await animateNumberCountUp(number, 700);
+        }
+
+        setTimeout(() => { spinner.style.top = `${isMobile ? 65 : 70}%`; spinner.style.opacity = '1'; }, 50);
+        const factResult = await getFunFact(number, currentLang, currentInfoType);
+        spinner.style.opacity = '0';
+
+        if (factResult.type === 'error') {
+            showError(factResult.message);
+            bigNumberDisplay.style.opacity = '0'; 
+            bigNumberDisplay.style.transform = 'translate(-50%, -50%) scale(0.8)';
+
+            progressBar.style.opacity = '1';
+            progressBar.style.width = '100%';
+            progressBar.offsetHeight;
+            progressBar.style.transition = `width ${5000}ms linear`;
+            progressBar.style.width = '0%';
+            animationTimeoutId = setTimeout(resetUI, 5000);
+            return;
+        }
+
+        hideError();
+        const fact = factResult.data;
+
+        progressBar.style.opacity = '1';
+        progressBar.style.width = '100%';
+        progressBar.offsetHeight;
+        progressBar.style.transition = `width ${RESET_DELAY}ms linear, opacity 0.3s linear ${RESET_DELAY}ms`;
+        progressBar.style.width = '0%';
+        progressBar.style.opacity = '0';
+
+        const factDisplayTop = isMobile ? `${window.innerHeight * 0.25}px` : `${window.innerHeight * 0.32}px`;
+        bigNumberDisplay.style.top = factDisplayTop;
+        bigNumberDisplay.style.color = '#fb923c';
+        bigNumberDisplay.style.transform = 'translate(-50%, -50%) scale(1.1)';
+        await new Promise(r => setTimeout(r, 600));
+
+        const bigNumberRect = bigNumberDisplay.getBoundingClientRect();
+
+        infoTextDisplay.style.position = 'fixed';
+        infoTextDisplay.style.top = `${bigNumberRect.bottom + (isMobile ? 10 : 15)}px`;
+        infoTextDisplay.style.left = '50%';
+        infoTextDisplay.style.transform = 'translateX(-50%) translateY(20px)';
+        infoTextDisplay.style.opacity = '0';
+        infoTextDisplay.style.transition = 'opacity 0.3s ease, transformY 0.6s ease';
+        infoTextDisplay.style.width = '90%';
+        infoTextDisplay.style.maxWidth = isMobile ? '90%' : '600px';
+        infoTextDisplay.style.padding = '0 15px';
+        infoTextDisplay.textContent = fact;
+
+        void infoTextDisplay.offsetHeight;
+
+        infoTextDisplay.style.opacity = '1';
+        infoTextDisplay.style.transform = 'translateX(-50%) translateY(0)';
+
+        requestAnimationFrame(() => {
+            const currentInfoTextRect = infoTextDisplay.getBoundingClientRect();
+            let skipButtonTop;
+
+            if (fact.trim() !== "" && currentInfoTextRect.height > 5) {
+                skipButtonTop = `${currentInfoTextRect.bottom + (isMobile ? 15 : 20)}px`;
+            } else {
+                const currentBigNumberRect = bigNumberDisplay.getBoundingClientRect();
+                skipButtonTop = `${currentBigNumberRect.bottom + (isMobile ? 15 : 20)}px`;
+            }
+            
+            skipButton.style.position = 'fixed';
+            skipButton.style.top = skipButtonTop;
+            skipButton.style.left = '50%';
+            skipButton.style.transform = 'translateX(-50%)';
+            skipButton.style.display = 'block';
+            skipButton.offsetHeight;
+            skipButton.style.opacity = '1';
+        });
+        
+        animationTimeoutId = setTimeout(resetUI, RESET_DELAY);
+    }
+
+    function resetUI() {
+        if (animationTimeoutId) clearTimeout(animationTimeoutId);
+        animationTimeoutId = null;
+        clearTimeout(autoSubmitTimer);
+        hideError();
+
+        bigNumberDisplay.style.opacity = '0';
+        bigNumberDisplay.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        bigNumberDisplay.style.color = '#f3f4f6';
+
+        infoTextDisplay.style.opacity = '0';
+
+        skipButton.style.opacity = '0';
+        
+        inputField.classList.remove('slider-active');
+        inputSliderFill.style.opacity = '0';
+        inputSliderFill.style.transition = 'none';
+        inputSliderFill.style.width = '0%';
+
+        progressBar.style.transition = 'none';
+        progressBar.style.opacity = '0';
+        progressBar.style.width = '0';
+
+
+        setTimeout(() => {
+            infoTextDisplay.style.position = '';
+            infoTextDisplay.style.top = '';
+            infoTextDisplay.style.left = '';
+            infoTextDisplay.style.transform = '';
+            infoTextDisplay.style.width = '';
+            infoTextDisplay.style.padding = '0 1rem';
+            infoTextDisplay.textContent = ''; 
+
+            skipButton.style.display = 'none';
+            skipButton.style.position = '';
+            skipButton.style.top = '';
+            skipButton.style.left = '';
+            skipButton.style.transform = '';
+            
+            bigNumberDisplay.textContent = '';
+
+            inputField.value = '';
+            inputField.style.opacity = '1';
+
+            toggleElementsVisibility(true);
+            updateUITextForLanguage();
+            inputField.focus();
+        }, 700);
+    }
+
+    skipButton.addEventListener('click', () => {
+        if (animationTimeoutId) clearTimeout(animationTimeoutId);
+        resetUI();
+    });
+
+    window.addEventListener('load', () => {
+        updateUITextForLanguage();
+        updateInfoTypeToggleVisuals();
+        inputField.style.opacity = '1';
+        toggleElementsVisibility(true);
+        hideError();
+        inputSliderFill.style.opacity = '0';
+        inputSliderFill.style.width = '0%';
+        
+        infoTextDisplay.style.position = '';
+        skipButton.style.position = '';
+        skipButton.style.display = 'none';
+
+        progressBar.style.opacity = '0';
+        
+        inputField.focus();
+    });
+</script>
+</body>
+</html>
