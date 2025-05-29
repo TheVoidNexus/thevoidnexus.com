@@ -3,35 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link id="stylesheet" rel="stylesheet" href="CSS/404.css" media="screen and (min-width: 709px)">
-  <link id="mstylesheet" rel="stylesheet" href="CSS/m404.css" media="screen and (max-width: 710px)">
+  <link id="stylesheet" rel="stylesheet" href="Game/CSS/404.css">
+  <link rel="icon" href="//www.gstatic.com/monospace/230530/favicon.ico" sizes="16x16">
   <title>404 - Not found</title>
 </head>
 <body>
+  <div class="overlay" id="overlay"></div>
   <div class="container">
-    <a href="https://thevoidnexus.github.io" id="main" class="main">thevoidnexus.github.io</a>
-    <p id="playtime" class="playtime"></p>
-    <div class="container2">
-        <button onclick="redirect()" class="database" id="database">Database</button>
-        <button onclick="redirect2()" class="calculator" id="calculator">Calculator</button>
-        <button class="google-log-in" id="login">Log in</button>
-            <div class="buttons-container">
-            <img id="pfp" class="pfp" alt="">
-        </div>
-    </div>
-</div>
-<hr class="line">
-<select class="language-select" id="language-select" onchange="updateLanguage(this.value)">
-  <option value="en">English</option>
-  <option value="de">German</option>
-  <option value="sv">Swedish</option>
-</select>
+    <div id="menuIcon" class="menu-icon">&#9776;</div>
+      <h1 class="title" id="title">404 - Not found</h1>
+      <div class="container2">
+        <button id="google-login" class="google-btn" >
+          <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
+           <span class="login-text" id="login-text">Sign in</span>
+       </button>
+              <img rel="preload" as="image" id="pfp" class="pfp" alt="">
+      </div>
+  </div>
+  <div id="sidebar" class="sidebar">
+    <a class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="menu-section">
+    <p class="menu-title" id="menu-projects">Other Projects</p>
+    <button onclick="redirect3()" class="manager" id="manager">Manager</button>
+    <button onclick="redirect4()" class="game" id="game">VoidClicker</button>
+    <button onclick="redirect()" class="database" id="database">Database</button>
+    <button onclick="redirect2()" class="calculator" id="calculator">Calculator</button>
+  </div>
+  <div class="menu-section">
+    <p class="menu-language" id="menu-language">Language</p>
+    <select class="language-select" id="language-select" onchange="setLanguage(this.value)">
+      <option class="lang-en" value="en">English</option>
+      <option value="de">German</option>
+      <option value="sv">Swedish</option>
+  </select>
+  </div>
+  <div class="menu-section">
+  <p class="menu-privacy" id="menu-other">Other</p>
+  <button onclick="redirect3()" class="privacy" id="menu-privacy">Privacy Policy</button>
+  </div>
+  <div class="menu-section">
+  <p class="menu-developer" id="menu-developer">Developer</p>
+  <div class="developer">
+    <div class="developer-container">
+    <p class="developer-text">TheVoidNexus</p>
+    <span class="menu-verified" style="display: flex;">
+      <span class="menu-tooltip" id="menu-tooltip">Verified Account</span>
+    </span>
+  </div>
+  </div>
+  <button onclick="redirect5()" class="privacy">GitHub</button>
+  <button onclick="redirect6()" class="privacy">Discord</button>
+  </div>
+  <br><br><br>
+  </div>
 
-  <h1>Error 404</h1>
+  <h1 class="code404">Code 404</h1>
   <h2 id="h2">The page you were looking for seems to have gotten lost in the digital void.</h2>
     <p class="removed" id="removed">It may not exist or got removed.</p>
-    <p class="returnp"><a href="https://thevoidnexus.github.io" id="return" class="return">Return to the Homepage</a></p>
+    <p class="returnp"><a onclick="redirect()" id="return" class="return">Return to the Homepage</a></p>
   
-<script src="Javascript/404.js"></script>
+<script src="Game/Javascript/404.js"></script>
 </body>
 </html>
