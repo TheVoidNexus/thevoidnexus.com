@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" type="image/png" href="https://i.ibb.co/zhnxd5n0/number-1.png" />
+<meta name="theme-color" content="#111827" />
 <title>Number Show</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -59,29 +60,49 @@
         height: 2.5rem;
         border-radius: 9999px;
         padding: 0.25rem;
-        background-color: #1f2937;
+        background-color: #2c2c2cb7;
         display: flex;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
     }
     #infoTypeToggleIndicator {
         width: calc(50% - 0.125rem);
         height: 2rem;
-        background-color: #fb923c;
+        background: linear-gradient(90deg, #fb923c 0%, #f9cf16 100%);
         border-radius: 9999px;
+        box-shadow: 0 2px 8px 0 rgba(251,146,60,0.15);
+        z-index: 1;
     }
     .toggle-option {
         flex: 1 1 0;
         min-width: 0;
-    }
-    .toggle-option span {
-        transition: color 0.3s ease;
+        position: relative;
+        z-index: 2;
+        border-radius: 9999px;
+        transition: color 0.3s, background 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        user-select: none;
     }
     .toggle-option.active-type span {
-        color: black;
+        color: #111827;
+        text-shadow: 0 1px 8px #fff2;
     }
     .toggle-option:not(.active-type) span {
-        color: #9ca3af;
+        color: #f3f4f6;
+        opacity: 0.7;
+    }
+    .toggle-option.active-type {
+        background: rgba(255,255,255,0.12);
+    }
+    .toggle-option:not(.active-type):hover {
+        background: rgba(251,146,60,0.10);
     }
     .checkmark-icon {
         color: black;
@@ -313,6 +334,8 @@
     let autoSubmitTimer = null;
     const INPUT_TIMEOUT_DURATION = 3000;
 
+    let factDisplayInProgress = false;
+
     const uiStrings = {
         en: {
             tabTitle: "Number Show",
@@ -421,7 +444,7 @@
                 btn.setAttribute('aria-pressed', btn.dataset.lang === currentLang ? 'true' : 'false');
             });
             updateUITextForLanguage();
-            if (document.activeElement !== inputField) inputField.focus();
+            if (document.activeElement !== inputField && !factDisplayInProgress) inputField.focus();
         });
     });
 
@@ -438,7 +461,7 @@
             inputSliderFill.style.width = '0%';
             inputField.classList.remove('slider-active');
             hideError(); 
-            if (document.activeElement !== inputField) inputField.focus();
+            if (document.activeElement !== inputField && !factDisplayInProgress) inputField.focus();
         });
     });
     
@@ -446,6 +469,13 @@
         const value = inputField.value.trim();
         clearTimeout(autoSubmitTimer);
         hideError(); 
+
+        if (factDisplayInProgress) {
+            inputSliderFill.style.opacity = '0';
+            inputSliderFill.style.width = '0%';
+            inputField.classList.remove('slider-active');
+            return;
+        }
 
         if (!value) {
             inputSliderFill.style.opacity = '0';
@@ -466,10 +496,10 @@
             });
         });
 
-        autoSubmitTimer = setTimeout(() => {
+        autoSubmitTimer = setTimeout(async () => {
             const currentValue = inputField.value.trim();
             if (currentValue) {
-                displayFunFact(currentValue);
+                await displayFunFact(currentValue);
             }
         }, INPUT_TIMEOUT_DURATION);
     }
@@ -497,51 +527,61 @@
     inputField.addEventListener('keydown', async (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
+            if (factDisplayInProgress) {
+                return;
+            }
             const number = inputField.value.trim();
             if (number) {
                 clearTimeout(autoSubmitTimer);
                 inputSliderFill.style.opacity = '0';
                 inputSliderFill.style.width = '0%';
                 inputField.classList.remove('slider-active');
-                displayFunFact(number);
+                await displayFunFact(number);
             }
         }
     });
 
     async function getFunFact(number, lang, type) {
-  const apiUrl = `https://api.thevoidnexus.com/number?number=${number}&lang=${lang}&type=${type}`;
+      const apiUrl = `https://api.thevoidnexus.com/number?number=${number}&lang=${lang}&type=${type}`;
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ number, lang, type }),
+        });
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('API request failed:', response.status, errorText);
+          let userMessage = uiStrings[currentLang].errorFetch;
+          if (response.status === 404) {
+              userMessage = uiStrings[currentLang].errorNotFound;
+          } else {
+              try {
+                  const errorJson = JSON.parse(errorText);
+                  if (errorJson && errorJson.message) {
+                      userMessage = errorJson.message;
+                  }
+              } catch (e) {
 
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ number, lang, type }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('API request failed:', response.status, errorText);
-      return { type: 'error', message: `API request failed with status ${response.status}` };
+              }
+          }
+          return { type: 'error', message: userMessage };
+        }
+        const result = await response.json();
+        if (result.type === 'success') {
+          return { type: 'success', data: result.data };
+        } else if (result.type === 'error') {
+          console.warn('API returned error:', result.message);
+          return { type: 'error', message: result.message || uiStrings[currentLang].errorNotFound };
+        } else {
+          console.warn('Unexpected API response:', result);
+          return { type: 'error', message: uiStrings[currentLang].errorGeneral };
+        }
+      } catch (error) {
+        console.error('Error fetching fact:', error);
+        return { type: 'error', message: uiStrings[currentLang].errorFetch + ` (${error.message})` };
+      }
     }
-
-    const result = await response.json();
-
-    if (result.type === 'success') {
-      return { type: 'success', data: result.data };
-    } else if (result.type === 'error') {
-      console.warn('API returned error:', result.message);
-      return { type: 'error', message: result.message };
-    } else {
-      console.warn('Unexpected API response:', result);
-      return { type: 'error', message: 'Unexpected response from API' };
-    }
-
-  } catch (error) {
-    console.error('Error fetching fact:', error);
-    return { type: 'error', message: `An error occurred: ${error.message}` };
-  }
-}
-
 
     async function animateNumberCountUp(targetNumberStr, duration = 700) {
         const target = parseInt(targetNumberStr, 10);
@@ -573,8 +613,10 @@
 
 
     async function displayFunFact(number) {
+        factDisplayInProgress = true;
         hideError();
         toggleElementsVisibility(false);
+        
         if (animationTimeoutId) clearTimeout(animationTimeoutId);
         clearTimeout(autoSubmitTimer);
         inputField.classList.remove('slider-active');
@@ -584,6 +626,10 @@
         
         inputField.style.transition = 'opacity 0.3s';
         inputField.style.opacity = '0';
+
+        if (window.innerWidth <= 640) {
+            inputField.blur();
+        }
 
         skipButton.style.display = 'none'; 
         skipButton.style.opacity = '0';
@@ -633,7 +679,7 @@
         spinner.style.opacity = '0';
 
         if (factResult.type === 'error') {
-            showError(factResult.message);
+            showError(factResult.message || uiStrings[currentLang].errorNotFound);
             bigNumberDisplay.style.opacity = '0'; 
             bigNumberDisplay.style.transform = 'translate(-50%, -50%) scale(0.8)';
 
@@ -704,6 +750,7 @@
     }
 
     function resetUI() {
+        factDisplayInProgress = false;
         if (animationTimeoutId) clearTimeout(animationTimeoutId);
         animationTimeoutId = null;
         clearTimeout(autoSubmitTimer);
@@ -774,6 +821,7 @@
         progressBar.style.opacity = '0';
         
         inputField.focus();
+        factDisplayInProgress = false;
     });
 </script>
 </body>
